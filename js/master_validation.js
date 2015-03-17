@@ -36,7 +36,7 @@ function authorize(username){
 	//make a call back to the database,make a sql query checking GUI and username
 	var response =$.ajax({ //use jquery to make a post to the api with the new client 
 		type: "POST", 
-		url: "http://localhost:49234/api/values",
+		url: "http://truckrtest.pcscrm.com/api/values",
 		crossDomain: true,
 		contentType: "application/json; charset=utf-8",
 		dataType: "json",
@@ -207,7 +207,7 @@ $(function () {
 				
 				var response =$.ajax({
 					type: "POST",
-					url: "http://localhost:49234/api/filter",
+					url: "http://truckrtest.pcscrm.com/api/filter",
 					contentType: "application/json; charset=utf-8",
 					Type: "json",
 					async: false,
@@ -286,7 +286,7 @@ $(function () {
 			  
 			var response =$.ajax({ //use jquery to make a post to the api with the new client 
 				type: "POST", 
-				url: "http://localhost:49234/api/newclient",
+				url: "http://truckrtest.pcscrm.com/api/newclient",
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				async: false,
@@ -354,7 +354,7 @@ $(function () {
 			else{
 				var response =$.ajax({
 					type: "POST",
-					url: "http://localhost:49234/api/transferform",
+					url: "http://truckrtest.pcscrm.com/api/transferform",
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					async: false,
@@ -420,7 +420,7 @@ $(function () {
 		else{
 			var response =$.ajax({
 				type: "POST",
-				url: "http://localhost:49234/api/confirm",
+				url: "http://truckrtest.pcscrm.com/api/confirm",
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				async: false,
@@ -1094,7 +1094,7 @@ function other(pdfBase64){
 
 			var response =$.ajax({
 				type: "POST",
-				url: "http://localhost:49234/api/submit",
+				url: "http://truckrtest.pcscrm.com/api/submit",
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				async: false,
