@@ -1,7 +1,18 @@
+	body
+	{
+		background-image:			url(''),		url('');
+		background-repeat:			repeat,							no-repeat;
+		background-size:			auto,							100% 100%;
+		background:					#3ca7ff;
+	}
 
 .article {
   float: left;
   margin: 5px;
-  padding: 5px;
-  border: 1px solid black;
+  padding: 10px 10px 10px 10px;
+  border: 1px solid white;
+  background: #FFFFFF;
 } 
+
+
+	

@@ -5,7 +5,7 @@ Public Class tooFormObj
     Sub New()
 
     End Sub
-    Sub New(lotNum As Integer, naidChoice As String, donorID As Integer, username As String, donationDescription As String, donorSig As String, org As String, dateFilled As String, Optional pdf64 As String = "", Optional formatted As String = "")
+    Sub New(lotNum As Integer, naidChoice As String, donorID As Integer, username As String, donationDescription As String, donorSig As String, org As String, dateFilled As String, donorEmail As String, Optional pdf64 As String = "", Optional formatted As String = "")
         Me.lotNum = lotNum
         Me.naidChoice = naidChoice
         Me.donorID = donorID
@@ -14,19 +14,20 @@ Public Class tooFormObj
         Me.donorSig = donorSig
         Me.org = org ''will not need this
         Me.formatted = formatted ''will not need
+        Me.donorEmail = donorEmail
         Me.pdf64 = pdf64 ''transfer pdf64
         Me.dateFilled = dateFilled
     End Sub
 
-    'Private _donorSig As List(Of Dictionary(Of String, Integer))
-    'Public Property donorSig() As List(Of Dictionary(Of String, Integer))
-    '    Get
-    '        Return _donorSig
-    '    End Get
-    '    Set(value As List(Of Dictionary(Of String, Integer)))
-    '        _donorSig = value
-    '    End Set
-    'End Property
+    Private _donorEmail As String
+    Public Property donorEmail() As String
+        Get
+            Return _donorEmail
+        End Get
+        Set(value As String)
+            _donorEmail = value
+        End Set
+    End Property
 
     Private _dateFilled As String
     Public Property dateFilled() As String

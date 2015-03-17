@@ -13,7 +13,7 @@ Public Class TransferFormController
     ' GET api/transferform/5
     Public Function GetValue(ByVal id As Integer) As tooFormObj
 
-        Dim tooForm As New tooFormObj(12345, "yesNaid", 1, "Gozong", "2 dell laptops, 4 dell desktops", "1opu21", "Somewhere", "1/1/11")
+        Dim tooForm As New tooFormObj(12345, "yesNaid", 1, "Gozong", "2 dell laptops, 4 dell desktops", "1opu21", "Somewhere", "1/1/11", "glor@macalester.edu")
         Return tooForm
     End Function
 
