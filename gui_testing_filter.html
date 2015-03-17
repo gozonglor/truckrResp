@@ -1,0 +1,44 @@
+<head>
+<body>
+<html>
+<b>test</b>
+
+				<p><h1>Filter for a Donor</h1></p>
+				
+								
+				<form id="relationship_filter_form">
+					<input type="checkbox" name="Computer Donor" style="display: none" checked>
+				</form>
+				
+				<input type ="text" id="id_f" placeholder="id"  style="display: none;"/>
+				<input type ="text" id="notes_f" placeholder="notes"  style="display: none;"/>
+										
+				<form id="filtering_form">
+					<select id="ddlContactStatus" style="display:none;">
+						<option value="">Select Contact Status...</option>
+						<option value="active">Active</option>
+						<option value="inactive">Inactive</option>
+						<option value="dormant">Dormant</option>
+						<option value="contact_needed">Contact Needed</option>
+				    </select>
+					<!--<input type ="text" id="contact_relationship_f" placeholder="contact_relationship"  style="display: none;"/>-->
+					<input type ="text" id="firstName_f" placeholder="First name"/>
+					<input type="text" id="lastName_f" placeholder="Last name"/>
+					<input type="text" id="phone_f" placeholder="Phone" maxlength="10"/> 
+					<input type="text" id="org_f" placeholder="Organization name"/>
+					<input type="text" id="email_f" placeholder="Email"/>
+					<input type="text" id="address_f" placeholder="Address: ex. 1600 Grand Avenue"/>
+					<input type="text" id="address2_f" placeholder="Address2: ex. 1600 Grand Avenue"/>
+					<input type ="text" id="city_f" placeholder="City: ex. St. Paul"/>
+					<input type="text" id="state_f" placeholder="State: ex. MN"/>
+					<input type="text" id="zip_f" placeholder="Zip code: ex. 55101"/>
+					
+				</form>
+				<input type="button" value="Filter" id="filter_button">
+				<div id="error_message_filter" class="error_message"></div>
+
+			
+</html>
+</body>
+
+</head>

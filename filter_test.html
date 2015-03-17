@@ -1,0 +1,61 @@
+<head>	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	  <script type="text/javascript" src="filter.js"></script>
+	<script src="js/jquery.min.js"></script>
+  
+</head>
+
+<!--------------entry 1: filter------------------->
+			<div id="filter_module" class="panel" name="module">
+				<p><h1>Filter for a Donor</h1></p>
+				
+								
+				<form id="relationship_filter_form">
+					<input type="checkbox" name="Computer Donor" style="display: none" checked>
+				</form>
+				
+				<input type ="text" id="id_f" placeholder="id"  style="display: none;"/>
+				<input type ="text" id="notes_f" placeholder="notes"  style="display: none;"/>
+										
+				<form id="filtering_form">
+					<select id="ddlContactStatus">
+						<option value="">Select Contact Status...</option>
+						<option value="active">Active</option>
+						<option value="inactive">Inactive</option>
+						<option value="dormant">Dormant</option>
+						<option value="contact_needed">Contact Needed</option>
+				    </select>
+					<!--<input type ="text" id="contact_relationship_f" placeholder="contact_relationship"  style="display: none;"/>-->
+					<input type ="text" id="firstName_f" placeholder="First name"/>
+					<input type="text" id="lastName_f" placeholder="Last name"/>
+					<input type="text" id="phone_f" placeholder="Phone" maxlength="10"/> 
+					<input type="text" id="org_f" placeholder="Organization name"/>
+					<input type="text" id="email_f" placeholder="Email"/>
+					<input type="text" id="address_f" placeholder="Address: ex. 1600 Grand Avenue"/>
+					<input type="text" id="address2_f" placeholder="Address2: ex. 1600 Grand Avenue"/>
+					<input type ="text" id="city_f" placeholder="City: ex. St. Paul"/>
+					<input type="text" id="state_f" placeholder="State: ex. MN"/>
+					<input type="text" id="zip_f" placeholder="Zip code: ex. 55101"/>
+					
+				</form>
+				<input type="button" value="Filter" id="filter_button">
+				<div id="error_message_filter" class="error_message"></div>
+			</div>
+			
+						<div id="client_table_module" class="panel" name="module" style="display: none;">
+				<!--<div id="client_table_wrapper">-->
+				<!--<input type="button" value="exit" id="exit_filter_table_button">-->
+				<img src="images/close.png" id="exit_filter_table_button">
+				<input type="button" value="Back to Filter" id="back_filter">
+
+				<input type = "button" value="Select Client" id="selected_client_button">
+				<div id="error_message_select" class="error_message"></div>
+				<div id="message_select" class="notification_message"></div>
+
+				<div id="client_table_div">
+					<table id="client_filter_table" class="filtered_client" >
+					</table>
+				</div>
+				<!--</div>-->
+			</div>
+			

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML> 
+<!--
+Astral by HTML5 UP
+html5up.net | @n33co
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+	<title>Truck App | Create New Donor</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+	<script src="js/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="js/skel.min.js"></script>
+	<script src="js/init.js"></script>
+	<script src="js/createclient.js"></script>
+	
+	<noscript>
+		<link rel="stylesheet" href="css/skel.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/style-desktop.css" />
+		<link rel="stylesheet" href="css/style-noscript.css" />
+	</noscript>
+	<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+</head>
+<body>
+
+	<!-- Wrapper-->
+		<div id="wrapper">
+
+			<!-- Main -->
+				<div id="main">
+
+					<!-- Clients-->
+						<article id="search" class="panel">
+						<!--the ID is placed outside of the form because its a value that doesn't have to be filled in yet.-->
+						<p><h1>Create New Donor</h1></p>
+						<!--<label type="text" id="message" value="" color="red">-->
+						<div id="message"></div>
+						<form id="relationship_form">
+							<input type="checkbox" name="Computer_Donor" style="display: none" checked> 
+						</form>	
+
+						<form id="new_client_form">
+							<select id="ddlContactStatus">
+								<option value="0">Select Contact Status...</option>
+								<option value="active">Active</option>
+								<option value="inactive">Inactive</option>
+								<option value="dormant">Dormant</option>
+								<option value="contact_needed">Contact Needed</option>
+							</select>								
+							<center>
+								<input type ="text" id="firstName" placeholder="First name"/>
+								<input type="text" id="lastName" placeholder="Last name"/>
+								<input type="text" id="phone" placeholder="Phone" maxlength="10"/> 
+								<input type="text" id="org" placeholder="Organization name"/>
+								<input type="text" id="email" placeholder="Email"/>
+								<input type="text" id="address" placeholder="Address: ex. 1600 Grand Avenue"/>
+								<input type="text" id="address2" placeholder="Address2: ex. 1600 Grand Avenue"/>
+								<input type ="text" id="city" placeholder="City: ex. St. Paul"/>
+								<input type="text" id="state" placeholder="State: ex. MN"/>
+							</center>
+						</form>
+						
+	
+						<form id="optional_form">
+						<!--default clients get a 0 zipcode until I figure out how to use google's api to get the zip, and an id of 0-->
+							<input type ="number" id="zip" style="display: none;" value="0"/> 
+							<!--default client id cannot be 0 as the id is how we'll track the donor throughout all the pages-->
+							<input type ="number" id="id" style="display: none;" value="0"/>
+							<input type ="text" id="notes" placeholder="Optional notes"/>
+							<input type ="text" id="contact_relationship" placeholder="contact_relationship"  style="display: none;"/>
+						</form>
+						
+						<p><br><!--<a href="#filter" class="jumplink">-->
+							<input type="button" value="Update New Client" id="create_new_client_button"></p>
+								<!--</form>-->
+								</center>
+					<!-- Selected/Filter Clients-->
+					<!-- initially hidden -->
+					<!-- http://jsfiddle.net/manishmmulani/7MRx6/ -->
+					<br><br><br>
+						<div id="selected_clients" class="panel" style="display: none;">
+						<!--<body onLoad="buildHtmlTable()-->
+						<!--</body>-->
+						<!--<a href="generate.html"><input type = "button" value="Generate forms" id="generate_button"></a>-->
+
+						<!--</table>-->
+						</div>
+						</article>
+						
+						</div>
+	
+			<!-- Footer -->
+				<div id="footer">
+					<ul class="copyright">
+						<li>&copy; Untitled.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+	
+		</div>
+
+</body>
+</html>

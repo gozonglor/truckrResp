@@ -1,0 +1,22 @@
+h1{
+	font-size: 25pt;
+	color: #ffffff;
+	letter-spacing: 0px;
+	text-align: right;
+	line-height: 30px;
+	font-family: times new roman;
+	background: #de5d80;
+	font-style: italic;
+	font-weight: bold;
+	letter-spacing: -1px;
+	
+}
+
+.pada{
+    padding-top: 25px;
+    padding-right: 50px;
+    padding-bottom: 25px;
+    padding-left: 50px;
+	background: #FFFFFF;
+
+}

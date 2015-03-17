@@ -1,0 +1,307 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Truck App | Clients</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+	<script src="js/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="js/skel.min.js"></script>
+	<script src="js/init.js"></script>
+	<script src="js/show.js"></script>
+	<script type="text/javascript" src="js/master_validation.js"></script>
+<!------------------->
+
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/south-street/jquery-ui.css" rel="stylesheet">
+<link href="css/jquery.signature.css" rel="stylesheet">
+<style>
+body > iframe { display: none; }
+.kbw-signature { width: 400px; height: 150px; }
+</style>
+<!--[if IE]>
+<script src="js/excanvas.js"></script>
+<![endif]-->
+<!--http://keith-wood.name/signatureRef.html-->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="js/jquery.signature.js"></script>
+<script>
+$(function() {
+$('#sig').signature({guideline: true, guidelineOffset: 50, guidelineIndent: 20, guidelineColor: '#000000'});
+	$('#sig').signature();
+	$('#clear').click(function() {
+		$('#sig').signature('clear');
+	});
+	$('#json').click(function() {
+		alert($('#sig').signature('toJSON'));
+	});
+	$('#svg').click(function() {
+		alert($('#sig').signature('toSVG'));
+	});
+});
+</script>
+
+<!------------------->
+
+<!--[if IE]>
+<script src="js/excanvas.js"></script>
+<![endif]-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="js/jquery.signature.js"></script>
+
+	<noscript>
+		<link rel="stylesheet" href="css/skel.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/style-desktop.css" />				
+
+		<link rel="stylesheet" href="css/style-noscript.css" />
+	</noscript>
+	<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+</head>
+
+<body onload="loadCurrentUser();">
+	<div id="wrapper" class="custom">
+		<input type="button" value="Find Client" id="show_filter_button">
+		<input type="button" value="New Client" id="show_new_client_button">
+		
+		<input type="button" value="Generate TOO" id="show_generate_button">
+		<input type="button" value="Present TOO" id="show_present_button">
+		
+		<input type="button" value="Show Table" id="show_table_button">
+<br>
+		<b>hidden donor: </b><div id="hidden_client_id" style="font-size:10pt;"></div>
+		<b>logged in as: </b><div id="hidden_username" style="font-size:10pt;"></div>
+		<div id="main" class="custom">
+<!------------------------------------------------->
+
+
+		<div id="filter_module" class="panel" style="display: none;" name="module">
+				<p><h1>NAVIGATION PAGE</h1></p>
+				
+								
+				<form id="relationship_filter_form">
+					<input type="checkbox" name="Computer Donor" style="display: none" checked>
+				</form>
+				
+				<input type ="text" id="id_f" placeholder="id"  style="display: none;"/>
+				<input type ="text" id="notes_f" placeholder="notes"  style="display: none;"/>
+										
+				<form id="filtering_form">
+					<select id="ddlContactStatus">
+						<option value="">Select Contact Status...</option>
+						<option value="active">Active</option>
+						<option value="inactive">Inactive</option>
+						<option value="dormant">Dormant</option>
+						<option value="contact_needed">Contact Needed</option>
+				    </select>
+					<!--<input type ="text" id="contact_relationship_f" placeholder="contact_relationship"  style="display: none;"/>-->
+					<input type ="text" id="firstName_f" placeholder="First name"/>
+					<input type="text" id="lastName_f" placeholder="Last name"/>
+					<input type="text" id="phone_f" placeholder="Phone" maxlength="10"/> 
+					<input type="text" id="org_f" placeholder="Organization name"/>
+					<input type="text" id="email_f" placeholder="Email"/>
+					<input type="text" id="address_f" placeholder="Address: ex. 1600 Grand Avenue"/>
+					<input type="text" id="address2_f" placeholder="Address2: ex. 1600 Grand Avenue"/>
+					<input type ="text" id="city_f" placeholder="City: ex. St. Paul"/>
+					<input type="text" id="state_f" placeholder="State: ex. MN"/>
+					<input type="text" id="zip_f" placeholder="Zip code: ex. 55101"/>
+					
+				</form>
+				<input type="button" value="Filter" id="filter_button">
+				<div id="error_message_filter" class="error_message"></div>
+			</div>
+
+<!--------------entry 1: filter------------------->
+			<div id="filter_module" class="panel" style="display: none;" name="module">
+				<p><h1>Filter for a Donor</h1></p>
+				
+								
+				<form id="relationship_filter_form">
+					<input type="checkbox" name="Computer Donor" style="display: none" checked>
+				</form>
+				
+				<input type ="text" id="id_f" placeholder="id"  style="display: none;"/>
+				<input type ="text" id="notes_f" placeholder="notes"  style="display: none;"/>
+										
+				<form id="filtering_form">
+					<select id="ddlContactStatus">
+						<option value="">Select Contact Status...</option>
+						<option value="active">Active</option>
+						<option value="inactive">Inactive</option>
+						<option value="dormant">Dormant</option>
+						<option value="contact_needed">Contact Needed</option>
+				    </select>
+					<!--<input type ="text" id="contact_relationship_f" placeholder="contact_relationship"  style="display: none;"/>-->
+					<input type ="text" id="firstName_f" placeholder="First name"/>
+					<input type="text" id="lastName_f" placeholder="Last name"/>
+					<input type="text" id="phone_f" placeholder="Phone" maxlength="10"/> 
+					<input type="text" id="org_f" placeholder="Organization name"/>
+					<input type="text" id="email_f" placeholder="Email"/>
+					<input type="text" id="address_f" placeholder="Address: ex. 1600 Grand Avenue"/>
+					<input type="text" id="address2_f" placeholder="Address2: ex. 1600 Grand Avenue"/>
+					<input type ="text" id="city_f" placeholder="City: ex. St. Paul"/>
+					<input type="text" id="state_f" placeholder="State: ex. MN"/>
+					<input type="text" id="zip_f" placeholder="Zip code: ex. 55101"/>
+					
+				</form>
+				<input type="button" value="Filter" id="filter_button">
+				<div id="error_message_filter" class="error_message"></div>
+			</div>
+			
+<!--------------Entry 2: create new client------------------->			
+			<div id="new_client_module" class="panel" style="display: none;" name="module">
+				<p><h1>Create New Donor</h1></p>
+					<form id="relationship_new_form">
+						<input type="checkbox" name="Computer_Donor" style="display: none" checked> 
+					</form>	
+
+					<form id="new_client_form">
+						<select id="ddlContactStatus">
+							<option value="">Select Contact Status...</option>
+							<option value="active">Active</option>
+							<option value="inactive">Inactive</option>
+							<option value="dormant">Dormant</option>
+							<option value="contact_needed">Contact Needed</option>
+						</select>								
+						<center>
+							<input type ="text" id="firstName_new" placeholder="First name"/>
+							<input type="text" id="lastName_new" placeholder="Last name"/>
+							<input type="text" id="phone_new" placeholder="Phone" maxlength="10"/> 
+							<input type="text" id="org_new" placeholder="Organization name"/>
+							<input type="text" id="email_new" placeholder="Email"/>
+							<input type="text" id="address_new" placeholder="Address: ex. 1600 Grand Avenue"/>
+							<input type="text" id="address2_new" placeholder="Address2: ex. 1600 Grand Avenue"/>
+							<input type ="text" id="city_new" placeholder="City: ex. St. Paul"/>
+							<input type="text" id="state_new" placeholder="State: ex. MN"/>
+							<input type="text" id="zip_f" placeholder="Zip code: ex. 55101"/>
+						</center>
+					</form>
+						
+					<form id="optional_form">
+						<!--default clients get a 0 zipcode until I figure out how to use google's api to get the zip, and an id of 0-->
+							<input type ="number" id="zip_new" style="display: none;" value="0"/> 
+							<!--default client id cannot be 0 as the id is how we'll track the donor throughout all the pages-->
+							<input type ="number" id="id_new" style="display: none;" value="0"/>
+							<input type ="text" id="notes_new" placeholder="Optional notes"/>
+							<input type ="text" id="contact_relationship_new" placeholder="contact_relationship"  style="display: none;"/>
+					</form>
+						
+					<!--<a href="#filter" class="jumplink">-->
+					<input type="button" value="Create" id="create_new_client_button">
+										<div id="error_message_create_new" class="error_message"></div>
+										<div id="message_create_new" class="notification_message"></div>
+
+			</div>
+			
+<!--------------entry 3: generate the too, midway------------------->
+<!-----------------WHY DOESNT THIS HAVE A AN ARTICLE>-------------->
+			<!--<input type="button" id="show_button" value="SHOW">-->
+			<div id="generate_module" class="panel" style="display: none;" name="module">
+				<form>
+					<b>Lot Number: </b> <div id="lot_number"></div>
+					<textarea id="donation_description" rows="10" cols="80" placeholder="Donated items description."></textarea>
+					<br><b>Naid:</b>
+					<input type="radio" name="naidOption" value="noNaid">No
+					<input type="radio" name="naidOption" value ="yesNaid">Yes
+					<div id="answer"></div>
+					<input type="button" id="transfer_button" value="Create Transfer of Ownership Form"></a>
+					<div id="error_message_generate" class="error_message"></div>
+
+				</form>
+			</div>						
+		
+	<!--------------entry 5: filtered clients ------------------->
+
+			<div id="client_table_module" class="panel" name="module" style="display: none;">
+				<!--<div id="client_table_wrapper">-->
+				<!--<input type="button" value="exit" id="exit_filter_table_button">-->
+				<img src="images/close.png" id="exit_filter_table_button">
+
+				<input type = "button" value="Select Client" id="selected_client_button">
+				<div id="error_message_select" class="error_message"></div>
+				<div id="message_select" class="notification_message"></div>
+
+				<div id="client_table_div">
+					<table id="client_filter_table" class="filtered_client" >
+					</table>
+				</div>
+				<!--</div>-->
+			</div>
+<!--------------entry 4: the transfer of ownership form------------------->
+
+			<div id="transfer_module" class="panel" style="display: none;" name="module">
+				<div id="too_form">
+						<form id="transfer_of_ownership_form">
+							<img src="images/pcs4ppl_banner.png">
+							<div id="lot_number_final" style="font-size:10pt;"><b><u>Lot Number <br></u></b></div>
+							<center><h4>Transfer of Ownership</h4></center><div id="intro"></div>
+							<div id="donation" style="font-size:10pt; padding-left: 25px; padding-right:25px; padding-bottom: 5px; background-color: #EEEEEE;"><b><u>Description and Quantity of Materials Donated:</u></b><br></div>
+							<center><h4>Data Sanitization</h4></center><div id="data_sanitization"> </div>
+							<div id="wrapper_transfer_form1" class="content">
+    <div id="naid_decision_initials" class="menu1"><b>Initials: </b><input type="text" maxlength="3" style="width:60px;background-color:#EEEEEE;"></input></div>
+    <div id="naid_decision_yes" class="menu2"><input type="radio" name="naidOption" value="yesNaid1"> </div>	
+</div>
+<div id="wrapper_transfer_form2" class="content">
+    <div id="naid_decision_initials" class="menu1"><b>Initials: </b><input type="text" maxlength="3" style="width:60px;background-color:#EEEEEE;"></input></div>
+    <div id="naid_decision_no" class="menu2"><input type="radio" name="naidOption" value="noNaid1"> </div>	
+							</div>
+							
+							<div id="final"></div>
+
+	
+		<div id="wrapper_signature" class="content" style="background-color: none;">
+							<div id="label" class="menu1" style="background-color: #FFFFFF; font-size: 12pt; font-weight : bold;">Customer Signature: </div>
+							<div id="label2" class="menu2" style="background-color: #FFFFFF;"><div id="sig" name="final_signature" class="kbw-signature"></div>
+							</div></div>
+	
+			<table style="width:100%; border:#FFFFFF; padding-left: 0px;">
+  <tr>
+    <td style="border:#FFFFFF; font-size: 12pt; font-weight : bold; padding-left: 10px; width: 30%;"><form>Title: <input type="text" id="client_title" placeholder="Title" style="width: 150px;"></input></form> </td>
+    <td style="font-size: 12pt; border:#FFFFFF; font-weight : bold;"><div id="transfer_form_date1">Date: </div></td>		
+  </tr>
+</table>
+						
+						<!-------Casey---->
+						
+<div id="wrapper_signature" class="content" style="background-color: none;">
+							<div id="label" class="menu1" style="background-color: #FFFFFF; font-size: 12pt; font-weight : bold; ">PCs for People Signature: </div>
+							<div id="label2" class="menu2" style="background-color: #FFFFFF;"><img src="images/casey_sig.png"></div>
+							</div>
+	
+			<table style="width:100%; border:#FFFFFF; padding-left: 0px;">
+  <tr>
+    <td style="border:#FFFFFF; font-size: 12pt; font-weight : bold; padding-left: 10px; width: 30%;"><form>Title: CEO</form> </td>
+    <td style="font-size: 12pt; border:#FFFFFF; font-weight : bold;"><div id="transfer_form_date2">Date: </div></td>		
+  </tr>
+</table>
+							
+						
+	
+	
+						
+	
+
+	
+
+						
+	
+						
+							<button id="json">To JSON</button> <button id="svg">To SVG</button>
+							<input type = "button" value="I Accept" id="accept_button">	
+							<div id="error_message_transfer" class="error_message"></div>
+							<div id="message_transfer" class="notification_message"></div>
+
+						</form>							
+				</div>
+			</div>
+			
+
+
+		</div>
+	</div>
+</body>
+</html>
