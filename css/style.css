@@ -14,10 +14,9 @@
 
 	body
 	{
-		background-image:			url(''),		url('');
-		background-repeat:			repeat,							no-repeat;
-		background-size:			auto,							100% 100%;
-		background:					#3ca7ff;
+		background-image:			url("tire_vector_bg.jpg");
+		background-position: left top;
+		/*background:					#3ca7ff;*/
 	}
 
 		body.is-loading *
