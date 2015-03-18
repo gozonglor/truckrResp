@@ -398,6 +398,58 @@ $(function () {
 });
 
 
+//User tries to login, clicks login buttom --> button listener authenticates user
+//user object with encrypted pw and username is posted to confirm controller
+//Used in the index.html page
+$(function () { 
+    $("#login_buttonORIGINAL").click(function (e) {
+		var validation = validateFormLogin();
+		var NewPerson = {};    
+
+        NewPerson.username = $("#userID").val();
+		pass = (CryptoJS.SHA1($("#password").val()));
+		newpass = (pass.toString(CryptoJS.enc.Hex)).toUpperCase();
+		NewPerson.pw = newpass;  
+		
+		var success=false;
+       
+		if (validation === false){
+				document.getElementById("error_message_login").innerHTML = "Please fill out all fields.";		
+		}
+		
+		else{
+			var response =$.ajax({
+				type: "POST",
+				url: "http://truckrtest.pcscrm.com/api/confirm",
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				async: false,
+				data: JSON.stringify(NewPerson),
+				 
+				success: function (response) {
+					if (response !== ""){ //originally, if response == true
+						currentUser = NewPerson.username;
+						document.getElementById("error_message_login").innerHTML = '<img src="images/loading.gif"/>';
+						setTimeout(allowLogin, 3000);
+						//allowLogin();
+						ekey = response;				
+					}
+					else{
+						document.getElementById("error_message_login").innerHTML = "Wrong password or username.";
+					}
+				},
+				
+				error: function(){
+					sucess=false;
+					document.getElementById("error_message_login").innerHTML = "No connection to API/Invalid encryption key.";
+				}
+			}).responseText;
+		}
+		e.preventDefault();
+		setTimeout(resetError, 3000);
+		//http://stackoverflow.com/questions/20890943/javascript-settimeout-not-working
+    });
+});
 
 //User tries to login, clicks login buttom --> button listener authenticates user
 //user object with encrypted pw and username is posted to confirm controller
@@ -430,8 +482,9 @@ $(function () {
 				success: function (response) {
 					if (response !== ""){ //originally, if response == true
 						currentUser = NewPerson.username;
-						document.getElementById("error_message_login").innerHTML = '<img src="images/loading.gif"/>';
-						setTimeout(allowLogin, 3000);
+						document.getElementById("error_message_login").innerHTML = 'Logging in...';
+						//setTimeout(allowLogin, 3000);
+						allowLogin();
 						//allowLogin();
 						ekey = response;				
 					}
