@@ -491,9 +491,10 @@ alert("Please fill out all fields");
 						currentUser = NewPerson.username;
 						document.getElementById("error_message_login").innerHTML = 'Logging in...';
 						//setTimeout(allowLogin, 3000);
-						allowLogin();
 						//allowLogin();
-						ekey = response;				
+						ekey = response;	
+						allowLogin();
+						
 					}
 					else{
 						document.getElementById("error_message_login").innerHTML = "Wrong password or username.";
@@ -980,7 +981,8 @@ function other(pdfBase64){
 								//And send email somehow simultaneously. I suppose you can try calling your sendemail class in this controller. 
 							}
 							else{
-								document.getElementById("error_message_transfer").innerHTML = "AJAX request returned an error. Wrong format detected. Error: "+response;
+								document.getElementById("error_message_transfer").innerHTML = "AJAX request returned an error. Error: "+response+".  Could not insert Transfer Form into db.";
+								alert( "AJAX request returned an error. Error: "+response+".  Could not insert Transfer Form into db.");
 							}
 						},
 						

@@ -8,6 +8,7 @@
     <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
 
     <!--Using the hamburger menu display code-->
+	<script type="text/javascript" src="js/html2canvas.js"></script>
     <script src="js/hamburger.js"></script>
 	    <script src="js/master_validation.js"></script>
 
@@ -25,7 +26,8 @@
 
 <!--This wrapping container is used to get the width of the whole content-->
 <div id="container">
-
+		<sub style="display: none;"><b>hidden donor: </b><div id="hidden_client_id" style="font-size:10pt;"></div></sub>
+		<sub style="display: none;"><b>logged in as: </b><div id="hidden_username" style="font-size:10pt;"></div></sub>
     <!--The Hamburger Button in the Header-->
     <header>
         <div id="hamburger">
@@ -41,8 +43,8 @@
             <li><a href="#" id="show_filter_button">Find Donor</a></li>
             <li><a href="#" id="show_new_client_button">New Donor</a></li>
             <li><a href="#">View Transactions</a></li>
-			<li>		Logged in as: <span id="show_user_status" style="font-weight: bold"></span>
-		 | Selected donor: <span id="show_donor_status" style="font-weight: bold"></span></li>
+			<li style="color: #3ca7ff">Logged in as: <span id="show_user_status" style="font-weight: bold; color: #FFFFFF;"></span><br><br>
+		 Selected donor: <span id="show_donor_status" style="font-weight: bold; color: #FFFFFF;"></span></li>
         </ul>
     </nav>
 
@@ -93,7 +95,7 @@
 			</div>
 			
 <!--------------Entry 2: create new client------------------->			
-			<div id="new_client_module" class="article" style="display: none;" name="module">
+			<div id="new_client_module" name="module" class="article" style="display: none;">
 				<p><h1>Create New Donor</h1></p>
 					<form id="relationship_new_form">
 						<input type="checkbox" name="Computer_Donor" style="display: none" checked> 
@@ -107,7 +109,6 @@
 							<option value="dormant">Dormant</option>
 							<option value="contact_needed">Contact Needed</option>
 						</select>								
-						<center>
 							<input type ="text" id="firstName_new" placeholder="First name" class='input_field'/>
 							<input type ="text" id="midName_new" name="optional" placeholder="Middle name" class='input_field'/>
 							<input type="text" id="lastName_new" placeholder="Last name" class='input_field'/>
@@ -119,7 +120,6 @@
 							<input type ="text" id="city_new" placeholder="City: ex. St. Paul" class='input_field'/>
 							<input type="text" id="state_new" placeholder="State: ex. MN" class='input_field'/>
 							<input type="text" id="zip_f" placeholder="Zip code: ex. 55101" class='input_field'/>
-						</center>
 					</form>
 						
 					<form id="optional_form">
@@ -157,11 +157,11 @@
 
 	<!------------------------------------------------------------------->
 	
-<div class="article"  style="display: none;" id="signature_module">
-	<center><form action="" class="sigPad" style="background-color:#FFFFFF;"> <!--method="post"-->
-	<img src="images/close.png" id="exit_client_sig_button">
+<div class="article"  style="display: none;" id="signature_module" style="background: #FFFFFF;">
+	<center><form action="" class="sigPad" style="background-color:#FFFFFF; max-width: 75%;"> <!--method="post"-->
+	<img src="css/images/close.png" id="exit_client_sig_button">
     <label for="name">Print your name</label>
-    <input type="text" name="name" id="name" class="name">
+    <input type="text" name="name" id="name" class="name" style="max-width: 75%;">
     <p class="typeItDesc">Review your signature</p>
     <p class="drawItDesc">Draw your signature</p>
     <ul class="sigNav">
@@ -197,7 +197,7 @@
 			<div id="client_table_module" class="article" name="module" style="display: none;">
 				<!--<div id="client_table_wrapper">-->
 				<!--<input type="button" value="exit" id="exit_filter_table_button">-->
-				<img src="images/close.png" id="exit_filter_table_button">
+				<img src="css/images/close.png" id="exit_filter_table_button">
 				<input type="button" value="Back to Filter" id="back_filter">
 
 				<input type = "button" value="Select Client" id="selected_client_button">
@@ -216,8 +216,8 @@
 			
 	
 	<!------------------------------------------------------------------->
-<div class="article" style="display: none;" id="p4p_signature_module">
-	<center><form action="" class="sigPad" style="background-color:#FFFFFF;"> <!--method="post"-->
+<div class="article" style="display: none;" id="p4p_signature_module" style="background: #FFFFFF;">
+	<center><form action="" class="sigPad"> <!--method="post"-->
 	<img src="images/close.png" id="exit_client_sig_button">
     <label for="p4p_name">Print your name</label>
     <input type="text" name="name" id="name" class="name">
