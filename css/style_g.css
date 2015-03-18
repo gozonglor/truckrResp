@@ -1,18 +1,20 @@
 	body
 	{
-		background-image:			url(''),		url('');
-		background-repeat:			repeat,							no-repeat;
-		background-size:			auto,							100% 100%;
-		background:					#3ca7ff;
+		background-image:			url('images/greyprint_sm.png');
+		background-repeat:			repeat;
+		background-size:			auto;
 	}
 
 .article {
   float: left;
   margin: 5px;
-  padding: 10px 10px 10px 10px;
-  border: 1px solid white;
-  background: #FFFFFF;
+  padding: 20px 20px 20px 20px;
+  background-image:			url('images/greyprint_sm.png');
 } 
 
-
+	h1, h2, h3, h4,h5, h6
+	{
+		color: #FFFFFF;
+		font-family: sans-serif;
+	}
 	

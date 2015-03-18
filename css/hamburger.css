@@ -36,7 +36,7 @@ position absolute isset to cover the whole viewport
 */
 #content
 {
-    background-color: #FFFFFF;
+    background-image: url('images/greyprint_sm.png');
     padding: 52px 10px 10px 10px;
     position: relative;
     width: auto;

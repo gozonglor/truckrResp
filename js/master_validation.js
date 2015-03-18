@@ -148,9 +148,10 @@ function validateFormNew() {
 	var check = true;
 	for (var i=0; i < elements.length; i++){ //For each form field...
 		if (!(elements[i].name === "optional")){
-			alert("current field: "+elements[i].value);
+			//alert("current field: "+elements[i].value);
 
-			if (((elements[i].value === "") || (elements[i].value === null)) || (elements[i].value ===0)) {				
+			if (((elements[i].value === "") || (elements[i].value === null)) || (elements[i].value ===0)) {	
+alert("Please fill out all fields");			
 				document.getElementById("error_message_create_new").innerHTML = "Please fill out all fields"; //Replace the error message in the document with this error message
 				//reset the message after every click, run on every post back
 				check = false;
@@ -231,6 +232,7 @@ $(function () {
 					error: function(){
 						sucess=false;
 						document.getElementById("error_message_filter").innerHTML = "No connection to API/Invalid encryption key.";
+						alert("No connection to API/Invalid encryption key.");
 					}
 				}).responseText;
 			e.preventDefault();
@@ -238,6 +240,8 @@ $(function () {
 			else{
 				$("#client_table_module").hide();
 				document.getElementById("error_message_filter").innerHTML = "Please specify a field to filter by.";
+										alert("Please specify a field to filter by.");
+
 			}
 		}
 	});
@@ -389,6 +393,7 @@ $(function () {
 					error: function(){
 						sucess=false;
 						document.getElementById("error_message_transfer").innerHTML = "No connection to API/Invalid encryption key.";
+						alert("No connection to API/Invalid encryption key.");
 					}
 				}).responseText;
 				e.preventDefault();
@@ -414,7 +419,7 @@ $(function () {
 		var success=false;
        
 		if (validation === false){
-				document.getElementById("error_message_login").innerHTML = "Please fill out all fields.";		
+				document.getElementById("error_message_login").innerHTML = "Please fill out all fields.";
 		}
 		
 		else{
@@ -467,7 +472,9 @@ $(function () {
 		var success=false;
        
 		if (validation === false){
-				document.getElementById("error_message_login").innerHTML = "Please fill out all fields.";		
+				document.getElementById("error_message_login").innerHTML = "Please fill out all fields.";	
+alert("Please fill out all fields");				
+				
 		}
 		
 		else{
@@ -490,12 +497,16 @@ $(function () {
 					}
 					else{
 						document.getElementById("error_message_login").innerHTML = "Wrong password or username.";
+						alert("Wrong password or username.");				
+
 					}
 				},
 				
 				error: function(){
 					sucess=false;
 					document.getElementById("error_message_login").innerHTML = "No connection to API/Invalid encryption key.";
+					alert("No connection to API/Invalid encryption key.");				
+
 				}
 			}).responseText;
 		}
@@ -551,6 +562,7 @@ $(function () {
 			//the chosenClientID must be null (has not been set to anything), and if it is null...
 			if (checked === false){
 					document.getElementById("error_message_select").innerHTML = "Please select a donor.";
+					alert("Please select a donor");
 			}
 			
 			else{ //otherwise... if we have selected a client
