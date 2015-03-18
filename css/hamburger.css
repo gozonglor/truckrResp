@@ -36,7 +36,7 @@ position absolute isset to cover the whole viewport
 */
 #content
 {
-    background-image: url('images/greyprint_sm.png');
+    background-image: url('');
     padding: 52px 10px 10px 10px;
     position: relative;
     width: auto;
@@ -91,7 +91,7 @@ nav
     top: 0px;
     position: fixed;
     z-index: 0;
-    width: 70%;
+    width: 30%;
     height: 100%;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -135,6 +135,18 @@ nav li a
     text-decoration: none;
 }
 
+nav li:hover
+{
+	background:#515050;
+	color: #FFFFFF;
+}
+
+nav a
+{
+	color: #fff;
+	text-decoration: none;
+}
+
 /*
 The Layer that will be layed over the content
 so that the content is unclickable while menu is shown
@@ -148,6 +160,6 @@ so that the content is unclickable while menu is shown
     position: absolute;
     right: 0;
     top: 0;
-    width: 30%;
+    width: 70%;
     z-index: 5;
 }

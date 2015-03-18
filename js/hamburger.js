@@ -33,8 +33,8 @@ jQuery(document).ready(function () {
         });
 
         //set margin for the whole container with a jquery UI animation
-        jQuery("#container").animate({"marginLeft": ["70%", 'easeOutExpo']}, {
-            duration: 700
+        jQuery("#container").animate({"marginLeft": ["30%", 'easeOutExpo']}, {
+            duration: 50
         });
 
     });
@@ -47,7 +47,7 @@ jQuery(document).ready(function () {
 
         //set margin for the whole container back to original state with a jquery UI animation
         jQuery("#container").animate({"marginLeft": ["-1", 'easeOutExpo']}, {
-            duration: 700,
+            duration: 50,
             complete: function () {
                 jQuery('#content').css('width', 'auto');
                 jQuery('#contentLayer').css('display', 'none');

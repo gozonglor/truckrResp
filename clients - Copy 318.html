@@ -11,13 +11,6 @@
 	<script type="text/javascript" src="js/html2canvas.js"></script>
     <script src="js/hamburger.js"></script>
 	    <script src="js/master_validation.js"></script>
-											
-		        <link rel="stylesheet" type="text/css" href="css/stylenav.css" />
-
-		       	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css' />
-		<script type="text/javascript" src="js/modernizr.custom.79639.js"></script> 
-		<noscript><link rel="stylesheet" type="text/css" href="css/noJS.css" /></noscript>
-			
 
 
     <!--Using Media Queries, if the viewport is smaller than 700px use another stylesheet-->
@@ -42,7 +35,7 @@
         <div></div>
         <div></div>
     </div>
-	<div id="title_bar" style="font-family:sans-serif; font-size: 20pt; font-weight:bold; color:#FFFFFF; text-align: center;"></div>
+	<div id="title_bar" style="font-family:sans-serif; font-size: 20pt; font-weight:bold; color:#FFFFFF; text-align: center;"><img src="logo_truckr2.png" style="max-width:15%;"></div>
 	</header>
 
     <!--The mobile navigation Markup hidden via css-->
@@ -74,8 +67,7 @@
 				<br><br>
 				<input type ="text" id="id_f" placeholder="id"  style="display: none;" />
 				<input type ="text" id="notes_f" placeholder="notes"  style="display: none;"/>
-	
-	
+										
 				<form id="filtering_form" style="background: none;">
 					<select id="ddlContactStatus" style="display:none;">
 						<option value="">Select Contact Status...</option>
@@ -85,20 +77,20 @@
 						<option value="contact_needed">Contact Needed</option>
 				    </select>
 					<!--<input type ="text" id="contact_relationship_f" placeholder="contact_relationship"  style="display: none;"/>-->
-					<input type ="text" id="firstName_f" placeholder="First name" class='input_field' style="display:none;"/>
-					<input type ="text" id="midName_f" placeholder="Middle name" class='input_field' style="display:none;"/>
-					<input type="text" id="lastName_f" placeholder="Last name" class='input_field' style="display:none;"/>
-					<input type="text" id="phone_f" placeholder="Phone" maxlength="10" class='input_field' style="display:none;"/> 
-					<input type="text" id="org_f" placeholder="Organization name" class='input_field' style="display:none;"/>
-					<input type="text" id="email_f" placeholder="Email" class='input_field' style="display:none;"/>
-					<input type="text" id="address_f" placeholder="Address: ex. 1600 Grand Avenue" class='input_field' style="display:none;"/>
-					<input type="text" id="address2_f" placeholder="Address2: ex. 1600 Grand Avenue" class='input_field' style="display:none;"/>
-					<input type ="text" id="city_f" placeholder="City: ex. St. Paul" class='input_field' style="display:none;"/>
-					<input type="text" id="state_f" placeholder="State: ex. MN" class='input_field' style="display:none;"/>
-					<input type="text" id="zip_f" placeholder="Zip code: ex. 55101" class='input_field' style="display:none;"/>
+					<input type ="text" id="firstName_f" placeholder="First name" class='input_field'/>
+					<input type ="text" id="midName_f" placeholder="Middle name" class='input_field'/>
+					<input type="text" id="lastName_f" placeholder="Last name" class='input_field'/>
+					<input type="text" id="phone_f" placeholder="Phone" maxlength="10" class='input_field'/> 
+					<input type="text" id="org_f" placeholder="Organization name" class='input_field'/>
+					<input type="text" id="email_f" placeholder="Email" class='input_field'/>
+					<input type="text" id="address_f" placeholder="Address: ex. 1600 Grand Avenue" class='input_field'/>
+					<input type="text" id="address2_f" placeholder="Address2: ex. 1600 Grand Avenue" class='input_field'/>
+					<input type ="text" id="city_f" placeholder="City: ex. St. Paul" class='input_field'/>
+					<input type="text" id="state_f" placeholder="State: ex. MN" class='input_field'/>
+					<input type="text" id="zip_f" placeholder="Zip code: ex. 55101" class='input_field'/>
 					
 				</form>
-				<input type="button" value="Filter" id="filter_button" style="display:none;">
+				<input type="button" value="Filter" id="filter_button">
 				<div id="error_message_filter" class="error_message"></div>
 				</center>
 			</div>

@@ -206,6 +206,7 @@ $(function () {
 				document.getElementById("error_message_filter").innerHTML = "";
 				$("#filter_module").hide();
 				$("#client_table_module").show();
+						document.getElementById("title_bar").innerHTML="Filtered Client Table";
 				
 				var response =$.ajax({
 					type: "POST",
@@ -368,7 +369,9 @@ $(function () {
 
 					success: function (response) {
 						$("#generate_module").hide();
-						$("#transfer_module").show();	
+						$("#transfer_module").show();
+		document.getElementById("title_bar").innerHTML="Transfer of Ownership";
+						
 						var formOwnership = donorOrgS;
 						response = response.split("%");
 						
@@ -632,6 +635,7 @@ $(function () {
 //Generates the lot number and populates the lot number fields in the generate module.
 function generateLotNum1(){
 	$("#generate_module").show();
+	document.getElementById("title_bar").innerHTML="Generating Form";
 	var donor = document.getElementById("hidden_client_id").innerHTML;
 	var currentDate = new Date();
 	var minutes = currentDate.getMinutes();
@@ -739,6 +743,8 @@ $(document).ready(function(){
 		}
 		$("#transfer_module").hide();
 		$("#signature_module").show();
+				document.getElementById("title_bar").innerHTML="Client Signature";
+
 	}); 
 });
 
@@ -754,6 +760,8 @@ $(document).ready(function() {
     $('#exit_client_sig_button').click(function() {	
 		$('#signature_module').hide(); //hide the current module ORGIINALLY COMMMENTED OUT 
 		$('#transfer_module').show();
+		document.getElementById("title_bar").innerHTML="Transfer of Ownership";
+
 	}); 
 });
 
@@ -790,6 +798,7 @@ $(document).ready(function(){
 		$("#transfer_module").hide();
 		$("#filter_module").hide();
 		$("#new_client_module").show();
+		document.getElementById("title_bar").innerHTML="New Client";
 		
 	});
 }); 
@@ -818,6 +827,7 @@ $(document).ready(function(){
 				$("#transfer_module").hide();
 		$("#new_client_module").hide();
 		$("#filter_module").show();
+				document.getElementById("title_bar").innerHTML="Find Client";
 	});
 });
 
