@@ -34,7 +34,7 @@ jQuery(document).ready(function () {
 
         //set margin for the whole container with a jquery UI animation
         jQuery("#container").animate({"marginLeft": ["50%", 'easeOutExpo']}, {
-            duration: 700
+            duration: 70
         });
 
     });
