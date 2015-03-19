@@ -145,6 +145,8 @@
     border-left: 5px solid grey;
     cursor: pointer;
     outline: none;
+	    top: 50%;
+    left: 50%;
 }
 
 .wrapper-dropdown-2:after {

@@ -1,9 +1,9 @@
-body {
+/*body {
     background-image: url('images/blueprint_sm2.png');
-	/*background-position: left top;
-	background-repeat: repeat-y;*/
+	background-position: left top;
+	background-repeat: repeat-y;
     background-color: #3ca7ff;
-}
+}*/
 
 .input_field {
    width: 200px;
@@ -59,6 +59,26 @@ input[type="button"],
 }
 
 .btn:hover {
+  background: #2f8ec9;
+  text-decoration: none;
+}
+
+.btn2 {
+  -webkit-border-radius: 5;
+  -moz-border-radius: 5;
+  border-radius: 5px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #969696;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  white-space:nowrap;
+  margin: 5px 5px 5px 5px;
+
+}
+
+.btn2:hover {
   background: #2f8ec9;
   text-decoration: none;
 }

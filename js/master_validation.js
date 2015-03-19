@@ -748,6 +748,7 @@ $(document).ready(function(){
 	}); 
 });
 
+
 //Exit button directions
 $(document).ready(function() {
         $('#exit_filter_table_button').click(function() {

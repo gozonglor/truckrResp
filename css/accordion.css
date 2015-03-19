@@ -1,0 +1,70 @@
+@font-face {
+    font-family: 'GeoSansLight';
+    src: url('fonts/geo_sans_light/GeosansLight.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LaneNar';
+    src: url('fonts/lane/LANENAR_.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+
+color: #FFFFFF;
+margin: 20%;
+   position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 99;
+
+}
+
+
+
+
+dl {
+	width: 90%;
+	margin: 50px 0px 0px 0px;
+
+
+	
+	
+}
+	dl dt {
+		margin: 0px;
+		background-color: #4a5a6b;
+		    position: relative;
+    font-weight: bold;
+    padding: 15px;
+		letter-spacing: 6px;
+
+				font-size: 75%;
+				font-family: LaneNar;
+
+		
+	}
+	
+	dl dt a {
+		color: #FFFFFF;
+		text-decoration: none;
+		font-size: 200%;
+		
+	}
+	dl dd {
+		margin: 0;
+		font-size: 75%;
+			font-family: 'LaneNar';
+			background-color: #687e95;
+	}
+		dl.enhance dd {
+			-webkit-transition: height 0.4s ease;
+			overflow: hidden;
+		}
+		dl.enhance dd.closed {
+			height: 0;
+		}
+		

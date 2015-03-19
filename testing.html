@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <title>Mobile Menu Hamburger</title>
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no"/>
+    <!--Using jQuery and jQuery UI for display effects-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+
+    <!--Using the hamburger menu display code-->
+	<script type="text/javascript" src="js/html2canvas.js"></script>
+    <script src="js/hamburger.js"></script>
+	    <script src="js/master_validation.js"></script>
+											
+		   <link rel="stylesheet" type="text/css" href="css/stylenav.css" />
+		  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css' />
+		<script type="text/javascript" src="js/modernizr.custom.79639.js"></script> 
+		<noscript><link rel="stylesheet" type="text/css" href="css/noJS.css" /></noscript>
+			
+
+
+    <!--Using Media Queries, if the viewport is smaller than 700px use another stylesheet-->
+    <link rel="stylesheet" type="text/css" media="all" href="css/hamburger.css"/>
+	    <link rel="stylesheet" type="text/css" media="all" href="css/style_i.css"/>
+
+			    <link rel="stylesheet" type="text/css" media="all" href="css/style_g.css"/>
+
+
+</head>
+
+<body style="min-height: 100%;">
+        <div class="container">
+
+			<section class="main">
+					<div class="wrapper-demo">
+
+					<div id="dd" class="wrapper-dropdown-2" tabindex="1">Filter by
+						<ul class="dropdown">
+							<li><a href="#"><i class="icon-twitter icon-large"></i>Names</a></li>
+							<li><a href="#"><i class="icon-github icon-large"></i>Address</a></li>
+							<li><a href="#"><i class="icon-facebook icon-large"></i>Contact Information</a></li>
+						</ul>
+					</div>
+									</div>
+
+								</section>
+								</div>
+
+
+		<script type="text/javascript">
+
+			function DropDown(el) {
+				this.dd = el;
+				this.initEvents();
+			}
+			DropDown.prototype = {
+				initEvents : function() {
+					var obj = this;
+
+					obj.dd.on('click', function(event){
+						$(this).toggleClass('active');
+						event.stopPropagation();
+					});	
+				}
+			}
+
+			$(function() {
+
+				var dd = new DropDown( $('#dd') );
+
+				$(document).click(function() {
+					// all dropdowns
+					$('.wrapper-dropdown-2').removeClass('active');
+				});
+
+			});
+
+		</script>
+
+
+</body>
+</html>
