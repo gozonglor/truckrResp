@@ -1,9 +1,7 @@
-/*body {
+body {
     background-image: url('images/blueprint_sm2.png');
-	background-position: left top;
-	background-repeat: repeat-y;
-    background-color: #3ca7ff;
-}*/
+	background-repeat: repeat;
+}
 
 .input_field {
    width: 200px;
