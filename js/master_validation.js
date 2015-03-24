@@ -734,6 +734,7 @@ $(document).ready(function() {
 function allowLogin(data) {
 	// window.location.href = "Posts?Category=" + sel;
 	ekey = btoa(ekey);
+	//
       window.location="clients.html"+"?user="+currentUser+"&"+ekey;
 	  //document.getElementById("testing").innerText="helllooo";
 	//buildQuery();
