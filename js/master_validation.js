@@ -318,6 +318,7 @@ $(function () {
 						generateLotNum1();
 						donorEmail = NewPerson.email;		
 						$("#generate_module").show();
+						document.getElementById("title_bar").innerHTML="Generate Form";
 
 					}
 					
@@ -825,7 +826,7 @@ $(document).ready(function(){
 		}	
 		document.getElementById("error_message_filter").innerHTML = "";
 		// $("#navigation_module").hide();
-				$("#transfer_module").hide();
+		$("#transfer_module").hide();
 		$("#new_client_module").hide();
 		$("#filter_module").show();
 				document.getElementById("title_bar").innerHTML="Find Client";
@@ -837,7 +838,11 @@ $(document).ready(function(){
 			if ($('[name="module"]').is(':visible')){
 			$('[name="module"]').hide();
 		}
-		$("#generate_module").show();
+				$("#transfer_module").hide();				
+
+		$("#generate_module").show();				
+		document.getElementById("title_bar").innerHTML="Generate Form";
+
 	});
 });
 
@@ -847,6 +852,8 @@ $(document).ready(function(){
 			$('[name="module"]').hide();
 		}
 		$("#transfer_module").show();
+						document.getElementById("title_bar").innerHTML="Transfer of Ownership";
+
 	}); 
 });
 
@@ -855,7 +862,11 @@ $(document).ready(function(){
 			if ($('[name="module"]').is(':visible')){
 			$('[name="module"]').hide();
 		}
+				$("#transfer_module").hide();
+
 		$("#client_table_module").show();
+						document.getElementById("title_bar").innerHTML="Filter Table";
+
 	}); 
 });
 
@@ -874,6 +885,32 @@ function buildHtmlTable(myList) {
 				if (colIndex == 0){
 					var cellValue = $('<input type="radio" name="radioBtn" id="radioBtn" value="' + myList[i][columns[colIndex+1]] + '">');
 			}
+			
+					if (colIndex == 3){
+					alert("Column index: "+colIndex+" & value: "+myList[i][columns[colIndex]]);
+					//do nothing, don't append to the table
+				}
+				if (colIndex == 8){
+					//do nothing, don't append to the table
+										alert("Column index: "+colIndex+" & value: "+myList[i][columns[colIndex]]);
+
+				}
+				if (colIndex == 9){
+					//do nothing, don't append to the table
+										alert("Column index: "+colIndex+" & value: "+myList[i][columns[colIndex]]);
+
+				}
+				if (colIndex == 10){
+					//do nothing, don't append to the table
+										alert("Column index: "+colIndex+" & value: "+myList[i][columns[colIndex]]);
+
+				}
+				if (colIndex == 11){
+					//do nothing, don't append to the table
+										alert("Column index: "+colIndex+" & value: "+myList[i][columns[colIndex]]);
+
+				}
+			
 			else{
 				var cellValue = myList[i][columns[colIndex]]; //set the cell value to client in the client list (????, why is it being referred as a 2d array?)
 			}

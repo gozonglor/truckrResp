@@ -1,16 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 100%;">
 <head>
     <title>Mobile Menu Hamburger</title>
     <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no"/>
     <!--Using jQuery and jQuery UI for display effects-->
+						<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js'></script>
+
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	
     <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
 
     <!--Using the hamburger menu display code-->
 	<script type="text/javascript" src="js/html2canvas.js"></script>
     <script src="js/hamburger.js"></script>
 	    <script src="js/master_validation.js"></script>
+
+			
+			<!--ACCORDION SHIT-->
+	
+	<link href="css/accordion.css" rel="stylesheet">
+	<script src="js/jquery.accordion.min.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('dl').accordion();
+		});
+	</script>
+	
+	<!---ACCORDION SHIT-->
 
 
     <!--Using Media Queries, if the viewport is smaller than 700px use another stylesheet-->
@@ -22,7 +39,7 @@
 
 </head>
 
-<body onload="loadCurrentUser();">
+<body onload="loadCurrentUser();" style="min-height: 100%; overflow: hidden;">
 
 <!--This wrapping container is used to get the width of the whole content-->
 <div id="container">
@@ -35,7 +52,7 @@
         <div></div>
         <div></div>
     </div>
-	<div id="title_bar" style="font-family:sans-serif; font-size: 20pt; font-weight:bold; color:#FFFFFF; text-align: center;"><img src="logo_truckr2.png" style="max-width:15%;"></div>
+	<div id="title_bar" style="font-family:sans-serif; font-size: 20pt; font-weight:bold; color:#FFFFFF; text-align: center;"><img src="logo_truckr2.png" style="width: 25%;"></div>
 	</header>
 
     <!--The mobile navigation Markup hidden via css-->
@@ -45,8 +62,10 @@
             <a href="#"><li id="show_new_client_button">New Client</li></a>
             <a href="#"><li>View Transactions</li></a>
 			<a href="#"><li>Logout</li></a>
-			<li style="color: #3ca7ff">Logged in as: <span id="show_user_status" style="font-weight: bold; color: #FFFFFF;"></span><br><br>
-		 Selected donor: <span id="show_donor_status" style="font-weight: bold; color: #FFFFFF;"></span></li>
+			<li style="color: #3ca7ff" id="status_check">
+				Logged in as: <span id="show_user_status" style="font-weight: bold; color: #FFFFFF;"></span>
+				<br><br>
+				Selected donor: <span id="show_donor_status" style="font-weight: bold; color: #FFFFFF;"></span></li>
         </ul>
     </nav>
 
@@ -67,7 +86,32 @@
 				<br><br>
 				<input type ="text" id="id_f" placeholder="id"  style="display: none;" />
 				<input type ="text" id="notes_f" placeholder="notes"  style="display: none;"/>
-										
+					
+					
+					
+					
+					
+						<dl>
+		<dt id="kr"><a href="#kr">Knight Rider</a></dt>
+		<dd>
+			<p>Knight Rider, a shadowy flight into the dangerous world of a man who does not exist. Michael Knight, a young loner on a crusade to champion the cause of the innocent, the helpless in a world of criminals who operate above the law.</p>
+		</dd>
+		<dt id="tc"><a href="#tc">Thundercats</a></dt>
+		<dd>
+			<p>Thunder, thunder, thundercats, Ho! Thundercats are on the move, Thundercats are loose. Feel the magic, hear the roar, Thundercats are loose. Thunder, thunder, thunder, Thundercats! Thunder, thunder, thunder, Thundercats! Thunder, thunder, thunder, Thundercats! Thunder, thunder, thunder, Thundercats! Thundercats!</p>
+		</dd>
+		<dt id="at"><a href="#at">The A-Team</a></dt>
+		<dd>
+			<p>Ten years ago a crack commando unit was sent to prison by a military court for a crime they didn't commit. These men promptly escaped from a maximum security stockade to the Los Angeles underground. Today, still wanted by the government, they survive as soldiers of fortune. If you have a problem and no one else can help, and if you can find them, maybe you can hire the A-team.</p>
+		</dd>
+	</dl>
+
+					
+					
+					
+					
+					
+			
 				<form id="filtering_form" style="background: none;">
 					<select id="ddlContactStatus" style="display:none;">
 						<option value="">Select Contact Status...</option>
@@ -77,20 +121,20 @@
 						<option value="contact_needed">Contact Needed</option>
 				    </select>
 					<!--<input type ="text" id="contact_relationship_f" placeholder="contact_relationship"  style="display: none;"/>-->
-					<input type ="text" id="firstName_f" placeholder="First name" class='input_field'/>
-					<input type ="text" id="midName_f" placeholder="Middle name" class='input_field'/>
-					<input type="text" id="lastName_f" placeholder="Last name" class='input_field'/>
-					<input type="text" id="phone_f" placeholder="Phone" maxlength="10" class='input_field'/> 
-					<input type="text" id="org_f" placeholder="Organization name" class='input_field'/>
-					<input type="text" id="email_f" placeholder="Email" class='input_field'/>
-					<input type="text" id="address_f" placeholder="Address: ex. 1600 Grand Avenue" class='input_field'/>
-					<input type="text" id="address2_f" placeholder="Address2: ex. 1600 Grand Avenue" class='input_field'/>
-					<input type ="text" id="city_f" placeholder="City: ex. St. Paul" class='input_field'/>
-					<input type="text" id="state_f" placeholder="State: ex. MN" class='input_field'/>
-					<input type="text" id="zip_f" placeholder="Zip code: ex. 55101" class='input_field'/>
+					<input type ="text" id="firstName_f" placeholder="First name" class='input_field' style="display:none;"/>
+					<input type ="text" id="midName_f" placeholder="Middle name" class='input_field' style="display:none;"/>
+					<input type="text" id="lastName_f" placeholder="Last name" class='input_field' style="display:none;"/>
+					<input type="text" id="phone_f" placeholder="Phone" maxlength="10" class='input_field' style="display:none;"/> 
+					<input type="text" id="org_f" placeholder="Organization name" class='input_field' style="display:none;"/>
+					<input type="text" id="email_f" placeholder="Email" class='input_field' style="display:none;"/>
+					<input type="text" id="address_f" placeholder="Address: ex. 1600 Grand Avenue" class='input_field' style="display:none;"/>
+					<input type="text" id="address2_f" placeholder="Address2: ex. 1600 Grand Avenue" class='input_field' style="display:none;"/>
+					<input type ="text" id="city_f" placeholder="City: ex. St. Paul" class='input_field' style="display:none;"/>
+					<input type="text" id="state_f" placeholder="State: ex. MN" class='input_field' style="display:none;"/>
+					<input type="text" id="zip_f" placeholder="Zip code: ex. 55101" class='input_field' style="display:none;"/>
 					
 				</form>
-				<input type="button" value="Filter" id="filter_button">
+				<input type="button" value="Filter" id="filter_button" style="display:none;">
 				<div id="error_message_filter" class="error_message"></div>
 				</center>
 			</div>
@@ -146,7 +190,7 @@
 			<!--<input type="button" id="show_button" value="SHOW">-->
 			<div id="generate_module" class="article" style="display: none;" name="module">
 			<center>
-				<form>
+				<form style="margin: 15px 15px;">
 					<b>Lot Number: </b> <div id="lot_number"></div>
 					<textarea id="donation_description" rows="10" cols="80" maxlength="90" style="height:60px;max-width:75%;" placeholder="Donated items description." class='input_field'></textarea>
 					<br><b>Naid:</b>

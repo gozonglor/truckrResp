@@ -1,17 +1,3 @@
-@font-face {
-    font-family: 'LaneNar';
-    src: url('fonts/lane/LANENAR_.ttf');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'GeoSansLight';
-    src: url('fonts/geo_sans_light/GeosansLight.ttf');
-    font-weight: normal;
-    font-style: normal;
-}
-
 html 
 {
     overflow-y: scroll;
@@ -42,12 +28,10 @@ header
     z-index: 1;
     -webkit-box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.4);
     box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.4);
-	font-family: LaneNar;
-	font-size: 50%;
-			letter-spacing: 6px;
-			color:#FFFFFF; 
-			text-align: center;
-
+	font-size: 200%;
+	letter-spacing: 6px;
+	color:#FFFFFF; 
+	text-align: center;
 }
 
 /*
@@ -61,8 +45,8 @@ position absolute isset to cover the whole viewport
     position: relative;
     width: auto;
     height: 100%;
-    /*-webkit-box-shadow: -10px 0px 9px 0px rgba(0, 0, 0, 0.4);*/
-    /*box-shadow: -10px 0px 9px 0px rgba(0, 0, 0, 0.4);*/
+    -webkit-box-shadow: -10px 0px 9px 0px rgba(0, 0, 0, 0.4);
+    box-shadow: -10px 0px 9px 0px rgba(0, 0, 0, 0.4);
 }
 
 /*
@@ -86,7 +70,6 @@ the hamburger button with a little gradient effekt
     background: -ms-linear-gradient(top, #4569b2 0%, #4062a5 100%);
     background: linear-gradient(to bottom, #4569b2 0%, #4062a5 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4569b2', endColorstr='#4062a5', GradientType=0);
-	font-family: LaneNar;
 	letter-spacing: 6px;
 }
 
@@ -101,8 +84,6 @@ The white stripes in the hamburger button
     height: 2px;
     margin-top: 3px;
     width: 90%;
-	font-family: LaneNar;
-	letter-spacing: 6px;
 }
 
 /*
@@ -115,7 +96,7 @@ nav
     top: 0px;
     position: fixed;
     z-index: 0;
-    width: 50%;
+    width: 30%;
     height: 100%;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -130,8 +111,6 @@ nav
     background: -ms-linear-gradient(top, #3e3c3d 0%, #2d2c2d 100%);
     background: linear-gradient(to bottom, #3e3c3d 0%, #2d2c2d 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3e3c3d', endColorstr='#2d2c2d', GradientType=0);
-		font-family: LaneNar;
-	letter-spacing: 6px;
 }
 
 /*
@@ -173,6 +152,17 @@ nav a
 	text-decoration: none;
 }
 
+nav li:hover
+{
+	background:#515050;
+	color: #FFFFFF;
+}
+
+#status_check:hover{
+	background: none;
+}
+
+
 /*
 The Layer that will be layed over the content
 so that the content is unclickable while menu is shown
@@ -186,11 +176,26 @@ so that the content is unclickable while menu is shown
     position: absolute;
     right: 0;
     top: 0;
-    width: 50%;
+    width: 70%;
     z-index: 5;
 }
 
+.btn2 {
+  -webkit-border-radius: 5;
+  -moz-border-radius: 5;
+  border-radius: 5px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #969696;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  white-space:nowrap;
+  margin: 5px 5px 5px 5px;
 
-#status_check:hover{
-	background: none;
+}
+
+.btn2:hover {
+  background: #2f8ec9;
+  text-decoration: none;
 }
