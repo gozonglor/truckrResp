@@ -886,30 +886,7 @@ function buildHtmlTable(myList) {
 					var cellValue = $('<input type="radio" name="radioBtn" id="radioBtn" value="' + myList[i][columns[colIndex+1]] + '">');
 			}
 			
-					if (colIndex == 3){
-					alert("Column index: "+colIndex+" & value: "+myList[i][columns[colIndex]]);
-					//do nothing, don't append to the table
-				}
-				if (colIndex == 8){
-					//do nothing, don't append to the table
-										alert("Column index: "+colIndex+" & value: "+myList[i][columns[colIndex]]);
-
-				}
-				if (colIndex == 9){
-					//do nothing, don't append to the table
-										alert("Column index: "+colIndex+" & value: "+myList[i][columns[colIndex]]);
-
-				}
-				if (colIndex == 10){
-					//do nothing, don't append to the table
-										alert("Column index: "+colIndex+" & value: "+myList[i][columns[colIndex]]);
-
-				}
-				if (colIndex == 11){
-					//do nothing, don't append to the table
-										alert("Column index: "+colIndex+" & value: "+myList[i][columns[colIndex]]);
-
-				}
+			
 			
 			else{
 				var cellValue = myList[i][columns[colIndex]]; //set the cell value to client in the client list (????, why is it being referred as a 2d array?)
