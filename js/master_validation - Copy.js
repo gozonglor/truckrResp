@@ -26,6 +26,40 @@ var currentUser = ""; //Username, example: "glor"
 
 //----------------------------------------------------------------------
 
+//Parameters: string username
+//Output: true (if authorized user) or false
+//Posts the username as a string to the values controller
+function authorize(username){
+	//check the url and its query 
+	var result = false;
+	var formatCurrUser = "'"+username+"'";
+
+	//make a call back to the database,make a sql query checking GUI and username
+	var response =$.ajax({ //use jquery to make a post to the api with the new client 
+		type: "POST", 
+		url: "http://truckrtest.pcscrm.com/api/values",
+		crossDomain: true,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		async: false,
+		data: formatCurrUser, //Passing in the name found in the url
+				 
+		success: function (data) { //the connection was successfully made
+			if (data != ekey){ //if they are not matching...
+				result = false;
+			}
+			else{
+				result=true;
+			}
+		},
+				
+		error: function(){
+			result = false;
+		}
+	}).responseText;
+	return result;
+}
+
 //Set up function called upon load of clients.html
 //Initializes the global username and ekey in the js by using the query string generated from login page
 //This is how the current user follows us through the different modules and actions on the app
@@ -139,6 +173,11 @@ alert("Please fill out all fields");
 $(function () { 	
 	 $("#filter_button").click(function (e) {
 
+		////*/*/CALLING AUTHORIZE/*/*///
+		if (authorize(currentUser) === false){
+			alert("Are you logged in?");
+		}
+		else{
 			$("#client_table_module").hide();
 			$("#client_filter_table").html("");
 			document.getElementById("error_message_filter").innerHTML = "";
@@ -172,12 +211,10 @@ $(function () {
 				var response =$.ajax({
 					type: "POST",
 					url: "http://truckrtest.pcscrm.com/api/filter",
+					contentType: "application/json; charset=utf-8",
+					Type: "json",
 					async: false,
 					data: JSON.stringify(NewPerson),
-					headers: {
-					"Authorization": "Basic "+ekey
-					},
-					dataType: 'json',
 					//Authorization: Basic ekey,
 					
 					success: function (data) {
@@ -207,7 +244,7 @@ $(function () {
 										alert("Please specify a field to filter by.");
 
 			}
-		
+		}
 	});
 });
 
