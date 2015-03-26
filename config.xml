@@ -22,7 +22,8 @@
         permission on your app, which PhoneGap requires. test
     --> 
 
-	<preference name="android-windowSoftInputMode" value="stateVisible|adjustResize" />
+<!--	<preference name="android-windowSoftInputMode" value="stateVisible|adjustResize" /> -->
+	<preference name="android-windowSoftInputMode" value="stateVisible" />
 
     <!-- Customize your app and platform with the preference element. -->
     <preference name="orientation"                value="default" />        <!-- all: default means both landscape and portrait are enabled -->
