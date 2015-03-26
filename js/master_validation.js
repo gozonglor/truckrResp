@@ -173,10 +173,12 @@ $(function () {
 					type: "POST",
 					url: "http://truckrtest.pcscrm.com/api/filter",
 					async: false,
+					 headers: {
+    "Authorization": "Basic " + ekey,
+	"Content-Type": "text/json",
+	"Connection": "keep-alive"
+  },
 					data: JSON.stringify(NewPerson),
-					headers: {
-					"Authorization": "Basic "+ekey
-					},
 					dataType: 'json',
 					//Authorization: Basic ekey,
 					
@@ -195,7 +197,9 @@ $(function () {
 					},
 					error: function(){
 						sucess=false;
-						document.getElementById("error_message_filter").innerHTML = "No connection to API/Invalid encryption key.";
+						  ekey = "";
+						  automaticLogout();
+						//document.getElementById("error_message_filter").innerHTML = "No connection to API/Invalid encryption key.";
 						alert("No connection to API/Invalid encryption key.");
 					}
 				}).responseText;
@@ -211,6 +215,27 @@ $(function () {
 	});
 });
 
+//"logging out"
+function automaticLogout(){
+  ekey = "";
+	  currentUser = "";
+	  currentDate = "";
+	  customer_signature = false;
+	  testing = true;
+	  chosenClientID =0; //the ID of the chosen donor. Example: "8"
+	  chosenClientFName; //the chosen donor's first name. Example: "Harry"
+	  chosenClientLName; //the chosen donor's last name. Example: "Potter"
+	  donorOrgS = ""; //name of the org the donor is tied to. Is updated in the call to the transferform controller.
+	  donorEmail = ""; //donor's email, will be data sent to the email controller
+
+//Transfer form data
+var lotNumber = 0; //LOT NUMBER DATA -- to be updated by the generateLotNum1 method
+var base64SigImg = ""; //SIGNATURE DATA -- the donor's signature in a base 64 string
+var globalDate = ""; //DATE DATA -- the date on which the form was filled out
+var formHtml = ""; //EMAIL BODY DATA -- Text sent in the body of the email
+      window.location="index.html";
+}
+
 //User is creating a new client --> We're sending the new client to the database.
 //Controller that waits for when user creates a new client. 
 //Contains Post request to newclient controller, passing in a client object, returning success (true) or failure (false).
@@ -219,11 +244,7 @@ $(function () {
     $("#create_new_client_button").click(function (e) {
 	
 		////*/*/CALLING AUTHORIZE/*/*///
-		if (authorize(currentUser) === false){
-			alert("Are you logged in?");
-		}
-			
-		else{
+
 			//First, validate the form.
 			var validation = validateFormNew();
 			if (validation === false){ //If not all fields are filled in...
@@ -259,6 +280,11 @@ $(function () {
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				async: false,
+				headers: {
+    "Authorization": "Basic " + ekey,
+	"Content-Type": "text/json",
+	"Connection": "keep-alive"
+  },
 				data: JSON.stringify(NewPerson), //Passing in NewPerson as a JSON object -- the new client that was just created
 				 
 				success: function (data) { //the connection was successfully made
@@ -293,10 +319,10 @@ $(function () {
 				
 				error: function(){
 					// alert("no success--error");
-					document.getElementById("error_message_create_new").innerHTML = "No connection to API/Invalid encryption key.";		
+					automaticLogout();
+					alert("No connection to API/Invalid encryption key.");		
 				}
 			}).responseText;
-		} //--end of else statement.
 	e.preventDefault();
     });	
 });
@@ -307,10 +333,7 @@ $(function () {
 $(function () { 
     $("#transfer_button").click(function (e) {
 			////*/*/CALLING AUTHORIZE/*/*///
-		if (authorize(currentUser) === false){
-			alert("Are you logged in?");
-		}
-		else{
+
 			var BuildingForm = {};    
 
 			BuildingForm.naidChoice = $('input[name=naidOption]:checked').val(); //will either be a string stating 'yesNaid' or 'noNaid'
@@ -328,6 +351,11 @@ $(function () {
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					async: false,
+									headers: {
+    "Authorization": "Basic " + ekey,
+	"Content-Type": "text/json",
+	"Connection": "keep-alive"
+  },
 					data: JSON.stringify(BuildingForm),
 					//Authorization: Basic ekey,
 
@@ -359,67 +387,13 @@ $(function () {
 				
 					error: function(){
 						sucess=false;
-						document.getElementById("error_message_transfer").innerHTML = "No connection to API/Invalid encryption key.";
+						automaticLogout();
+						//document.getElementById("error_message_transfer").innerHTML = "No connection to API/Invalid encryption key.";
 						alert("No connection to API/Invalid encryption key.");
 					}
 				}).responseText;
 				e.preventDefault();
 			}
-		}
-    });
-});
-
-
-//User tries to login, clicks login buttom --> button listener authenticates user
-//user object with encrypted pw and username is posted to confirm controller
-//Used in the index.html page
-$(function () { 
-    $("#login_buttonORIGINAL").click(function (e) {
-		var validation = validateFormLogin();
-		var NewPerson = {};    
-
-        NewPerson.username = $("#userID").val();
-		pass = (CryptoJS.SHA1($("#password").val()));
-		newpass = (pass.toString(CryptoJS.enc.Hex)).toUpperCase();
-		NewPerson.pw = newpass;  
-		
-		var success=false;
-       
-		if (validation === false){
-				document.getElementById("error_message_login").innerHTML = "Please fill out all fields.";
-		}
-		
-		else{
-			var response =$.ajax({
-				type: "POST",
-				url: "http://truckrtest.pcscrm.com/api/confirm",
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
-				async: false,
-				data: JSON.stringify(NewPerson),
-				 
-				success: function (response) {
-					if (response !== ""){ //originally, if response == true
-						currentUser = NewPerson.username;
-						document.getElementById("error_message_login").innerHTML = '<img src="images/loading.gif"/>';
-						setTimeout(allowLogin, 3000);
-						//allowLogin();
-						ekey = response;				
-					}
-					else{
-						document.getElementById("error_message_login").innerHTML = "Wrong password or username.";
-					}
-				},
-				
-				error: function(){
-					sucess=false;
-					document.getElementById("error_message_login").innerHTML = "No connection to API/Invalid encryption key.";
-				}
-			}).responseText;
-		}
-		e.preventDefault();
-		setTimeout(resetError, 3000);
-		//http://stackoverflow.com/questions/20890943/javascript-settimeout-not-working
     });
 });
 
@@ -434,7 +408,8 @@ $(function () {
         NewPerson.username = $("#userID").val();
 		pass = (CryptoJS.SHA1($("#password").val()));
 		newpass = (pass.toString(CryptoJS.enc.Hex)).toUpperCase();
-		NewPerson.pw = newpass;  
+		
+		NewPerson.pw = newpass;
 		
 		var success=false;
        
@@ -475,7 +450,10 @@ alert("Please fill out all fields");
 					document.getElementById("error_message_login").innerHTML = "No connection to API/Invalid encryption key.";
 					alert("No connection to API/Invalid encryption key.");				
 
-				}
+				},
+				    beforeSend: function(xhr){ 
+            xhr.setRequestHeader('Authorization', 'Basic ' + ekey);
+          }
 			}).responseText;
 		}
 		e.preventDefault();
@@ -491,12 +469,7 @@ $(function () {
 	$('#selected_client_button').click(function(){ 
 		var checked = false;
 		////*/*/CALLING AUTHORIZE/*/*///
-		if (authorize(currentUser) === false){
-					alert("Are you logged in?");
-
-		}
 		////*/*/CALLING AUTHORIZE/*/*///
-		else{
 		   var table = document.getElementById('client_filter_table'); //grab the table of filtered clients 
 		   for (var i = 2; i < table.rows.length; i++){ //loop through them and grab their information
 				var entry = table.rows[i];
@@ -547,7 +520,7 @@ $(function () {
 				$("#filter_module").hide(); //Hide current module
 				$("#generate_module").show(); //Show the wanted module
 			}
-		}
+		
 	});
 });
 
@@ -733,13 +706,37 @@ $(document).ready(function() {
 //Helper function: switch window location along to url+query
 function allowLogin(data) {
 	// window.location.href = "Posts?Category=" + sel;
-	ekey = btoa(ekey);
+	//ekey = btoa(ekey);
 	//
       window.location="clients.html"+"?user="+currentUser+"&"+ekey;
 	  //document.getElementById("testing").innerText="helllooo";
 	//buildQuery();
 	//alert("whoo");
 }
+
+$(document).ready(function(){
+	$("#logout_button").click(function(){
+
+	  ekey = "";
+	  currentUser = "";
+	  currentDate = "";
+	  customer_signature = false;
+	  testing = true;
+	  chosenClientID =0; //the ID of the chosen donor. Example: "8"
+	  chosenClientFName; //the chosen donor's first name. Example: "Harry"
+	  chosenClientLName; //the chosen donor's last name. Example: "Potter"
+	  donorOrgS = ""; //name of the org the donor is tied to. Is updated in the call to the transferform controller.
+	  donorEmail = ""; //donor's email, will be data sent to the email controller
+
+//Transfer form data
+var lotNumber = 0; //LOT NUMBER DATA -- to be updated by the generateLotNum1 method
+var base64SigImg = ""; //SIGNATURE DATA -- the donor's signature in a base 64 string
+var globalDate = ""; //DATE DATA -- the date on which the form was filled out
+var formHtml = ""; //EMAIL BODY DATA -- Text sent in the body of the email
+      window.location="index.html";
+
+});
+}); 
 
 /////==================crytoJS============================//////////
 var CryptoJS=CryptoJS||function(e,m){var p={},j=p.lib={},l=function(){},f=j.Base={extend:function(a){l.prototype=this;var c=new l;a&&c.mixIn(a);c.hasOwnProperty("init")||(c.init=function(){c.$super.init.apply(this,arguments)});c.init.prototype=c;c.$super=this;return c},create:function(){var a=this.extend();a.init.apply(a,arguments);return a},init:function(){},mixIn:function(a){for(var c in a)a.hasOwnProperty(c)&&(this[c]=a[c]);a.hasOwnProperty("toString")&&(this.toString=a.toString)},clone:function(){return this.init.prototype.extend(this)}},
@@ -917,11 +914,6 @@ $(function () {
 
 function other(pdfBase64){
 
-		if (authorize(currentUser) == false){
-			alert("Are you logged in?");
-		}
-		
-		else{
 			var result = checkTOOForm();
 			if (result == false){//orig false
 			//Missing a field--a field is not filled out
@@ -959,6 +951,11 @@ function other(pdfBase64){
 						contentType: "application/json; charset=utf-8",
 						dataType: "json",
 						async: false,
+											 headers: {
+    "Authorization": "Basic " + ekey,
+	"Content-Type": "text/json",
+	"Connection": "keep-alive"
+  },
 						data: JSON.stringify(TransferForm),
 						//Authorization: Basic ekey,
 						 
@@ -983,7 +980,6 @@ function other(pdfBase64){
 			//response.preventDefault();
 			}
 			}
-		}
 
 
 function demoFromHTML(base64){

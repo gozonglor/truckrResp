@@ -31,7 +31,7 @@
 .sigPad input {
   margin: 0;
   padding: 0.2em 0;
-  width: 198px;
+  width: 308px; 
 
   border: 1px solid #666;
 
@@ -149,6 +149,7 @@
 }
 
 .pad {
+  /*position: relative;*/
   position: relative;
 
   /**
