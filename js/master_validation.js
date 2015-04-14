@@ -23,6 +23,7 @@ var formHtml = ""; //EMAIL BODY DATA -- Text sent in the body of the email
 //---Authentication
 var ekey = "";
 var currentUser = ""; //Username, example: "glor"
+var locationID = 0;
 
 //----------------------------------------------------------------------
 
@@ -173,11 +174,11 @@ $(function () {
 					type: "POST",
 					url: "http://truckrtest.pcscrm.com/api/filter",
 					async: false,
-					 headers: {
-    "Authorization": "Basic " + ekey,
-	"Content-Type": "text/json",
-	"Connection": "keep-alive"
-  },
+					headers: {
+						"Authorization": "Basic " + ekey,
+						"Content-Type": "text/json",
+						"Connection": "keep-alive"
+					  },
 					data: JSON.stringify(NewPerson),
 					dataType: 'json',
 					//Authorization: Basic ekey,
@@ -273,6 +274,7 @@ $(function () {
 			NewPerson.username = currentUser;
 			NewPerson.key = ekey;
 			NewPerson.id = generateID(NewPerson); //Generate an id for the person using the generateID function.
+			NewPerson.locationid = locationID;
 			  
 			var response =$.ajax({ //use jquery to make a post to the api with the new client 
 				type: "POST", 
@@ -397,6 +399,14 @@ $(function () {
     });
 });
 
+function init()
+{
+    document.getElementById("setScroll").addEventListener('click',function()
+    {
+        document.getElementById("").style.top = -120;//Scroll by 120px
+    });
+}
+
 //User tries to login, clicks login buttom --> button listener authenticates user
 //user object with encrypted pw and username is posted to confirm controller
 //Used in the index.html page
@@ -429,12 +439,15 @@ alert("Please fill out all fields");
 				data: JSON.stringify(NewPerson),
 				 
 				success: function (response) {
-					if (response !== ""){ //originally, if response == true
+					if (response !== "401"){ //originally, if response == true, checks if user is authorized. returns 401 if not authorized.
 						currentUser = NewPerson.username;
 						document.getElementById("error_message_login").innerHTML = 'Logging in...';
 						//setTimeout(allowLogin, 3000);
 						//allowLogin();
-						ekey = response;	
+						var guidlocation = response.split("_");
+						
+						ekey = guidlocation[0];
+						locationID = guidlocation[1];
 						allowLogin();
 						
 					}
