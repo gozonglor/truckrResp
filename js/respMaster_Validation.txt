@@ -24,10 +24,8 @@ var formHtml = ""; //EMAIL BODY DATA -- Text sent in the body of the email
 var ekey = "";
 var currentUser = ""; //Username, example: "glor"
 var locationID = 0;
-var wordage = "";
 
 //----------------------------------------------------------------------
-
 
 //Set up function called upon load of clients.html
 //Initializes the global username and ekey in the js by using the query string generated from login page
@@ -42,13 +40,10 @@ function loadCurrentUser(){
 	if (typeof query !== "undefined"){
 		query = query.split('&');
 		var name = query[0];
-		name = name.split('!');
-		var username = name[1];
-		locationID = name[0];
-		currentUser = username;
+		currentUser = name;
 		ekey = query[1];
-		document.getElementById("hidden_username").innerHTML = username;
-		document.getElementById('show_user_status').innerHTML = username+" "+locationID;
+		document.getElementById("hidden_username").innerHTML = currentUser;
+		document.getElementById('show_user_status').innerHTML = currentUser;
 		//alert("currentUser: "+currentUser+" ekey: "+ekey); //for testing
 	}
 	else{
@@ -165,7 +160,6 @@ $(function () {
 			NewPerson.zip = $("#zip_f").val();
 			NewPerson.state = $("#state_f").val();
 			NewPerson.notes = $("#notes_f").val();
-			NewPerson.locationid = parseInt(locationID);
 			
 			var formFill = validateFormFilter();
 			var success=false;
@@ -280,7 +274,7 @@ $(function () {
 			NewPerson.username = currentUser;
 			NewPerson.key = ekey;
 			NewPerson.id = generateID(NewPerson); //Generate an id for the person using the generateID function.
-			NewPerson.locationid = parseInt(locationID);
+			NewPerson.locationid = locationID;
 			  
 			var response =$.ajax({ //use jquery to make a post to the api with the new client 
 				type: "POST", 
@@ -383,7 +377,6 @@ $(function () {
 						document.getElementById("customTOOForm").innerHTML = formOwnership+response[1];
 						var data = formOwnership+response[1];
 						formHtml = data;
-						wordage = data; //store global form wordage to be referenced when form is submitted...
 					
 						var dateObj= new Date();
 						var month = dateObj.getUTCMonth() + 1; //months from 1-12
@@ -452,14 +445,10 @@ alert("Please fill out all fields");
 						//setTimeout(allowLogin, 3000);
 						//allowLogin();
 						var guidlocation = response.split("_");
-
+						
 						ekey = guidlocation[0];
 						locationID = guidlocation[1];
-												alert("location id is "+locationID);
-
-						//allowLogin();
-												window.location="clients.html"+"?user="+locationID+"!"+currentUser+"&"+ekey;						
-
+						allowLogin();
 						
 					}
 					else{
@@ -932,7 +921,7 @@ $(function () {
 			}
 		});
 		//put it on a pdf
-		//demoFromHTML(img);	
+		demoFromHTML(img);	
 	});
 });
 
@@ -965,9 +954,6 @@ function other(pdfBase64){
 				TransferForm.pdf64 = pdfBase64;
 				
 				TransferForm.donorEmail = donorEmail;
-				TransferForm.wordage = wordage;
-									TransferForm.firstName = chosenClientFName;
-
 				
 				var success=false;
 
@@ -981,7 +967,7 @@ function other(pdfBase64){
 											 headers: {
     "Authorization": "Basic " + ekey,
 	"Content-Type": "text/json",
-	//"Connection": "keep-alive"
+	"Connection": "keep-alive"
   },
 						data: JSON.stringify(TransferForm),
 						//Authorization: Basic ekey,
@@ -1009,29 +995,29 @@ function other(pdfBase64){
 			}
 
 
-// function demoFromHTML(base64){
-         // var doc = new jsPDF('p', 'in', [8,11]); //say 3 5 instead of 'letter'
+function demoFromHTML(base64){
+         var doc = new jsPDF('p', 'in', [8,11]); //say 3 5 instead of 'letter'
 
-           // var source = $('#transfer_module')[0];//originally:$('#transfer_module').first()
-         // var specialElementHandlers = {
-             // '#bypassme': function(element, renderer) {
-                 // return true; 
-             // }
-         // };
+           var source = $('#transfer_module')[0];//originally:$('#transfer_module').first()
+         var specialElementHandlers = {
+             '#bypassme': function(element, renderer) {
+                 return true; 
+             }
+         };
 
-         // doc.fromHTML(
-            // $('#transfer_module').get(0), // [Refer Exact code tutorial][2]HTML string or DOM elem ref.
-             // 0.5,    // x coord, originally 0.5
-             // 1,    // y coord, originally 0.5
-             // {
-                 // 'width': 6.5, // max width of content on PDF
-                 // 'elementHandlers': specialElementHandlers
-             // });
+         doc.fromHTML(
+            $('#transfer_module').get(0), // [Refer Exact code tutorial][2]HTML string or DOM elem ref.
+             0.5,    // x coord, originally 0.5
+             1,    // y coord, originally 0.5
+             {
+                 'width': 6.5, // max width of content on PDF
+                 'elementHandlers': specialElementHandlers
+             });
         
-		// doc.addImage(base64, 'PNG', 0, 0);
+		doc.addImage(base64, 'PNG', 0, 0);
 
-		// var holder = doc.output('dataurlstring');
+		var holder = doc.output('dataurlstring');
 		
-		// document.getElementById('holder').innerHTML= holder.trim();
-// }
+		document.getElementById('holder').innerHTML= holder.trim();
+}
 
