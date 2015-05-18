@@ -1,5 +1,4 @@
 body{ //**having overflow:scroll -- messes up with the alignment of the hamburger menu*//
-	background-image: url('images/greyprint_sm.png');
 	background-repeat: repeat;
 	background-size:auto;
 }
@@ -11,10 +10,17 @@ body{ //**having overflow:scroll -- messes up with the alignment of the hamburge
   padding: 20px 20px 20px 20px;
 } 
 
+@font-face {
+    font-family: roboto;
+    src: url(fonts/roboto/Roboto-Thin.ttf);
+}
+
+
 	h1, h2, h3, h4,h5, h6
 	{
 		color: #000000;
-		font-family: sans-serif;
+		font-family: roboto;
+		font-size: 40pt;
 	}
 	
 #filter_module{
@@ -22,20 +28,27 @@ top:50%;left:0;width:100%;height:500%;
 padding: 10px; 
 }
 
+
+.main{
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background:#4569b2;
+}
+
+
+
 .input_field {
    width: 200px;
    height: 33px;
    border: solid 2px #FFFFFF;
    padding: 2px;
-   border-radius: 5px;
    font-size: 23px;
    box-shadow: 1px 1px 4px 0px #9C9C9C;
    background-color: #FFFFFF;
    outline: none;
    color: #474747;
-   margin-bottom: 25px;
-   width:75%;
-
+   width:100%;
   }
 .input_field:focus  {
    border: solid 2px #F6892E;
@@ -45,12 +58,29 @@ padding: 10px;
    border: solid 2px #0043EB;
   }
 
+  
+#userID{
+background: url(images/user.png) no-repeat scroll 7px 7px;
+background-color:#FFFFFF;
+padding-left:55px;
+height:50px;
+width:50px;
+}
+
+#password{
+background: url(images/lock.png) no-repeat scroll 7px 7px;
+background-color:#FFFFFF;
+padding-left:55px;
+height:50px;
+width:50px;
+}  
 .error_message {
-	font-weight: bold;
-	color: #FFFFFF;
+	color: #000000;
 	padding-top: 5px;
-	font-family: sans-serif;
+	padding-bottom: 5px;
 	text-align:center;
+	font-weight:bold;
+	font-family: sans-serif;
 }
 
 .notification_message {
@@ -65,14 +95,13 @@ input[type="button"],
 .btn {
   -webkit-border-radius: 5;
   -moz-border-radius: 5;
-  border-radius: 5px;
   font-family: Arial;
   color: #ffffff;
   font-size: 20px;
-  background: #969696;
+  background: #000000;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
-  width: 75%;
+  width: 100%;
 }
 
 .btn:hover {
