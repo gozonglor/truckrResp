@@ -455,7 +455,7 @@ alert("Please fill out all fields");
 
 						ekey = guidlocation[0];
 						locationID = guidlocation[1];
-												alert("location id is "+locationID);
+						//alert("location id is "+locationID);
 
 						//allowLogin();
 												window.location="clients.html"+"?user="+locationID+"!"+currentUser+"&"+ekey;						
