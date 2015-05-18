@@ -18,7 +18,7 @@
       <!--Using Media Queries, if the viewport is smaller than 700px use another stylesheet-->
       <link rel="stylesheet" type="text/css" media="all" href="css/hamburger.css"/>
    </head>
-   <body onload="loadCurrentUser();" style="background-image:url(css/images/greyprint_sm.png)">
+   <body onload="loadCurrentUser();" style="background-color: #DDDDDD;">
       <!--This wrapping container is used to get the width of the whole content-->
       <div id="container">
          <sub style="display: none;">
@@ -42,10 +42,10 @@
          <nav>
             <ul>
                <a href="#">
-                  <li id="show_filter_button">Find Client</li>
+                  <li id="show_filter_button"><img src="css/images/filter_white.png"> Find Client</li>
                </a>
                <a href="#">
-                  <li id="show_new_client_button">New Client</li>
+                  <li id="show_new_client_button"><img src="css/images/addnew_white.png"> New Client</li>
                </a>
                <!--<a href="#"><li id="show_present_button">test: present transfer form</li></a>-->
                <!--<a href="#"><li id="show_generate_button">test: generate</li></a>
@@ -88,12 +88,12 @@
                      <input type="text" id="org_f" placeholder="Organization name" class='input_field'/>
                      <input type="text" id="email_f" placeholder="Email" class='input_field'/>
                      <input type="text" id="address_f" placeholder="Address: ex. 1600 Grand Avenue" class='input_field'/>
-                     <input type="text" id="address2_f" placeholder="Address2: ex. 1600 Grand Avenue" class='input_field'/>
+                     <input type="text" id="address2_f" placeholder="Address2: ex. 1600 Grand Avenue" class='input_field' style="display:none;"/>
                      <input type ="text" id="city_f" placeholder="City: ex. St. Paul" class='input_field'/>
                      <input type="text" id="state_f" placeholder="State: ex. MN" class='input_field'/>
                      <input type="text" id="zip_f" placeholder="Zip code: ex. 55101" class='input_field'/>
                   </form>
-                  <input type="button" value="Filter" id="filter_button">
+                  <input type="button" value="Find Existing Client" id="filter_button">
                   <div id="error_message_filter" class="error_message"></div>
                </center>
             </div>
@@ -132,7 +132,7 @@
                      <input type ="text" id="contact_relationship_new" placeholder="contact_relationship"  style="display: none;"/>
                   </form>
                   <!--<a href="#filter" class="jumplink">-->
-                  <input type="button" value="Create" id="create_new_client_button">
+                  <input type="button" value="Create New Client" id="create_new_client_button">
                   <div id="error_message_create_new" class="error_message"></div>
                   <div id="message_create_new" class="notification_message"></div>
                </center>
