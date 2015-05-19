@@ -1157,9 +1157,6 @@ function other(pdfBase64) {
     if (result == false) { //orig false
         //Missing a field--a field is not filled out
     } else {
-        //take the base 64 string....
-        //pdfBase64 = pdfBase64.split("$");
-        //pdfBase64 = pdfBase64[1];
         var TransferForm = {};
 
         TransferForm.naidChoice = $('input[name=naidOption]:checked').val(); //will either be a string stating 'yesNaid' or 'noNaid'
@@ -1184,7 +1181,7 @@ function other(pdfBase64) {
 
 
         var success = false;
-
+		alert("Created the Transfer form... Making a post request now");
 
         var response = $.ajax({
             type: "POST",
@@ -1195,8 +1192,10 @@ function other(pdfBase64) {
             headers: {
                 "Authorization": "Basic " + ekey,
                 "Content-Type": "text/json",
-                "Connection": "keep-alive"
+                "Connection": "keep-alive" //Note: This might have been the key to solving the issue.
             },
+			
+			
             data: JSON.stringify(TransferForm),
             //Authorization: Basic ekey,
 
@@ -1217,6 +1216,8 @@ function other(pdfBase64) {
             }
         }).responseText;
         //response.preventDefault();
+				alert("Fell through the post request!");
+
     }
 }
 
