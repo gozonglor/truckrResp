@@ -23,6 +23,7 @@ var ekey = "";
 var currentUser = ""; //Username, example: "glor"
 var locationID = 0;
 var wordage = "";
+var shownName = "";
 
 //----------------------------------------------------------------------
 
@@ -375,9 +376,16 @@ $(function() {
 
                     if (response[0] == "False") { //if there is no org tied to the donor
                         formOwnership = chosenClientFName.toUpperCase() + " " + chosenClientLName.toUpperCase() + " "; //form ownership information belongs to individual donor
-                    } //else, the passed in response[0] already has the org name in it, no need to parse it or add an else statement.
+						var splitP1 = response[1].split('_');
+						response[1] = splitP1[0]+formOwnership+splitP1[1];
+                    } //else, the passed in response[0] already has the org name in it, no need to parse it or add an else statement
+					else{
+						var splitP1 = response[1].split('_');
+						response[1] = splitP1[0]+formOwnership+splitP1[1];
+					}
 
-					wordage = formOwnership+"%"+response[1]+response[4]; //store global form wordage to be referenced when form is submitted...
+					shownName = formOwnership;
+					wordage = formOwnership+"%"+response[1]+"%"+response[4]; //store global form wordage to be referenced when form is submitted...
 
 					
                     //First Paragraph
@@ -498,7 +506,7 @@ $(function() {
         ////*/*/CALLING AUTHORIZE/*/*///
         ////*/*/CALLING AUTHORIZE/*/*///
         var table = document.getElementById('client_filter_table'); //grab the table of filtered clients 
-        for (var i = 2; i < table.rows.length; i++) { //loop through them and grab their information
+        for (var i = 1; i < table.rows.length; i++) { //loop through them and grab their information
             var entry = table.rows[i];
             var firstCol = entry.childNodes[0];
             var radioButton = firstCol.firstChild;
@@ -568,8 +576,11 @@ $(function() {
                 //imgBaseSig = imgBaseSig.split(",");
                 document.getElementById("test_sig").innerHTML = imgBaseSig;
                 //base64SigImg = imgBaseSig[1]; //store globally...
+				var cleanArray = imgBaseSig.split(",");
+				
+				base64SigImg = cleanArray[1];
 
-                base64SigImg = imgBaseSig;
+                //base64SigImg = imgBaseSig;
 
                 document.getElementById("sigImage").innerHTML = "<img src='" + base64SigImg + "'>";
 
@@ -997,6 +1008,45 @@ var CryptoJS = CryptoJS || function(e, m) {
 })();
 ////////..............................................////////
 
+
+////////////////////BACK BUTTONS////////////////////////////////
+
+$(document).ready(function() {
+    $("#back_filtered_list").click(function() {
+        if ($('[name="module"]').is(':visible')) {
+            $('[name="module"]').hide();
+        }
+        document.getElementById("error_message_filter").innerHTML = "";
+        // $("#navigation_module").hide();
+        $("#client_table_module").show();
+
+    });
+});
+
+	
+	
+$(document).ready(function() {
+    $("#back_build_form").click(function() {
+        if ($('[name="module"]').is(':visible')) {
+            $('[name="module"]').hide();
+        }
+        document.getElementById("error_message_filter").innerHTML = "";
+        // $("#navigation_module").hide();
+        $("#generate_module").show();
+
+    });
+});
+
+$(document).ready(function() {
+    $("#back_new_client").click(function() {
+        if ($('[name="module"]').is(':visible')) {
+            $('[name="module"]').hide();
+        }
+		alert("Sorry - I haven't built in this functionality yet. You can edit the client information when you get back to the office.");
+    });
+});
+
+
 ////////////////////////////////FOR TESTING PURPOSES/////////////////////////////////////////
 
 $(document).ready(function() {
@@ -1183,6 +1233,7 @@ function other(pdfBase64) {
         TransferForm.donorEmail = donorEmail;
         TransferForm.wordage = wordage;
         TransferForm.firstName = chosenClientFName;
+		TransferForm.shownName = shownName;
 
 
         var success = false;

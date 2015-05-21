@@ -84,14 +84,14 @@
                      <B>First Name: </b><br><input type ="text" id="firstName_f" placeholder="First name" class='input_field' style="   text-transform: capitalize;"/><br>
                      <b>Middle Initial: </b><br><input type ="text" id="midName_f" placeholder="(optional) Middle initial" class='input_field' style="text-transform: capitalize;" maxlength="1"/><br>
                      <b>Last Name: </b><br><input type="text" id="lastName_f" placeholder="Last name" class='input_field' style="   text-transform: capitalize;"/><br>
-                     <b>Phone: </b><br><input type="text" id="phone_f" placeholder="Phone: ex. 999-999-9999" maxlength="10" class='input_field'/><br>
+                     <b>Phone: </b><br><input type="number" pattern="[0-9]*" id="phone_f" placeholder="Phone: ex. 999-999-9999" maxlength="10" class='input_field'/><br>
                      <b>Business: </b><br><input type="text" id="org_f" placeholder="Organization name" class='input_field'/><br>
                      <b>Email: </b><br><input type="text" id="email_f" placeholder="Email" class='input_field'/><br><br>
                      <b>Address: </b><input type="text" id="address_f" placeholder="Address: ex. 1600 Grand Avenue" class='input_field' style="text-transform: capitalize;"/><br>
                      <input type="text" id="address2_f" placeholder="Address2: ex. 1600 Grand Avenue" class='input_field' style="display:none;" style="text-transform: capitalize;"/>
                      <b>City: </b><br><input type ="text" id="city_f" placeholder="City: ex. St. Paul" class='input_field' style="text-transform: capitalize;"/><br>
                      <b>State: </b><br><input type="text" id="state_f" placeholder="State: ex. MN" class='input_field' style="   text-transform: uppercase;" maxlength="2"/><br>
-                     <b>Zip code: </b><br><input type="text" id="zip_f" placeholder="Zip code: ex. 55101" class='input_field' maxlength="5"/><br>
+                     <b>Zip code: </b><br><input type="number" pattern="[0-9]*" id="zip_f" placeholder="Zip code: ex. 55101" class='input_field' maxlength="5"/><br>
                   </form>
                   <input type="button" value="Find Existing Client" id="filter_button">
                   <div id="error_message_filter" class="error_message"></div>
@@ -114,7 +114,7 @@
                      <b>First Name: </b><input type ="text" id="firstName_new" placeholder="First name" class='input_field' style="text-transform: capitalize;"/><br>
                      <b>Middle Initial: </b><input type ="text" id="midName_new" name="optional" placeholder="(optional) Middle initial" class='input_field' style="text-transform: capitalize;" maxlength="1"/><br>
                      <b>Last Name: </b><input type="text" id="lastName_new" placeholder="Last name" class='input_field' style="text-transform: capitalize;"/><br>
-                     <b>Phone: </b><input type="text" id="phone_new" placeholder="Phone: ex. 999-999-9999" maxlength="10" class='input_field'/> <br>
+                     <b>Phone: </b><input type="number" id="phone_new" pattern="[0-9]*" placeholder="Phone: ex. 999-999-9999" maxlength="10" class='input_field'/> <br>
                      <b>Business: </b><input type="text" id="org_new" name="optional" placeholder="Organization name" class='input_field' style="text-transform: capitalize;"/><br>
                      <b>Email: </b><input type="text" id="email_new" placeholder="Email" class='input_field'/><br>
                      <b>Address: </b><input type="text" id="address_new" placeholder="Address: ex. 1600 Grand Avenue" class='input_field'/><br>
@@ -124,7 +124,7 @@
                      <b>City: </b><input type ="text" id="city_new" placeholder="City: ex. St. Paul" class='input_field' style="text-transform: capitalize;"/>
                      <select id="citiesDropDown" name="optional" style="visibility:hidden;" class='input_field'></select><br>
 					 <b>State: </b><input type="text" id="state_new" placeholder="Readonly: State" class='input_field' style="text-transform: uppercase;" maxlength="2" readonly/><br>
-                     <b>Zip code: </b><input type="text" id="zip_new" placeholder="Zip code: ex. 55101" class='input_field' maxlength="5" onchange="autoPopZip()"/><br>
+                     <b>Zip code: </b><input type="number" pattern="[0-9]*" id="zip_new" placeholder="Zip code: ex. 55101" class='input_field' maxlength="5" onchange="autoPopZip()"/><br>
 					 <select id="zipcodesDropDown" name="optional" style="visibility:hidden;" class='input_field'></select><br>
                   </form>
                   <form id="optional_form">
