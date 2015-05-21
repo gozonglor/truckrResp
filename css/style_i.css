@@ -97,15 +97,14 @@ width:50px;
 input[type="button"],
 .btn {
   font-family: Arial;
-  color: #000000;
-  font-size: 20px;
-  background: transparent;
+  color: #FFFFFF;
+  font-size: 24px;
+  background: #000000;
   padding: 30px 30px 30px 30px;
   text-decoration: none;
   width: 100%;
-  border-color:#FFFFFF;
-  border-width: 2px;
-  margin: 30px;
+  border-color:#000000;
+  border-width: 1px;
 }
 
 .btn:hover {
