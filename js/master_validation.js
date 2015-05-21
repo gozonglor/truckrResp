@@ -173,11 +173,16 @@ $(function() {
 
             var response = $.ajax({
                 type: "POST",
+				    // beforeSend: function (request)
+    // {
+        // request.withCredentials = true;
+        // request.setRequestHeader("Authorization", "Basic "+ekey);
+    // },
                 url: "http://truckrtest.pcscrm.com/api/filter",
                 async: false,
                 headers: {
                     "Authorization": "Basic " + ekey,
-                    "Content-Type": "text/json",
+                    "Content-Type": "application/json",
                     "Connection": "keep-alive"
                 },
                 data: JSON.stringify(NewPerson),
@@ -185,18 +190,19 @@ $(function() {
                 //Authorization: Basic ekey,
 
                 success: function(data) {
-                    if (data.length == 1) {
+                    if (data.length == 0) {
                         //alert("No results found");
                         document.getElementById("error_message_select").innerHTML = "No results found.";
-                        document.getElementById("message_select").innerHTML = data.length - 1 + " result(s) found.";
+                        document.getElementById("message_select").innerHTML = data.length + " result(s) found.";
                     } else {
                         document.getElementById("error_message_select").innerHTML = "";
-                        document.getElementById("message_select").innerHTML = data.length - 1 + " result(s) found.";
+                        document.getElementById("message_select").innerHTML = data.length + " result(s) found.";
                         success = true;
                         handleData(data);
                     }
                 },
                 error: function() {
+					alert("error: "+response);
                     sucess = false;
                     ekey = "";
                     automaticLogout();
@@ -1079,12 +1085,12 @@ function handleData(data) { //A smaller function to consolidate the longer ones 
 
 function buildHtmlTable(myList) {
     var columns = addAllColumnHeaders(myList); //call function taking in list of clients, 
-    for (var i = 0; i <= myList.length; i++) { //for each client, used to be myList.length+1
+    for (var i = 0; i < myList.length; i++) { //for each client, used to be myList.length+1
         var row$ = $('<tr/>'); //create a row 
-        var row$ = $('<tr/>'); //create a row 
+        //var row$ = $('<tr/>'); //create a row 
         for (var colIndex = 0; colIndex < columns.length; colIndex++) { //for each column in the row	
 
-            if (i > 0) {
+            if (i >= 0) {
                 if (colIndex == 0) {
                     var cellValue = $('<input type="radio" name="radioBtn" id="radioBtn" value="' + myList[i][columns[colIndex + 1]] + '">');
                 } else {
@@ -1108,13 +1114,13 @@ function addAllColumnHeaders(myList) {
     var columnSet = [];
     var headerTr$ = $('<tr/>');
 
-    for (var i = 0; i <= myList.length - 1; i++) { //used to be myList.length+1
+    for (var i = 0; i <= myList.length+1; i++) { //used to be myList.length+1
         if (i == 0) {
             var rowHash = " ";
             columnSet.push(rowHash);
             headerTr$.append($('<th/>').html(rowHash));
         } else {
-            var rowHash = myList[i];
+            var rowHash = myList[i-1];
             for (var key in rowHash) {
                 if ($.inArray(key, columnSet) == -1) {
                     columnSet.push(key);
@@ -1122,7 +1128,7 @@ function addAllColumnHeaders(myList) {
                 }
             }
         }
-    }
+   }
 
     $("#client_filter_table").append(headerTr$); //To be renamed.
     return columnSet;

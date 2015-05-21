@@ -81,16 +81,16 @@
                         <option value="contact_needed">Contact Needed</option>
                      </select>
                      <!--<input type ="text" id="contact_relationship_f" placeholder="contact_relationship"  style="display: none;"/>-->
-                     <input type ="text" id="firstName_f" placeholder="First name" class='input_field'/>
-                     <input type ="text" id="midName_f" placeholder="Middle name" class='input_field'/>
-                     <input type="text" id="lastName_f" placeholder="Last name" class='input_field'/>
-                     <input type="text" id="phone_f" placeholder="Phone: ex. 9999999999" maxlength="10" class='input_field'/> 
+                     <input type ="text" id="firstName_f" placeholder="First name" class='input_field' style="   text-transform: capitalize;"/>
+                     <input type ="text" id="midName_f" placeholder="Middle name" class='input_field' style="   text-transform: capitalize;"/>
+                     <input type="text" id="lastName_f" placeholder="Last name" class='input_field' style="   text-transform: capitalize;"/>
+                     <input type="text" id="phone_f" placeholder="Phone: ex. 999-999-9999" maxlength="10" class='input_field'/> 
                      <input type="text" id="org_f" placeholder="Organization name" class='input_field'/>
                      <input type="text" id="email_f" placeholder="Email" class='input_field'/>
-                     <input type="text" id="address_f" placeholder="Address: ex. 1600 Grand Avenue" class='input_field'/>
-                     <input type="text" id="address2_f" placeholder="Address2: ex. 1600 Grand Avenue" class='input_field' style="display:none;"/>
-                     <input type ="text" id="city_f" placeholder="City: ex. St. Paul" class='input_field'/>
-                     <input type="text" id="state_f" placeholder="State: ex. MN" class='input_field'/>
+                     <input type="text" id="address_f" placeholder="Address: ex. 1600 Grand Avenue" class='input_field' style="text-transform: capitalize;"/>
+                     <input type="text" id="address2_f" placeholder="Address2: ex. 1600 Grand Avenue" class='input_field' style="display:none;" style="text-transform: capitalize;"/>
+                     <input type ="text" id="city_f" placeholder="City: ex. St. Paul" class='input_field' style="text-transform: capitalize;"/>
+                     <input type="text" id="state_f" placeholder="State: ex. MN" class='input_field' style="   text-transform: uppercase;" maxlength="2"/>
                      <input type="text" id="zip_f" placeholder="Zip code: ex. 55101" class='input_field' maxlength="5"/>
                   </form>
                   <input type="button" value="Find Existing Client" id="filter_button">
@@ -111,17 +111,17 @@
                         <option value="dormant">Dormant</option>
                         <option value="contact_needed">Contact Needed</option>
                      </select>
-                     <input type ="text" id="firstName_new" placeholder="First name" class='input_field'/>
-                     <input type ="text" id="midName_new" name="optional" placeholder="Middle name" class='input_field'/>
-                     <input type="text" id="lastName_new" placeholder="Last name" class='input_field'/>
-                     <input type="text" id="phone_new" placeholder="Phone: ex. 9999999999" maxlength="10" class='input_field'/> 
-                     <input type="text" id="org_new" name="optional" placeholder="Organization name" class='input_field'/>
+                     <input type ="text" id="firstName_new" placeholder="First name" class='input_field' style="text-transform: capitalize;"/>
+                     <input type ="text" id="midName_new" name="optional" placeholder="Middle name" class='input_field' style="text-transform: capitalize;"/>
+                     <input type="text" id="lastName_new" placeholder="Last name" class='input_field' style="text-transform: capitalize;"/>
+                     <input type="text" id="phone_new" placeholder="Phone: ex. 999-999-9999" maxlength="10" class='input_field'/> 
+                     <input type="text" id="org_new" name="optional" placeholder="Organization name" class='input_field' style="text-transform: capitalize;"/>
                      <input type="text" id="email_new" placeholder="Email" class='input_field'/>
                      <input type="text" id="address_new" placeholder="Address: ex. 1600 Grand Avenue" class='input_field'/>
                      <input type="text" id="address2_new" name="optional" placeholder="Address2: ex. 1600 Grand Avenue" class='input_field'/>
-                     <input type ="text" id="city_new" placeholder="City: ex. St. Paul" class='input_field'/>
-                     <input type="text" id="state_new" placeholder="State: ex. MN" class='input_field'/>
-                     <input type="text" id="zip_f" placeholder="Zip code: ex. 55101" class='input_field' maxlength="5"/>
+                     <input type ="text" id="city_new" placeholder="City: ex. St. Paul" class='input_field' style="text-transform: capitalize;"/>
+                     <input type="text" id="state_new" placeholder="State: ex. MN" class='input_field' style="text-transform: uppercase;" maxlength="2"/>
+                     <input type="text" id="zip_new" placeholder="Zip code: ex. 55101" class='input_field' maxlength="5"/>
                   </form>
                   <form id="optional_form">
                      <!--default clients get a 0 zipcode until I figure out how to use google's api to get the zip, and an id of 0-->
@@ -218,7 +218,7 @@
                   </ul>
                   <div class="sig sigWrapper">
                      <div class="typed"></div>
-                     <canvas class="pad" width="298" height="55"></canvas>
+                     <canvas class="pad" width="4000" height="55"></canvas>
                      <input type="hidden" name="output" class="output" id="output">
                   </div>
                   <input type="button" id="submit_me" value="Submit">
@@ -244,7 +244,7 @@
             <!---------------------------------------------------------------------->					
             <div id="transfer_module" name="transfer_module" class="article" style="background-color: #FFFFFF; display:none;width:100%;" name="module" >
                <!--<form id="transfer_of_ownership_form1">-->
-               <div id="actual_form" style="background: #FFFFFF; padding-top: 100px;">
+               <div id="actual_form" style="background: #FFFFFF; padding-top: 100px; padding-left: 50px; padding-right: 50px; padding-bottom: 50px;">
                   <div id="transfer_form_date1" style="text-align: right;"> </div>
                   <img src="pcs4ppl_banner.png">
                   <div id="lot_number_final" style="font-size:10pt;"></div>
@@ -256,8 +256,8 @@
                      <table style="width:100%; border: #ffffff; padding-left: 0px;">
                         <tr style="border: #ffffff;">
                            <td style="font-size: 12pt; font-weight : bold; padding-left: 6px; border: #ffffff; width: 30%;">
-                              <div id="label" class="menu1" style="background-color: #FFFFFF; border: #ffffff; font-size: 12pt; color: #000000; font-weight : bold;">
-                                 Donor Signature: 
+                              <div id="label" class="menu1" style="background-color: #FFFFFF; border: #ffffff; font-size: 12pt; color: #000000; font-weight : bold;"><br><br>
+                                 Donor Signature: <br>
                                  <div id="select_signature" style="display:inline;"><b><u>Sign</u></b></div>
                               </div>
                               <div id="label2" class="menu2" style="background-color: #FFFFFF;">
