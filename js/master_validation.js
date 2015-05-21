@@ -202,7 +202,6 @@ $(function() {
                     }
                 },
                 error: function() {
-					alert("error: "+response);
                     sucess = false;
                     ekey = "";
                     automaticLogout();
@@ -1253,3 +1252,134 @@ function other(pdfBase64) {
 
 // document.getElementById('holder').innerHTML= holder.trim();
 // }
+
+function autoPopZip() {
+
+	var val = "";
+	 
+	var zip = document.getElementById("zip_new").value;
+
+
+		val =zip;
+
+    var response = $.ajax({
+        type: "GET",
+        url: "http://truckrtest.pcscrm.com/api/location/"+val,
+        contentType: "application/json; charset=utf-8",
+        //dataType: "json",
+        async: false,
+        // data: JSON.stringify(data),
+
+        success: function(response) {
+			if (response.cityList.length > 0){ //if it's returning a list of cities that match the zip code
+				//hide the single cities input
+				document.getElementById("city_new").style.visibility = "hidden";
+				document.getElementById("city_new").style.display = "none";
+				var listCities = response.cityList;
+				populateCitiesDLL(listCities); //populate the drop down list
+				document.getElementById("citiesDropDown").style.visibility = "visible"; //finally show the drop down list
+				document.getElementById("state_new").value = response.stateLocation;
+				document.getElementById("state_new").textContent = response.stateLocation;
+			}
+			else{
+				document.getElementById("city_new").value = response.city;
+				document.getElementById("city_new").textContent = response.city;
+				document.getElementById("state_new").value = response.stateLocation;
+				document.getElementById("state_new").textContent = response.stateLocation;
+
+			}
+        },
+
+        error: function() {
+            alert("Error.");
+        }
+    }).responseText;
+}
+
+
+function populateCitiesDLL(listCities){
+	var ddlCityMenu = document.getElementById("citiesDropDown");
+	for (var i=0; i<listCities.length; i++){
+		var city = listCities[i];
+		var element = document.createElement("option");
+		element.textContent = city;
+		element.value = city;
+		ddlCityMenu.appendChild(element);
+	}
+}
+
+
+			
+function autoPopCity() {
+  	 
+	var city = document.getElementById("cityT").value;
+
+	var cityObject = {};
+	cityObject.name = city;
+	
+    var response = $.ajax({
+        type: "GET",
+        url: "http://truckrtest.pcscrm.com/api/location/",
+        contentType: "application/json; charset=utf-8",
+        //dataType: "json",
+        async: false,
+        data: JSON.stringify(city),
+		
+
+        success: function(response) {
+			if (response.errorMsg == ""){
+
+				if (response.zipList.length > 0){ //if it's returning a list of cities that match the zip code
+					//hide the single cities input
+					document.getElementById("zip_new").style.visibility = "hidden";
+					document.getElementById("zip_new").style.display = "none";
+					var listZips = response.zipList;
+					populateZipcodesDLL(listZips); //populate the drop down list
+					document.getElementById("zipcodesDropDown").style.visibility = "visible"; //finally show the drop down list
+					document.getElementById("state_new").value = response.stateLocation;
+					document.getElementById("state_new").textContent = response.stateLocation;
+				}
+				else{
+					document.getElementById("state_new").value = response.stateLocation;
+					document.getElementById("state_new").textContent = response.stateLocation;
+					document.getElementById("zip_new").value = response.zip;
+					document.getElementById("zip_new").textContent = response.zip;
+
+				}
+			}
+			else{
+				alert("Sorry, there is no existing data to reference and match with your input... but you can carry on like normal.");
+			}
+        },
+
+        error: function() {
+            alert("Error.");
+        }
+    }).responseText;
+}
+
+//to help auto pop the existing input field with a choice chosen from the drop down list
+//source/help: http://stackoverflow.com/questions/22309036/change-the-value-of-input-fields-according-to-what-is-selected-from-the-dropdow
+var select = document.getElementsByTagName('zipcodesDropDown')[0];
+select.addEventListener('change', function () {
+    var texts = document.getElementsById('zip_new');
+     texts[i].value = select.value;
+});
+
+//notes are same as above
+var select2 = document.getElementsByTagName('citiesDropDown')[0];
+select.addEventListener('change', function () {
+    var texts = document.getElementsById('city_new');
+     texts[i].value = select.value;
+});
+	
+function populateZipcodesDLL(listZips){
+	var ddlZipMenu = document.getElementById("zipcodesDropDown");
+	for (var i=0; i<listZips.length; i++){
+		var city = listZips[i];
+		var element = document.createElement("option");
+		element.textContent = city;
+		element.value = city;
+		ddlZipMenu.appendChild(element);
+	}
+}
