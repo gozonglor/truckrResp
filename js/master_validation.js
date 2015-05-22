@@ -1230,7 +1230,7 @@ function other(pdfBase64) {
 
         TransferForm.naidChoice = $('input[name=naidOption]:checked').val(); //will either be a string stating 'yesNaid' or 'noNaid'
         TransferForm.donationDescription = $("#donation_description").val();
-        TransferForm.lotNum = lotNumber;
+        TransferForm.lotNum = 0;
         TransferForm.donorID = parseInt(donorID);
         TransferForm.username = currentUser;
 		var cleanSig = base64SigImg.split(',');
