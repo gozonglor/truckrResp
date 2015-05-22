@@ -24,6 +24,7 @@ var currentUser = ""; //Username, example: "glor"
 var locationID = 0;
 var wordage = "";
 
+
 //----------------------------------------------------------------------
 
 
@@ -173,11 +174,6 @@ $(function() {
 
             var response = $.ajax({
                 type: "POST",
-				    // beforeSend: function (request)
-    // {
-        // request.withCredentials = true;
-        // request.setRequestHeader("Authorization", "Basic "+ekey);
-    // },
                 url: "http://truckrtest.pcscrm.com/api/filter",
                 async: false,
                 headers: {
@@ -186,7 +182,6 @@ $(function() {
                     "Connection": "keep-alive"
                 },
                 data: JSON.stringify(NewPerson),
-                dataType: 'json',
                 //Authorization: Basic ekey,
 
                 success: function(data) {
@@ -203,8 +198,8 @@ $(function() {
                 },
                 error: function() {
                     sucess = false;
-                    ekey = "";
-                    automaticLogout();
+                    //ekey = "";
+                    //automaticLogout();
                     //document.getElementById("error_message_filter").innerHTML = "No connection to API/Invalid encryption key.";
                     alert("No connection to API/Invalid encryption key.");
                 }
@@ -376,8 +371,10 @@ $(function() {
                     if (response[0] == "False") { //if there is no org tied to the donor
                         formOwnership = chosenClientFName.toUpperCase() + " " + chosenClientLName.toUpperCase() + " "; //form ownership information belongs to individual donor
                     } //else, the passed in response[0] already has the org name in it, no need to parse it or add an else statement.
-
-					wordage = formOwnership+"%"+response[1]+response[4]; //store global form wordage to be referenced when form is submitted...
+					
+					var cleanResponse = response[1].split("_");
+					wordage[1] = cleanResponse[0] + formOwnership + cleanResponse[1]; 
+					wordage = formOwnership+"%"+response[1]+"%"+response[4]; //store global form wordage to be referenced when form is submitted...
 
 					
                     //First Paragraph
@@ -1209,6 +1206,13 @@ function other(pdfBase64) {
                 if (response == true) {
                     document.getElementById("error_message_transfer").innerHTML = "";
                     document.getElementById("message_transfer").innerHTML = "Transfer Form successfully added to database. Email sent to " + "<b>" + donorEmail + "</b>";
+					alert("Transaction completed!");
+					//document.getElementById("transfer_module").style.display = "none";
+					//document.getElementById("transfer_module").style.visibility = "none";
+					//document.getElementById("transfer_module").style.visibility = "none";
+					
+					$("#transfer_module").hide();
+					$("#final_module").show();
                 } else {
                     document.getElementById("error_message_transfer").innerHTML = "Successful post. Bad API response. Error: " + response + ".  Could not insert final Transfer Form into db.";
                     alert("AJAX request returned an error. Error: " + response + ".  Could not insert Transfer Form into db.");
@@ -1360,18 +1364,14 @@ function autoPopCity() {
 
 //to help auto pop the existing input field with a choice chosen from the drop down list
 //source/help: http://stackoverflow.com/questions/22309036/change-the-value-of-input-fields-according-to-what-is-selected-from-the-dropdow
-var select = document.getElementsByTagName('zipcodesDropDown')[0];
-select.addEventListener('change', function () {
-    var texts = document.getElementsById('zip_new');
-     texts[i].value = select.value;
-});
+// var select = document.getElementById('zipcodesDropDown')[0];
+// select.addEventListener('change', function () {
+    // var texts = document.getElementsById('zip_new');
+     // texts[i].value = select.value;
+// });
 
 //notes are same as above
-var select2 = document.getElementsByTagName('citiesDropDown')[0];
-select.addEventListener('change', function () {
-    var texts = document.getElementsById('city_new');
-     texts[i].value = select.value;
-});
+//  
 	
 function populateZipcodesDLL(listZips){
 	var ddlZipMenu = document.getElementById("zipcodesDropDown");
