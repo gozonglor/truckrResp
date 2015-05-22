@@ -140,7 +140,7 @@
                   </form>
                   <form id="optional_form">
                      <!--default clients get a 0 zipcode until I figure out how to use google's api to get the zip, and an id of 0-->
-                     <input type ="number" id="zip_new" style="display: none;" value="0" name='input_field' maxlength="5"/> 
+                     <input type ="number" id="zip_new" style="display: none;" value="0" name='input_field' maxlength="5" onchange="autoPopZip()"/> 
                      <!--default client id cannot be 0 as the id is how we'll track the donor throughout all the pages-->
                      <input type ="number" id="id_new" style="display: none;" value="0" name='input_field'/>
                      <input type ="text" id="notes_new" placeholder="Optional notes" name='input_field'/>
