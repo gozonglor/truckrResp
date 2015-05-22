@@ -729,7 +729,7 @@ function validateTransferForm() {
 function checkTOOForm() {
     var validate = false;
     document.getElementById("message_transfer").innerHTML = "";
-    if (((document.getElementById("client_title").value === "")) || (document.getElementById("p4p_name").value === "")) {
+    if (((document.getElementById("client_title").value === ""))) {
         // document.getElementById("error_message_transfer").innerHTML = "Missing customer signature and/or title.";
         document.getElementById("error_message_transfer").innerHTML = "Missing fields.";
 		alert("Please fill out the missing fields!");
