@@ -1271,7 +1271,7 @@ function other(pdfBase64) {
 
             success: function(response) {
 
-                if (response == true) {
+                if (response.errCode == 0) {
                     document.getElementById("error_message_transfer").innerHTML = "";
                     document.getElementById("message_transfer").innerHTML = "Transfer Form successfully added to database. Email sent to " + "<b>" + donorEmail + "</b>";
 					alert("Transaction completed!");
@@ -1283,9 +1283,10 @@ function other(pdfBase64) {
 					$("#final_module").show();
 					clearAllForms();
                 } else {
-                    document.getElementById("error_message_transfer").innerHTML = "Successful post. Bad API response. Error: " + response + ".  Could not insert final Transfer Form into db.";
-                    alert("AJAX request returned an error. Error: " + response + ".  Could not insert Transfer Form into db.");
-                }
+                    //document.getElementById("error_message_transfer").innerHTML = "Successful post. Bad API response. Error: " + response + ".  Could not insert final Transfer Form into db.";
+                    //alert("AJAX request returned an error. Error: " + response + ".  Could not insert Transfer Form into db.");
+					alert("response from api: "+response.errorMsg);
+				}
             },
 
             error: function() {
