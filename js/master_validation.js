@@ -10,6 +10,7 @@ var chosenClientFName; //the chosen donor's first name. Example: "Harry"
 var chosenClientLName; //the chosen donor's last name. Example: "Potter"
 var donorOrgS = ""; //name of the org the donor is tied to. Is updated in the call to the transferform controller.
 var donorEmail = ""; //donor's email, will be data sent to the email controller
+var donorID = 0;
 
 //Transfer form data
 var lotNumber = 0; //LOT NUMBER DATA -- to be updated by the generateLotNum1 method
@@ -373,13 +374,14 @@ $(function() {
                     } //else, the passed in response[0] already has the org name in it, no need to parse it or add an else statement.
 					
 					var cleanResponse = response[1].split("_");
-					wordage[1] = cleanResponse[0] + formOwnership + cleanResponse[1]; 
-					wordage = formOwnership+"%"+response[1]+"%"+response[4]; //store global form wordage to be referenced when form is submitted...
+					var firstParagraph = cleanResponse[0] + formOwnership + cleanResponse[1]; 
+					
+					wordage = formOwnership+"%"+firstParagraph+"%"+response[4]; //store global form wordage to be referenced when form is submitted...
 
 					
                     //First Paragraph
 					formHtml = ""; //formatted transfer of ownership form
-                    document.getElementById("customTOOForm").innerHTML = "<b>"+formOwnership+"</b>" + response[1]; 
+                    document.getElementById("customTOOForm").innerHTML = "<b>"+formOwnership+"</b>" + firstParagraph; 
                     var data = formOwnership + response[1] + " what is this Data?!"; //Not sure what this this?
                     formHtml = data; 
 					
@@ -496,12 +498,14 @@ $(function() {
         ////*/*/CALLING AUTHORIZE/*/*///
         var table = document.getElementById('client_filter_table'); //grab the table of filtered clients 
         for (var i = 1; i < table.rows.length; i++) { //loop through them and grab their information
-            var entry = table.rows[i];
+			var entry = table.rows[i];
             var firstCol = entry.childNodes[0];
             var radioButton = firstCol.firstChild;
-            //var clientID = entry.childNodes[1];
-            var clientFName = entry.childNodes[1];
-            var clientLName = entry.childNodes[2];
+            var clientID = entry.childNodes[1];
+			            alert("here is the id of the donor: "+clientID);
+			donorID = clientID;
+            var clientFName = entry.childNodes[2];
+            var clientLName = entry.childNodes[3];
             clientFName = clientFName.innerText;
             clientLName = clientLName.innerText;
             if (radioButton.checked) { //checks if the 'i' particular radio button is checked --i.e. the 3rd if you are on the fourth iteration of the loop
@@ -512,8 +516,8 @@ $(function() {
                 //chosenClientID = clientID.firstChild.data; //set the global variable chosenClientID to be the id of the selected child
                 chosenClientFName = clientFName; //set global variable of first name
                 chosenClientLName = clientLName; //set global variable of last name
-                donorEmail = entry.childNodes[5].innerText;
-                donorOrgS = entry.childNodes[4].innerText;
+                donorEmail = entry.childNodes[6].innerText;
+                donorOrgS = entry.childNodes[5].innerText;
 
                 //alert("Globalizing line 265: "+donorEmail+" .... "+donorOrgS);
                 //show the generate module
@@ -719,9 +723,12 @@ function checkTOOForm() {
     if (((document.getElementById("client_title").value === "")) || (document.getElementById("p4p_name").value === "")) {
         // document.getElementById("error_message_transfer").innerHTML = "Missing customer signature and/or title.";
         document.getElementById("error_message_transfer").innerHTML = "Missing fields.";
+		alert("Please fill out the missing fields!");
+
     } else {
         if (customer_signature === false) {
             document.getElementById("error_message_transfer").innerHTML = "Missing fields.";
+			alert("Please fill out the missing fields!");
         } else {
             validate = true;
         }
@@ -1168,7 +1175,7 @@ function addAllColumnHeaders(myList) {
             var rowHash = myList[i-1];
             for (var key in rowHash) {
                 if ($.inArray(key, columnSet) == -1) {
-					if ((key == "firstName") || (key == "lastName") || (key == "email") || (key == "org") || (key == "phone")){
+					if ((key == "firstName") || (key == "lastName") || (key == "email") || (key == "org") || (key == "phone") || (key == "contactid")){
                     columnSet.push(key);
                     headerTr$.append($('<th/>').html(key));
 					}
@@ -1215,18 +1222,19 @@ function other(pdfBase64) {
         TransferForm.naidChoice = $('input[name=naidOption]:checked').val(); //will either be a string stating 'yesNaid' or 'noNaid'
         TransferForm.donationDescription = $("#donation_description").val();
         TransferForm.lotNum = lotNumber;
-        TransferForm.donorID = chosenClientID;
+        TransferForm.donorID = parseInt(donorID);
         TransferForm.username = currentUser;
-        TransferForm.donorSig = base64SigImg;
+		var cleanSig = base64SigImg.split(',');
+        TransferForm.donorSig = cleanSig[1];
         TransferForm.org = donorOrgS;
         TransferForm.dateFilled = globalDate;
 
 
         TransferForm.formatted = "Thank you for calling PCs for People to safely and legally dispose of your used hardware. Attached is a screen shot of the transfer of ownership form.";
 
-        pdfBase64 = pdfBase64.split(',');
-        pdfBase64 = pdfBase64[1];
-        TransferForm.pdf64 = pdfBase64;
+        // pdfBase64 = pdfBase64.split(',');
+        // pdfBase64 = pdfBase64[1];
+        // TransferForm.pdf64 = "";
 
         TransferForm.donorEmail = donorEmail;
         TransferForm.wordage = wordage;
@@ -1264,6 +1272,7 @@ function other(pdfBase64) {
 					
 					$("#transfer_module").hide();
 					$("#final_module").show();
+					clearAllForms();
                 } else {
                     document.getElementById("error_message_transfer").innerHTML = "Successful post. Bad API response. Error: " + response + ".  Could not insert final Transfer Form into db.";
                     alert("AJAX request returned an error. Error: " + response + ".  Could not insert Transfer Form into db.");
