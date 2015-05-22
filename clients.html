@@ -47,13 +47,23 @@
                <a href="#">
                   <li id="show_new_client_button"><img src="css/images/addnew_white.png"> New Client</li>
                </a>
-               <!--<a href="#"><li id="show_present_button">test: present transfer form</li></a>-->
-               <!--<a href="#"><li id="show_generate_button">test: generate</li></a>
-                  <a href="#"><li id="show_table_button">test: show filter table</li></a>-->
+
                <li style="color: #3ca7ff" id="status_check">Logged in as: <span id="show_user_status" style="font-weight: bold; color: #FFFFFF;"></span><br><br>
                   Selected donor: <span id="show_donor_status" style="font-weight: bold; color: #FFFFFF;"></span>
                </li>
-               <a href="#" id="logout_button">
+			   
+			      <a href="#"><li id="show_present_button">test: present transfer form</li></a>
+				  <a href="#"><li id="show_generate_button">test: generate</li></a>
+                  <a href="#"><li id="show_table_button">test: show filter table</li></a>
+                  <li onclick="clearFilterForm()">Test clear filter field</li>
+				  <li onclick="clearNewClientForm()">Test clear new client field</li>
+				  <li onclick="clearCreatingForm()">Test clear creating field</li>
+				  <li onclick="clearTooForm()">Test clear too field</li>
+				  				  <li onclick="clearAllForms()">CLEAR ALL</li>
+
+
+				  
+				  <a href="#" id="logout_button">
                   <li>Logout</li>
                </a>
             </ul>
@@ -146,7 +156,7 @@
             <!--<input type="button" id="show_button" value="SHOW">-->
             <div id="generate_module" class="article" style="display: none; width: 100%;" name="module">
                <center>
-                  <form style="margin-top: 50px; align: center;">
+                  <form id="generate_too_form" style="margin-top: 50px; align: center;">
                      <b>Lot Number: </b> 
                      <div id="lot_number"></div>
                      <textarea id="donation_description" rows="10" cols="80" maxlength="90" style="height:60px;max-width:75%;" placeholder="Donated items description." class='input_field'></textarea>
@@ -161,16 +171,16 @@
             </div>
             <!------------------------------------------------------------------->
             <div class="article" style="display: none; width: 100%;" id="signature_module">
-               <form action="" class="sigPad" style="margin-top: 50px;">
+               <form action="" class="sigPad" id="sigPad" style="margin-top: 50px;">
                   <!--method="post"-->
                   <img src="css/images/close.png" id="exit_client_sig_button"><label for="name">Print your name:</label>
                   <input type="text" name="name" id="name" class="name" style="min-width: 75%;">
                   <p class="typeItDesc">Review your signature</p>
                   <p class="drawItDesc">Draw your signature</p>
                   <ul class="sigNav">
-                     <li class="typeIt"><a href="#type-it" class="current">Type It</a></li>
+                     <!--<li class="typeIt"><a href="#type-it" class="current">Type It</a></li>-->
                      <li class="drawIt"><a href="#draw-it" >Draw It</a></li>
-                     <li class="clearButton"><a href="#clear" style="text-decoration: none;">Clear</a></li>
+                     <li class="clearButton" id="clearButton"><a href="#clear" style="text-decoration: none;">Clear</a></li>
                   </ul>
                   <div class="sig sigWrapper" style="margin-bottom: 50px;">
                      <div class="typed"></div>
@@ -205,38 +215,6 @@
                <!--</div>-->
             </div>
             <!------------------------------------------------------------------->
-            <div class="article" style="display: none;" id="p4p_signature_module" style="margin-top: 50px; width: 100%;">
-               <center>
-               <form action="" class="sigPad">
-                  <!--method="post"-->
-                  <img src="images/close.png" id="exit_client_sig_button">
-                  <label for="p4p_name">Print your name</label>
-                  <input type="text" name="name" id="name" class="name">
-                  <p class="typeItDesc">Review your signature.</p>
-                  <p class="drawItDesc">Draw your signature.</p>
-                  <ul class="sigNav">
-                     <li class="typeIt"><a href="#type-it" class="current">Type It</a></li>
-                     <li class="drawIt"><a href="#draw-it" >Draw It</a></li>
-                     <li class="clearButton"><a href="#clear">Clear</a></li>
-                  </ul>
-                  <div class="sig sigWrapper">
-                     <div class="typed"></div>
-                     <canvas class="pad" width="4000" height="55"></canvas>
-                     <input type="hidden" name="output" class="output" id="output">
-                  </div>
-                  <input type="button" id="submit_me" value="Submit">
-                  <div id="sig_error_message" class="error_message"></div>
-                  <div id="sig_message" class="notification"></div>
-                  <center>
-               </form>
-               <script>
-                  $(document).ready(function() {
-                    $('.sigPad').signaturePad();
-                  });
-               </script>
-               <script src="js/json2.min.js"></script>
-               </center>
-            </div>
             <!---------------------------------------------------------------------->					
             <!------------------------------------------------------------------->
             <div class="article" style="display: none;" id="complete_module">
@@ -247,7 +225,7 @@
             <!---------------------------------------------------------------------->					
             <div id="transfer_module" name="transfer_module" class="article" style="background-color: #FFFFFF; display:none;width:100%;" name="module" >
                <!--<form id="transfer_of_ownership_form1">-->
-               <div id="actual_form" style="background: #FFFFFF; padding-top: 100px; padding-left: 50px; padding-right: 50px; padding-bottom: 50px;">
+               <div id="actual_form" style="background: #FFFFFF; padding-top: 100px; padding-left: 50px; padding-right: 50px; padding-bottom: 50px;"><form id="actual_too_form">
                   <div id="transfer_form_date1" style="text-align: right;"> </div>
                   <img src="pcs4ppl_banner.png">
                   <div id="lot_number_final" style="font-size:10pt;"></div>
@@ -290,6 +268,7 @@
                <!----------------------------------------------------------->
                <!--<input type="button" value="Sign" id="testing_button">p-->
                <!--<a href="javascript:demoFromHTML()" class="button"><input type = "button" value="I Accept" id="accept_button"></a>-->	
+			   </form>
             </div>
             <div id="button_holder"><input type = "button" value="I Accept" id="accept_button"></div>
             <div id="error_message_transfer" class="error_message"></div>
@@ -297,6 +276,10 @@
             <canvas id="newCanvas" style="display:none"></canvas>
             <!--</form>	-->						
          </div>
+		 
+		 
+		 <div id="final_module" style="display: none;"><h1>Complete. Email was sent to you and the client.</h1></div>
+		 
       </div>
       </div>
       <div id="test_sig" style="display:none"></div>
