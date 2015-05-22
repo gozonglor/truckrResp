@@ -135,7 +135,7 @@
                      <b>City: </b><input type ="text" id="city_new" placeholder="City: ex. St. Paul" name='input_field' style="text-transform: capitalize;"/>
                      <select id="citiesDropDown" name="optional" style="visibility:hidden;" name='input_field'></select><br>
 					 <b>State: </b><input type="text" id="state_new" placeholder="Readonly: State" name='input_field' style="text-transform: uppercase;" maxlength="2" readonly/><br>
-                     <b>Zip code: </b><input type="text" class="simple-field-data-mask" id="zip_new" placeholder="Zip code: ex. 55101" name='input_field' maxlength="5" data-mask="00000"/><br>
+                     <b>Zip code: </b><input type="text" class="simple-field-data-mask" id="zip_new" placeholder="Zip code: ex. 55101" name='input_field' maxlength="5" data-mask="00000" onchange="autoPopZip()"/><br>
 					 <select id="zipcodesDropDown" name="optional" style="visibility:hidden;" name='input_field'></select><br>
                   </form>
                   <form id="optional_form">
