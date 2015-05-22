@@ -498,7 +498,7 @@ $(function() {
         ////*/*/CALLING AUTHORIZE/*/*///
         ////*/*/CALLING AUTHORIZE/*/*///
         var table = document.getElementById('client_filter_table'); //grab the table of filtered clients 
-        for (var i = 2; i < table.rows.length; i++) { //loop through them and grab their information
+        for (var i = 1; i < table.rows.length; i++) { //loop through them and grab their information
             var entry = table.rows[i];
             var firstCol = entry.childNodes[0];
             var radioButton = firstCol.firstChild;
