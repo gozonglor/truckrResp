@@ -199,8 +199,8 @@ $(function() {
                 },
                 error: function() {
                     sucess = false;
-                    //ekey = "";
-                    //automaticLogout();
+                    ekey = "";
+                    automaticLogout();
                     //document.getElementById("error_message_filter").innerHTML = "No connection to API/Invalid encryption key.";
                     alert("No connection to API/Invalid encryption key.");
                 }
@@ -501,27 +501,36 @@ $(function() {
 			var entry = table.rows[i];
             var firstCol = entry.childNodes[0];
             var radioButton = firstCol.firstChild;
-            var clientID = entry.childNodes[1];
-			            alert("here is the id of the donor: "+clientID);
-			donorID = clientID;
+            var clientID = entry.childNodes[1].innerText;
+			//donorID = clientID;
             var clientFName = entry.childNodes[2];
             var clientLName = entry.childNodes[3];
             clientFName = clientFName.innerText;
             clientLName = clientLName.innerText;
             if (radioButton.checked) { //checks if the 'i' particular radio button is checked --i.e. the 3rd if you are on the fourth iteration of the loop
                 checked = true;
-                document.getElementById("error_message_select").innerHTML = "You have selected " + clientFName + " " + clientLName;
+                //document.getElementById("error_message_select").innerHTML = "You have selected " + clientFName + " " + clientLName, " with an id number of "+clientID;
+				
+				
+				if (confirm("You have selected " + clientFName + " " + clientLName+ " with an id number of "+clientID+". Is that ok?")){
+					$("#client_table_module").hide(); //Hide current module
+					$("#filter_module").hide(); //Hide current module
+					$("#generate_module").show(); //Show the wanted module
+										
+					donorID = clientID;
 
-                //GLOBALIZING				
-                //chosenClientID = clientID.firstChild.data; //set the global variable chosenClientID to be the id of the selected child
-                chosenClientFName = clientFName; //set global variable of first name
-                chosenClientLName = clientLName; //set global variable of last name
-                donorEmail = entry.childNodes[6].innerText;
-                donorOrgS = entry.childNodes[5].innerText;
-
+					//GLOBALIZING				
+					//chosenClientID = clientID.firstChild.data; //set the global variable chosenClientID to be the id of the selected child
+					chosenClientFName = clientFName; //set global variable of first name
+					chosenClientLName = clientLName; //set global variable of last name
+					donorEmail = entry.childNodes[6].innerText;
+					donorOrgS = entry.childNodes[5].innerText;
+				} else{
+				break;
+				}
+		
                 //alert("Globalizing line 265: "+donorEmail+" .... "+donorOrgS);
                 //show the generate module
-                $("#generate_module").show();
 
                 break; //break out of the for loop, since we have a selected donor already
             }
@@ -540,11 +549,11 @@ $(function() {
             var showDonorStatus = document.getElementById('show_donor_status');
             showDonorStatus.innerHTML = donorOrgS +"<br>"+ clientFName + " " + clientLName;
             hiddenDonor.innerHTML = getDonor();
-            document.getElementById("message_select").innerHTML = "Grabbing from the database...Donors are successfully filtered.";
-            generateLotNum1();
-            $("#client_table_module").hide(); //Hide current module
-            $("#filter_module").hide(); //Hide current module
-            $("#generate_module").show(); //Show the wanted module
+            //document.getElementById("message_select").innerHTML = "Grabbing from the database...Donors are successfully filtered.";
+            //generateLotNum1();
+            //$("#client_table_module").hide(); //Hide current module
+            //$("#filter_module").hide(); //Hide current module
+            //$("#generate_module").show(); //Show the wanted module
         }
 
     });
@@ -1175,7 +1184,7 @@ function addAllColumnHeaders(myList) {
             var rowHash = myList[i-1];
             for (var key in rowHash) {
                 if ($.inArray(key, columnSet) == -1) {
-					if ((key == "firstName") || (key == "lastName") || (key == "email") || (key == "org") || (key == "phone") || (key == "contactid")){
+					if ((key == "firstName") || (key == "lastName") || (key == "email") || (key == "org") || (key == "phone") || (key == "contactID")){
                     columnSet.push(key);
                     headerTr$.append($('<th/>').html(key));
 					}
@@ -1443,3 +1452,20 @@ function populateZipcodesDLL(listZips){
 		ddlZipMenu.appendChild(element);
 	}
 }
+
+$(document).ready(function(){
+  $('#phone_f').mask('000-000-0000');
+});
+
+
+$(document).ready(function(){
+  $('#zip_f').mask('00000');
+});
+
+$(document).ready(function(){
+  $('#phone_new').mask('000-000-0000');
+});
+
+$(document).ready(function(){
+  $('#zip_new').mask('00000');
+});

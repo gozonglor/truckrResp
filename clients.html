@@ -10,7 +10,8 @@
       <script src="js/jquery.maskedinput.min.js" type="text/javascript"></script>
       <!--Using the hamburger menu display code-->
       <script type="text/javascript" src="js/html2canvas.js"></script>
-      <script type="text/javascript" src="js/mask.js"></script>
+	        <script type="text/javascript" src="js/jquery.mask.js"></script>
+
       <script src="js/hamburger.js"></script>
       <script src="js/master_validation.js"></script>
       <link rel="stylesheet" type="text/css" media="all" href="css/style_i.css"/>
@@ -91,17 +92,17 @@
                         <option value="contact_needed">Contact Needed</option>
                      </select>
                      <!--<input type ="text" id="contact_relationship_f" placeholder="contact_relationship"  style="display: none;"/>-->
-                     <B>First Name: </b><br><input type ="text" id="firstName_f" placeholder="First name" class='input_field' style="   text-transform: capitalize;"/><br>
-                     <b>Middle Initial: </b><br><input type ="text" id="midName_f" placeholder="(optional) Middle initial" class='input_field' style="text-transform: capitalize;" maxlength="1"/><br>
-                     <b>Last Name: </b><br><input type="text" id="lastName_f" placeholder="Last name" class='input_field' style="   text-transform: capitalize;"/><br>
-                     <b>Phone: </b><br><input type="text" id="phone_f" placeholder="Phone: ex. 999-999-9999" maxlength="10" class='input_field'/><br>
-                     <b>Business: </b><br><input type="text" id="org_f" placeholder="Organization name" class='input_field'/><br>
-                     <b>Email: </b><br><input type="text" id="email_f" placeholder="Email" class='input_field'/><br><br>
-                     <b>Address: </b><input type="text" id="address_f" placeholder="Address: ex. 1600 Grand Avenue" class='input_field' style="text-transform: capitalize;"/><br>
-                     <input type="text" id="address2_f" placeholder="Address2: ex. 1600 Grand Avenue" class='input_field' style="display:none;" style="text-transform: capitalize;"/>
-                     <b>City: </b><br><input type ="text" id="city_f" placeholder="City: ex. St. Paul" class='input_field' style="text-transform: capitalize;"/><br>
-                     <b>State: </b><br><input type="text" id="state_f" placeholder="State: ex. MN" class='input_field' style="   text-transform: uppercase;" maxlength="2"/><br>
-                     <b>Zip code: </b><br><input type="text" id="zip_f" placeholder="Zip code: ex. 55101" class='input_field' maxlength="5"/><br>
+                     <B>First Name: </b><br><input type ="text" id="firstName_f" placeholder="First name" name='input_field' style="   text-transform: capitalize;"/><br>
+                     <b>Middle Initial: </b><br><input type ="text" id="midName_f" placeholder="(optional) Middle initial" name='input_field' style="text-transform: capitalize;" maxlength="1"/><br>
+                     <b>Last Name: </b><br><input type="text" id="lastName_f" placeholder="Last name" name='input_field' style="   text-transform: capitalize;"/><br>
+                     <b>Phone: </b><br><input class="simple-field-data-mask" type="text" id="phone_f" placeholder="Phone: ex. 999-999-9999" name='input_field' data-mask="000-000-0000"><br>
+                     <b>Business: </b><br><input type="text" id="org_f" placeholder="Organization name" name='input_field'/><br>
+                     <b>Email: </b><br><input type="text" id="email_f" placeholder="Email" name='input_field'/><br><br>
+                     <b>Address: </b><input type="text" id="address_f" placeholder="Address: ex. 1600 Grand Avenue" name='input_field' style="text-transform: capitalize;"/><br>
+                     <input type="text" id="address2_f" placeholder="Address2: ex. 1600 Grand Avenue" name='input_field' style="display:none;" style="text-transform: capitalize;"/>
+                     <b>City: </b><br><input type ="text" id="city_f" placeholder="City: ex. St. Paul" name='input_field' style="text-transform: capitalize;"/><br>
+                     <b>State: </b><br><input type="text" id="state_f" placeholder="State: ex. MN" name='input_field' style="   text-transform: uppercase;" maxlength="2"/><br>
+                     <b>Zip code: </b><br><input type="text" class="simple-field-data-mask" id="zip_f" placeholder="Zip code: ex. 55101" name='input_field' maxlength="5" data-mask="000000"/><br>
                   </form>
                   <input type="button" value="Find Existing Client" id="filter_button">
                   <div id="error_message_filter" class="error_message"></div>
@@ -121,28 +122,28 @@
                         <option value="dormant">Dormant</option>
                         <option value="contact_needed">Contact Needed</option>
                      </select>
-                     <b>First Name: </b><input type ="text" id="firstName_new" placeholder="First name" class='input_field' style="text-transform: capitalize;"/><br>
-                     <b>Middle Initial: </b><input type ="text" id="midName_new" name="optional" placeholder="(optional) Middle initial" class='input_field' style="text-transform: capitalize;" maxlength="1"/><br>
-                     <b>Last Name: </b><input type="text" id="lastName_new" placeholder="Last name" class='input_field' style="text-transform: capitalize;"/><br>
-                     <b>Phone: </b><input type="text" id="phone_new" placeholder="Phone: ex. 999-999-9999" maxlength="10" class='input_field'/> <br>
-                     <b>Business: </b><input type="text" id="org_new" name="optional" placeholder="Organization name" class='input_field' style="text-transform: capitalize;"/><br>
-                     <b>Email: </b><input type="text" id="email_new" placeholder="Email" class='input_field'/><br>
-                     <b>Address: </b><input type="text" id="address_new" placeholder="Address: ex. 1600 Grand Avenue" class='input_field'/><br>
-                     <b>Address 2: </b><input type="text" id="address2_new" name="optional" placeholder="(optional) Address2: ex. 1600 Grand Avenue" class='input_field'/><br>
+                     <b>First Name: </b><input type ="text" id="firstName_new" placeholder="First name" name='input_field' style="text-transform: capitalize;"/><br>
+                     <b>Middle Initial: </b><input name="input_field" type ="text" id="midName_new" name="optional" placeholder="(optional) Middle initial" name='input_field' style="text-transform: capitalize;" maxlength="1"/><br>
+                     <b>Last Name: </b><input type="text" id="lastName_new" placeholder="Last name" name='input_field' style="text-transform: capitalize;"/><br>
+                     <b>Phone: </b><input class="simple-field-data-mask" type="text" id="phone_new" placeholder="Phone: ex. 999-999-9999" data-mask="000-000-0000" name='input_field'/> <br>
+                     <b>Business: </b><input name="input_field" type="text" id="org_new" name="optional" placeholder="Organization name" name='input_field' style="text-transform: capitalize;"/><br>
+                     <b>Email: </b><input type="text" id="email_new" placeholder="Email" name='input_field'/><br>
+                     <b>Address: </b><input type="text" id="address_new" placeholder="Address: ex. 1600 Grand Avenue" name='input_field'/><br>
+                     <b>Address 2: </b><input name="input_field" type="text" id="address2_new" name="optional" placeholder="(optional) Address2: ex. 1600 Grand Avenue" name='input_field'/><br>
 					 
 					 
-                     <b>City: </b><input type ="text" id="city_new" placeholder="City: ex. St. Paul" class='input_field' style="text-transform: capitalize;"/>
-                     <select id="citiesDropDown" name="optional" style="visibility:hidden;" class='input_field'></select><br>
-					 <b>State: </b><input type="text" id="state_new" placeholder="Readonly: State" class='input_field' style="text-transform: uppercase;" maxlength="2" readonly/><br>
-                     <b>Zip code: </b><input type="text" id="zip_new" placeholder="Zip code: ex. 55101" class='input_field' maxlength="5" onchange="autoPopZip()"/><br>
-					 <select id="zipcodesDropDown" name="optional" style="visibility:hidden;" class='input_field'></select><br>
+                     <b>City: </b><input type ="text" id="city_new" placeholder="City: ex. St. Paul" name='input_field' style="text-transform: capitalize;"/>
+                     <select id="citiesDropDown" name="optional" style="visibility:hidden;" name='input_field'></select><br>
+					 <b>State: </b><input type="text" id="state_new" placeholder="Readonly: State" name='input_field' style="text-transform: uppercase;" maxlength="2" readonly/><br>
+                     <b>Zip code: </b><input type="text" class="simple-field-data-mask" id="zip_new" placeholder="Zip code: ex. 55101" name='input_field' maxlength="5" data-mask="00000"/><br>
+					 <select id="zipcodesDropDown" name="optional" style="visibility:hidden;" name='input_field'></select><br>
                   </form>
                   <form id="optional_form">
                      <!--default clients get a 0 zipcode until I figure out how to use google's api to get the zip, and an id of 0-->
-                     <input type ="number" id="zip_new" style="display: none;" value="0" class='input_field' maxlength="5"/> 
+                     <input type ="number" id="zip_new" style="display: none;" value="0" name='input_field' maxlength="5"/> 
                      <!--default client id cannot be 0 as the id is how we'll track the donor throughout all the pages-->
-                     <input type ="number" id="id_new" style="display: none;" value="0" class='input_field'/>
-                     <input type ="text" id="notes_new" placeholder="Optional notes" class='input_field'/>
+                     <input type ="number" id="id_new" style="display: none;" value="0" name='input_field'/>
+                     <input type ="text" id="notes_new" placeholder="Optional notes" name='input_field'/>
                      <input type ="text" id="contact_relationship_new" placeholder="contact_relationship"  style="display: none;"/>
                   </form>
                   <!--<a href="#filter" class="jumplink">-->
@@ -159,7 +160,7 @@
                   <form id="generate_too_form" style="margin-top: 50px; align: center;">
                      <b>Lot Number: </b> 
                      <div id="lot_number"></div>
-                     <textarea id="donation_description" rows="10" cols="80" maxlength="90" style="height:60px;max-width:75%;" placeholder="Donated items description." class='input_field'></textarea>
+                     <textarea id="donation_description" rows="10" cols="80" maxlength="90" style="height:60px;max-width:75%;" placeholder="Donated items description." name='input_field'></textarea>
                      <br><b>Naid:</b>
                      <input type="radio" name="naidOption" value="noNaid">No
                      <input type="radio" name="naidOption" value ="yesNaid">Yes
