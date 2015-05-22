@@ -1270,6 +1270,7 @@ function other(pdfBase64) {
             //Authorization: Basic ekey,
 
             success: function(response) {
+			alert("response: "+response);
 
                 if (response != false) {
                     document.getElementById("error_message_transfer").innerHTML = "";
