@@ -499,9 +499,9 @@ $(function() {
             var entry = table.rows[i];
             var firstCol = entry.childNodes[0];
             var radioButton = firstCol.firstChild;
-            var clientID = entry.childNodes[1];
-            var clientFName = entry.childNodes[2];
-            var clientLName = entry.childNodes[4];
+            //var clientID = entry.childNodes[1];
+            var clientFName = entry.childNodes[1];
+            var clientLName = entry.childNodes[2];
             clientFName = clientFName.innerText;
             clientLName = clientLName.innerText;
             if (radioButton.checked) { //checks if the 'i' particular radio button is checked --i.e. the 3rd if you are on the fourth iteration of the loop
@@ -509,11 +509,11 @@ $(function() {
                 document.getElementById("error_message_select").innerHTML = "You have selected " + clientFName + " " + clientLName;
 
                 //GLOBALIZING				
-                chosenClientID = clientID.firstChild.data; //set the global variable chosenClientID to be the id of the selected child
+                //chosenClientID = clientID.firstChild.data; //set the global variable chosenClientID to be the id of the selected child
                 chosenClientFName = clientFName; //set global variable of first name
                 chosenClientLName = clientLName; //set global variable of last name
-                donorEmail = entry.childNodes[7].innerText;
-                donorOrgS = entry.childNodes[6].innerText;
+                donorEmail = entry.childNodes[5].innerText;
+                donorOrgS = entry.childNodes[4].innerText;
 
                 //alert("Globalizing line 265: "+donorEmail+" .... "+donorOrgS);
                 //show the generate module
@@ -534,7 +534,7 @@ $(function() {
             // hiddenDonorName.innerHTML = ""+chosenClientFName+" "+chosenClientLName+"."; //set the innerHTML to be the id of the donor
 
             var showDonorStatus = document.getElementById('show_donor_status');
-            showDonorStatus.innerHTML = clientFName + " " + clientLName;
+            showDonorStatus.innerHTML = donorOrgS +"<br>"+ clientFName + " " + clientLName;
             hiddenDonor.innerHTML = getDonor();
             document.getElementById("message_select").innerHTML = "Grabbing from the database...Donors are successfully filtered.";
             generateLotNum1();
@@ -546,16 +546,57 @@ $(function() {
     });
 });
 
+
+//this function will clear out the filter fields
+function clearFilterForm(){
+	//document.getElementById("filtering_form").
+	$('#filtering_form').trigger("reset");
+}
+
+
+//this function will clear out the create new client fields
+function clearNewClientForm(){
+	//document.getElementById("filtering_form").
+	$('#new_client_form').trigger("reset");
+}
+
+//this function will clear out the creating forms
+function clearCreatingForm(){
+	//document.getElementById("filtering_form").
+	$('#generate_too_form').trigger("reset");
+}
+
+//this function will clear out the too form
+function clearTooForm(){
+	$('#clearButton').trigger('click');
+	$('#name').val('');
+	$('#actual_too_form').trigger("reset");
+	document.getElementById("typed_name").innerHTML = "";
+	document.getElementById("typed_name").innerText = ""; 
+	//document.getElementById("canvas_pad") = "";
+	document.getElementById("sigImage").innerHTML = "";
+
+}
+
+//this function clears out every field in the db
+function clearAllForms(){
+	clearCreatingForm();
+	clearFilterForm();
+	clearNewClientForm();
+	clearTooForm();
+}
 //Submitting the donor's signature
 //--> Record it as a base 64 image to store and display again on the final pdf transfer form.
 //Does validation and redisplays the signature on the next page 
 $(function() {
     $("#submit_me").click(function(e) {
         var valid = validateSignature();
-        if (valid === true) {
+		sig_coord = document.getElementById("output").defaultValue;
+        if ((valid === true) && (sig_coord != "")){
+		
             document.getElementById("sig_message").innerHTML = "";
             document.getElementById("sig_error_message").innerHTML = "";
-            sig_coord = document.getElementById("output").defaultValue;
+            //sig_coord = document.getElementById("output").defaultValue;
 
             if (sig_coord !== "") {
                 $('.signed').show();
@@ -577,16 +618,19 @@ $(function() {
                 api.regenerate(sig_coord); //--
                 //alert("base 64 image: "+base64SigImg);
                 document.getElementById("typed_name").innerText = document.getElementById("name").value;
-            } else {
-                customer_signature = true;
-                document.getElementById("typed_name").innerText = document.getElementById("name").value;
-                base64SigImg = document.getElementById("typed_name").innerText;
-                $('.signed').hide();
-            }
+            } 
+			// else {
+                // customer_signature = true;
+                // document.getElementById("typed_name").innerText = document.getElementById("name").value;
+                // base64SigImg = document.getElementById("typed_name").innerText;
+				// $('.signed').hide();
+            // }
 
             $('#signature_module').hide();
             $('#transfer_module').show();
-        } else {}
+        } else { document.getElementById("sig_error_message").innerText = "Please sign.";
+				alert("Please sign.");
+}
     });
 });
 
@@ -628,8 +672,11 @@ function validateSignature() {
     var valid = false;
     if (document.getElementById("name").value === "") {
         document.getElementById("sig_error_message").innerText = "Please print donor name.";
+		alert("Please print donor name");
         return valid;
-    } else {
+    } 
+	
+	if (document.getElementById("name").value !== ""){
         valid = true;
         return valid;
     }
@@ -1090,7 +1137,9 @@ function buildHtmlTable(myList) {
                 if (colIndex == 0) {
                     var cellValue = $('<input type="radio" name="radioBtn" id="radioBtn" value="' + myList[i][columns[colIndex + 1]] + '">');
                 } else {
+					if (cellValue = myList[i][columns[colIndex]] != ""){ //if it is empty
                     var cellValue = myList[i][columns[colIndex]]; //set the cell value to client in the client list (????, why is it being referred as a 2d array?)
+					}
                 }
 
                 if (cellValue == null) {
@@ -1119,8 +1168,10 @@ function addAllColumnHeaders(myList) {
             var rowHash = myList[i-1];
             for (var key in rowHash) {
                 if ($.inArray(key, columnSet) == -1) {
+					if ((key == "firstName") || (key == "lastName") || (key == "email") || (key == "org") || (key == "phone")){
                     columnSet.push(key);
                     headerTr$.append($('<th/>').html(key));
+					}
                 }
             }
         }
