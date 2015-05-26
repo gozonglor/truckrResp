@@ -1357,27 +1357,51 @@ function autoPopZip() {
         // data: JSON.stringify(data),
 
         success: function(response) {
-			if (response.cityList.length > 0){ //if it's returning a list of cities that match the zip code
-				//hide the single cities input
-				document.getElementById("city_new").style.visibility = "hidden";
-				document.getElementById("city_new").style.display = "none";
-				var listCities = response.cityList;
-				populateCitiesDLL(listCities); //populate the drop down list
-				document.getElementById("citiesDropDown").style.visibility = "visible"; //finally show the drop down list
-				document.getElementById("state_new").value = response.stateLocation;
-				document.getElementById("state_new").textContent = response.stateLocation;
+		
+			if (response.city == ""){
+				if (response.cityList.length > 0){ //if it's returning a list of cities that match the zip code
+					//hide the single cities input
+					document.getElementById("city_new").style.visibility = "hidden";
+					document.getElementById("city_new").style.display = "none";
+					var listCities = response.cityList;
+					populateCitiesDLL(listCities); //populate the drop down list
+					document.getElementById("citiesDropDown").style.visibility = "visible"; //finally show the drop down list
+					document.getElementById("state_new").value = response.stateLocation;
+					document.getElementById("state_new").textContent = response.stateLocation;
+					document.getElementById("state_new").readOnly = true;
+				}
+				else{
+					alert("There are no known cities in our database with this zip code.");
+					document.getElementById("city_new").style.visibility = "visible";
+					document.getElementById("city_new").style.display = "block";
+					document.getElementById("citiesDropDown").style.visibility = "hidden"; //finally show the drop down list
+				}
+				
 			}
 			else{
+				document.getElementById("citiesDropDown").style.visibility = "hidden";
+				document.getElementById("city_new").style.visibility = "visible";
+				document.getElementById("city_new").style.display = "block";
 				document.getElementById("city_new").value = response.city;
 				document.getElementById("city_new").textContent = response.city;
 				document.getElementById("state_new").value = response.stateLocation;
 				document.getElementById("state_new").textContent = response.stateLocation;
-
-			}
+				document.getElementById("state_new").readOnly = true;
+				}
+			
         },
 
         error: function() {
-            alert("Error.");
+            //alert("Error with GET request. Make sure your zip code begins with a number other than 0.");
+							document.getElementById("state_new").readOnly = false;
+								document.getElementById("citiesDropDown").style.visibility = "hidden";
+				document.getElementById("city_new").style.visibility = "visible";
+				document.getElementById("city_new").style.display = "block";
+								document.getElementById("city_new").value = "";
+				document.getElementById("city_new").textContent = "";
+				document.getElementById("state_new").value = "";
+				document.getElementById("state_new").textContent = "";
+
         }
     }).responseText;
 }
@@ -1414,6 +1438,14 @@ function autoPopCity() {
 
         success: function(response) {
 			if (response.errorMsg == ""){
+			
+				if (response.zipList.length == 0){
+					alert("There are no known cities in our database with this zip code.");
+					document.getElementById("zip_new").style.visibility = "visible";
+					document.getElementById("zip_new").style.display = "block";
+					document.getElementById("zipcodesDropDown").style.visibility = "hidden"; //finally show the drop down list
+
+				}
 
 				if (response.zipList.length > 0){ //if it's returning a list of cities that match the zip code
 					//hide the single cities input
@@ -1425,7 +1457,7 @@ function autoPopCity() {
 					document.getElementById("state_new").value = response.stateLocation;
 					document.getElementById("state_new").textContent = response.stateLocation;
 				}
-				else{
+				else {
 					document.getElementById("state_new").value = response.stateLocation;
 					document.getElementById("state_new").textContent = response.stateLocation;
 					document.getElementById("zip_new").value = response.zip;
@@ -1464,8 +1496,7 @@ function autoPopCity() {
       var b = $("select#citiesDropDown :selected").text();
       var texts = document.getElementById('city_new');
       texts.value = b;
-	  alert("FYCIAJSDHUAKFUCK YOU!");
-   });
+  });
 });
 	
 function populateZipcodesDLL(listZips){

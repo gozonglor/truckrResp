@@ -129,7 +129,7 @@
                         <option value="contact_needed">Contact Needed</option>
                      </select>
                      <b>First Name: </b><input type ="text" id="firstName_new" placeholder="First name" name='input_field' style="text-transform: capitalize;"/><br>
-                     <b>Middle Initial: </b><input type ="text" id="midName_new" name="optional" placeholder="(optional) Middle initial" name='input_field' style="text-transform: capitalize;" maxlength="1"/><br>
+                     <b>Middle Initial: </b><input type ="text" id="midName_new" name="optional" placeholder="(Optional) Middle initial" name='input_field' style="text-transform: capitalize;" maxlength="1"/><br>
                      <b>Last Name: </b><input type="text" id="lastName_new" placeholder="Last name" name='input_field' style="text-transform: capitalize;"/><br>
                      <b>Phone: </b><input class="simple-field-data-mask" type="text" id="phone_new" placeholder="Phone: ex. 999-999-9999" data-mask="000-000-0000" name='input_field'/> <br>
                      <b>Business: </b><input type="text" id="org_new" name="input_field" placeholder="Organization name" name='input_field' style="text-transform: capitalize;"/><br>
@@ -139,8 +139,8 @@
 					 
 					 
                      <b>City: </b><input type ="text" id="city_new" placeholder="City: ex. St. Paul" name='input_field' style="text-transform: capitalize;"/>
-                     <select id="citiesDropDown" name="optional" style="visibility:hidden;"></select><br>
-					 <b>State: </b><input type="text" id="state_new" placeholder="Readonly: State" name='input_field' style="text-transform: uppercase;" maxlength="2" readonly/><br>
+                     <select id="citiesDropDown" name="optional" style="visibility:hidden;"><option value=""></option></select><br>
+					 <b>State: </b><input type="text" id="state_new" placeholder="State: ex. MN" name='input_field' style="text-transform: uppercase;" maxlength="2"/><br>
                      <b>Zip code: </b><input type="text" class="simple-field-data-mask" id="zip_new" placeholder="Zip code: ex. 55101" name='input_field' maxlength="5" data-mask="00000" onchange="autoPopZip()"/><br>
 					 <select id="zipcodesDropDown" name="optional" style="visibility:hidden;" name='input_field'>
 						<option value=""></option>
@@ -148,7 +148,7 @@
                   </form>
                   <form id="optional_form">
                      <!--default clients get a 0 zipcode until I figure out how to use google's api to get the zip, and an id of 0-->
-                     <input type ="number" id="zip_new" style="display: none;" value="0" name='input_field' maxlength="5" onchange="autoPopZip()"/> 
+                     <input type ="number" id="zip_newR" style="display: none;" value="0" name='input_field' maxlength="5" onchange="autoPopZip()"/> 
                      <!--default client id cannot be 0 as the id is how we'll track the donor throughout all the pages-->
                      <input type ="number" id="id_new" style="display: none;" value="0" name='input_field'/>
                      <input type ="text" id="notes_new" placeholder="Optional notes" name='input_field'/>
