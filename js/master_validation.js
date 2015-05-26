@@ -132,7 +132,19 @@ function validateFormNew() {
                 //reset the message after every click, run on every post back
                 check = false;
                 return check;
-            } else {
+            } 
+			else {
+				if (elements[i].id == "phone_new"){
+					var phoneN = document.getElementById("phone_new").value;
+					if (phoneN.length < 15){
+					alert("Phone number is not long enough.");
+						//111-111-1111
+						alert("Please fill out all fields");
+						check = false;
+						return check;
+					}					
+				}
+
                 document.getElementById("error_message_create_new").innerHTML = ""; //Replace the error message in the document with this error message
 
                 check = true;
@@ -662,10 +674,33 @@ function clearAllForms2(){
 
 	if (confirm("Do you want to refresh?/App will begin like new/Fields are clear, etc.")){
 clearAllForms();
+testing = true;
+chosenClientID = 0; //the ID of the chosen donor. Example: "8"
+chosenClientFName; //the chosen donor's first name. Example: "Harry"
+chosenClientLName; //the chosen donor's last name. Example: "Potter"
+donorOrgS = ""; //name of the org the donor is tied to. Is updated in the call to the transferform controller.
+donorEmail = ""; //donor's email, will be data sent to the email controller
+donorID = 0;
+
+//Transfer form data
+lotNumber = 0; //LOT NUMBER DATA -- to be updated by the generateLotNum1 method
+base64SigImg = ""; //SIGNATURE DATA -- the donor's signature in a base 64 string
+customer_signature = false; //BOOLEAN DATA for validating the transfer form -- "is there a signature?"
+globalDate = ""; //DATE DATA -- the date on which the form was filled out
+formHtml = ""; //EMAIL BODY DATA -- Text sent in the body of the email
+
+//---Authentication
+//ekey = "";
+//currentUser = ""; //Username, example: "glor"
+//locationID = 0;
+wordage = "";
+loads = 0;
 					
 	}else{
-	
+		
 	}
+	
+	
 }
 //Submitting the donor's signature
 //--> Record it as a base 64 image to store and display again on the final pdf transfer form.
@@ -1490,8 +1525,23 @@ function autoPopZip() {
 
 function populateCitiesDLL(listCities){
 	var ddlCityMenu = document.getElementById("citiesDropDown");
-	for (var i=0; i<listCities.length; i++){
-		var city = listCities[i];
+	
+	//clear it out first.
+	//var select = document.getElementById("citiesDropDown");
+	var length = ddlCityMenu.options.length;
+	for (i = 0; i < length; i++) {
+	  ddlCityMenu.options[i] = null;
+	}
+	
+	for (var i=0; i<listCities.length+1; i++){
+		if (i == 0){
+			var element = document.createElement("option");
+			element.textContent = "";
+			element.value = "";
+			ddlCityMenu.appendChild(element);
+		}
+		
+		var city = listCities[i-1];
 		var element = document.createElement("option");
 		element.textContent = city;
 		element.value = city;
@@ -1499,6 +1549,9 @@ function populateCitiesDLL(listCities){
 	}
 }
 
+function clearDLL(){
+
+}
 
 			
 function autoPopCity() {
