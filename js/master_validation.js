@@ -603,6 +603,8 @@ function clearAllForms(){
 	clearNewClientForm();
 	clearTooForm();
 	document.getElementById("accept_button").disabled = false;
+	document.getElementById("error_message_transfer").innerHTML = "";
+                    document.getElementById("message_transfer").innerHTML = "";
 
 }
 //Submitting the donor's signature
@@ -1287,7 +1289,7 @@ return;
 					//document.getElementById("transfer_module").style.visibility = "none";
 					//document.getElementById("transfer_module").style.visibility = "none";
 					
-					$("#transfer_module").hide();
+					//$("#transfer_module").hide();
 					//$("#final_module").show();
 					clearAllForms();
                 } else {
