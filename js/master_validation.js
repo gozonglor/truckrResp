@@ -1205,28 +1205,9 @@ function addAllColumnHeaders(myList) {
 //==================            HTML TO CANVAS              =================//
 $(function() {
     $("#accept_button").click(function(e) {
-        //instantiate a variable to hold our base 64 string
-        var img = "";
-        //http://stackoverflow.com/questions/14595541/capture-div-into-image-using-html2canvas
-        //generate the base 64 string using html2canvas
-        html2canvas($('#actual_form'), {
-            onrendered: function(canvas) {
-                img = canvas.toDataURL();
-                //window.open(img);
-                //alert(img);
-                //document.getElementById("holder").innerHTML = img;
-                //demoFromHTML(img);
-                //FUCK it the pdf base 64 keeps getting corrupted. ok now lets see if we can just send an IMAGE >:(
-                other(img);
-            }
-        });
-        //put it on a pdf
-        //demoFromHTML(img);	
-    });
-});
 
-function other(pdfBase64) {
-
+	
+	
 if (donorID == 0){
 alert("Please select a client first.");
 return;
@@ -1310,6 +1291,13 @@ return;
 				alert("Fell through the post request!");
 
     }
+	
+	
+	
+});
+
+function other(pdfBase64) {
+
 }
 
 
