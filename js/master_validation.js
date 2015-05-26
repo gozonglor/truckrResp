@@ -602,6 +602,8 @@ function clearAllForms(){
 	clearFilterForm();
 	clearNewClientForm();
 	clearTooForm();
+	document.getElementById("accept_button").disabled = false;
+
 }
 //Submitting the donor's signature
 //--> Record it as a base 64 image to store and display again on the final pdf transfer form.
@@ -1273,6 +1275,7 @@ return;
             //Authorization: Basic ekey,
 
             success: function(response) {
+			document.getElementById("accept_button").disabled = true;
 			alert("response: "+response);
 
                 if (response != false) {
