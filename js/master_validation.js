@@ -476,8 +476,6 @@ $(function() {
                     } else {
                         document.getElementById("error_message_login").innerHTML = "Wrong password or username.";
                         alert("Wrong password or username.");
-																document.getElementById("login_button").disabled = false;
-
 
                     }
                 },
@@ -486,7 +484,6 @@ $(function() {
                     sucess = false;
                     document.getElementById("error_message_login").innerHTML = "No connection to API/Invalid encryption key.";
                     alert("No connection to API/Invalid encryption key.");
-															document.getElementById("login_button").disabled = false;
 
 
                 },
