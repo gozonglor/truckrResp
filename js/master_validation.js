@@ -39,9 +39,9 @@ function loadCurrentUser() {
     var urlTokens = url.split('='); //split into local url and query string
     var query = urlTokens[1]; //get query string
     //currentUser = vars; //for testing
-	loads += 1;
+	// loads += 1;
 	
-	if (loads == 1){
+	// if (loads == 1){
 
     if (typeof query !== "undefined") {
         query = query.split('&');
@@ -57,7 +57,7 @@ function loadCurrentUser() {
     } else {
         ekey = null;
     }
-	}
+	// }
 }
 
 //Generate a client id for a new client. 
@@ -451,7 +451,6 @@ function init() {
 //Used in the index.html page
 $(function() {
     $("#login_button").click(function(e) {
-											document.getElementById("login_button").disabled = true;
 
         var validation = validateFormLogin();
         var NewPerson = {};
@@ -465,7 +464,7 @@ $(function() {
         var success = false;
 
         if (validation === false) {
-            document.getElementById("error_message_login").innerHTML = "Please fill out all fields.";
+            // document.getElementById("error_message_login").innerHTML = "Please fill out all fields.";
             alert("Please fill out all fields");
 
         } else {
@@ -482,11 +481,11 @@ $(function() {
 
                     if (response !== "401") { //originally, if response == true, checks if user is authorized. returns 401 if not authorized.
                         currentUser = NewPerson.username;
-                        document.getElementById("error_message_login").innerHTML = 'Logging in...';
+                        // document.getElementById("error_message_login").innerHTML = 'Logging in...';
                         //setTimeout(allowLogin, 3000);
                         //allowLogin();
                         var guidlocation = response.split("_");
-
+						
                         ekey = guidlocation[0];
                         locationID = guidlocation[1];
                         //alert("location id is "+locationID);
@@ -496,7 +495,7 @@ $(function() {
 
 
                     } else {
-                        document.getElementById("error_message_login").innerHTML = "Wrong password or username.";
+                        // document.getElementById("error_message_login").innerHTML = "Wrong password or username.";
                         alert("Wrong password or username.");
 
                     }
@@ -504,7 +503,7 @@ $(function() {
 
                 error: function() {
                     sucess = false;
-                    document.getElementById("error_message_login").innerHTML = "No connection to API/Invalid encryption key.";
+                    // document.getElementById("error_message_login").innerHTML = "No connection to API/Invalid encryption key.";
                     alert("No connection to API/Invalid encryption key.");
 
 
@@ -515,7 +514,7 @@ $(function() {
             }).responseText;
         }
         e.preventDefault();
-        setTimeout(resetError, 3000);
+        //setTimeout(resetError, 3000);
         //http://stackoverflow.com/questions/20890943/javascript-settimeout-not-working
     });
 });
