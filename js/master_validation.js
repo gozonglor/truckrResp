@@ -334,6 +334,11 @@ $(function() {
     $("#transfer_button").click(function(e) {
         ////*/*/CALLING AUTHORIZE/*/*///
 
+		if (donorID == 0){
+			alert("Please select a client first.");
+			return;
+		}
+		
         var BuildingForm = {};
 
         BuildingForm.naidChoice = $('input[name=naidOption]:checked').val(); //will either be a string stating 'yesNaid' or 'noNaid'
@@ -1222,6 +1227,11 @@ $(function() {
 
 function other(pdfBase64) {
 
+if (donorID == 0){
+alert("Please select a client first.");
+return;
+}
+
     var result = checkTOOForm();
     if (result == false) { //orig false
         //Missing a field--a field is not filled out
@@ -1275,13 +1285,14 @@ function other(pdfBase64) {
                 if (response != false) {
                     document.getElementById("error_message_transfer").innerHTML = "";
                     document.getElementById("message_transfer").innerHTML = "Transfer Form successfully added to database. Email sent to " + "<b>" + donorEmail + "</b>";
-					alert("Transaction completed!");
+					alert("Transfer of Ownership successfully added to database. Email sent to " + donorEmail);
+					alert("Transaction completed.");
 					//document.getElementById("transfer_module").style.display = "none";
 					//document.getElementById("transfer_module").style.visibility = "none";
 					//document.getElementById("transfer_module").style.visibility = "none";
 					
 					$("#transfer_module").hide();
-					$("#final_module").show();
+					//$("#final_module").show();
 					clearAllForms();
                 } else {
                     //document.getElementById("error_message_transfer").innerHTML = "Successful post. Bad API response. Error: " + response + ".  Could not insert final Transfer Form into db.";
@@ -1435,14 +1446,27 @@ function autoPopCity() {
 
 // to help auto pop the existing input field with a choice chosen from the drop down list
 // source/help: http://stackoverflow.com/questions/22309036/change-the-value-of-input-fields-according-to-what-is-selected-from-the-dropdow
-var select = document.getElementById('citiesDropDown')[0];
-select.addEventListener('change', function () {
-    var texts = document.getElementsById('city_new');
-     texts[i].value = select.value;
-});
+// var select = document.getElementById('citiesDropDown')[0];
+// select.addEventListener('change', function () {
+    // var texts = document.getElementsById('city_new');
+     // texts[i].value = select.value;
+// });
 
-// notes are same as above
- 
+// notes are same as above, this is a piece of poop
+// var select = document.getElementById('zipcodesDropDown');
+// select.addEventListener('change', function () {
+    // var texts = document.getElementsById('zip_new');
+     // texts[i].value = select.value;
+// });
+
+ $(document).ready(function(){
+   $("select#citiesDropDown").change(function(){
+      var b = $("select#citiesDropDown :selected").text();
+      var texts = document.getElementById('city_new');
+      texts.value = b;
+	  alert("FYCIAJSDHUAKFUCK YOU!");
+   });
+});
 	
 function populateZipcodesDLL(listZips){
 	var ddlZipMenu = document.getElementById("zipcodesDropDown");

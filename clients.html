@@ -5,7 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no"/>
       <!--Using jQuery and jQuery UI for display effects-->
       <script src="js/jquery.min.js"></script>
-      <!--<script src="js/jquery-2.1.1.min.js" type="text/javascript"></script>-->
+      <script src="js/jquery-2.1.1.min.js" type="text/javascript"></script>
       <script src="js/jquery-ui.min.js" type="text/javascript"></script>
       <script src="js/jquery.maskedinput.min.js" type="text/javascript"></script>
       <!--Using the hamburger menu display code-->
@@ -47,6 +47,12 @@
                </a>
                <a href="#">
                   <li id="show_new_client_button"><img src="css/images/addnew_white.png"> New Client</li>
+               </a>
+			   <a href="#">
+                  <li id="show_generate_button"><img src="css/images/build_icon.png" width="24px"> Create Transfer of Ownership</li>
+               </a>
+			   <a href="#">
+                  <li id="show_present_button"><img src="css/images/form_icon.png" width="20px"> Display Transfer of Ownership</li>
                </a>
 
                <li style="color: #3ca7ff" id="status_check">Logged in as: <span id="show_user_status" style="font-weight: bold; color: #FFFFFF;"></span><br><br>
@@ -123,20 +129,22 @@
                         <option value="contact_needed">Contact Needed</option>
                      </select>
                      <b>First Name: </b><input type ="text" id="firstName_new" placeholder="First name" name='input_field' style="text-transform: capitalize;"/><br>
-                     <b>Middle Initial: </b><input name="input_field" type ="text" id="midName_new" name="optional" placeholder="(optional) Middle initial" name='input_field' style="text-transform: capitalize;" maxlength="1"/><br>
+                     <b>Middle Initial: </b><input type ="text" id="midName_new" name="optional" placeholder="(optional) Middle initial" name='input_field' style="text-transform: capitalize;" maxlength="1"/><br>
                      <b>Last Name: </b><input type="text" id="lastName_new" placeholder="Last name" name='input_field' style="text-transform: capitalize;"/><br>
                      <b>Phone: </b><input class="simple-field-data-mask" type="text" id="phone_new" placeholder="Phone: ex. 999-999-9999" data-mask="000-000-0000" name='input_field'/> <br>
-                     <b>Business: </b><input name="input_field" type="text" id="org_new" name="optional" placeholder="Organization name" name='input_field' style="text-transform: capitalize;"/><br>
+                     <b>Business: </b><input type="text" id="org_new" name="input_field" placeholder="Organization name" name='input_field' style="text-transform: capitalize;"/><br>
                      <b>Email: </b><input type="text" id="email_new" placeholder="Email" name='input_field'/><br>
                      <b>Address: </b><input type="text" id="address_new" placeholder="Address: ex. 1600 Grand Avenue" name='input_field'/><br>
-                     <b>Address 2: </b><input name="input_field" type="text" id="address2_new" name="optional" placeholder="(optional) Address2: ex. 1600 Grand Avenue" name='input_field'/><br>
+                     <b>Address 2: </b><input type="text" id="address2_new" name="optional" placeholder="(optional) Address2: ex. 1600 Grand Avenue"/><br>
 					 
 					 
                      <b>City: </b><input type ="text" id="city_new" placeholder="City: ex. St. Paul" name='input_field' style="text-transform: capitalize;"/>
-                     <select id="citiesDropDown" name="optional" style="visibility:hidden;" name='input_field'></select><br>
+                     <select id="citiesDropDown" name="optional" style="visibility:hidden;"></select><br>
 					 <b>State: </b><input type="text" id="state_new" placeholder="Readonly: State" name='input_field' style="text-transform: uppercase;" maxlength="2" readonly/><br>
                      <b>Zip code: </b><input type="text" class="simple-field-data-mask" id="zip_new" placeholder="Zip code: ex. 55101" name='input_field' maxlength="5" data-mask="00000" onchange="autoPopZip()"/><br>
-					 <select id="zipcodesDropDown" name="optional" style="visibility:hidden;" name='input_field'></select><br>
+					 <select id="zipcodesDropDown" name="optional" style="visibility:hidden;" name='input_field'>
+						<option value=""></option>
+					 </select><br>
                   </form>
                   <form id="optional_form">
                      <!--default clients get a 0 zipcode until I figure out how to use google's api to get the zip, and an id of 0-->
@@ -155,18 +163,18 @@
             <!--------------entry 3: generate the too, midway------------------->
             <!-----------------WHY DOESNT THIS HAVE A AN ARTICLE>-------------->
             <!--<input type="button" id="show_button" value="SHOW">-->
-            <div id="generate_module" class="article" style="display: none; width: 100%;" name="module">
+            <div id="generate_module" class="article" style="display: none; width: 100%; margin-top:60px;" name="module">
                <center>
                   <form id="generate_too_form" style="margin-top: 50px; align: center;">
-                     <b>Lot Number: </b> 
+                     <b>Lot Number: </b> <i>To be generated by the database and emailed to client.</i>
                      <div id="lot_number"></div>
                      <textarea id="donation_description" rows="10" cols="80" maxlength="90" style="height:60px;max-width:75%;" placeholder="Donated items description." name='input_field'></textarea>
                      <br><b>Naid:</b>
                      <input type="radio" name="naidOption" value="noNaid">No
                      <input type="radio" name="naidOption" value ="yesNaid">Yes
-                     <div id="answer"></div>
+                     <div id="answer"></div><br><br>
                      <input type="button" id="transfer_button" value="Create Transfer of Ownership Form"></a>
-                     <div id="error_message_generate" class="error_message"></div>
+                     <div id="error_message_generate" class="error_message"></div><br><br><br>
                   </form>
                </center>
             </div>
@@ -202,7 +210,7 @@
             </div>
             <!---------------------------------------------------------------------->					
             <!--------------entry 5: filtered clients ------------------->
-            <div id="client_table_module" class="article" name="module" style="display: none; margin-top: 50px;">
+            <div id="client_table_module" class="article" name="module" style="display: none; margin-top: 100px;">
                <!--<div id="client_table_wrapper">-->
                <!--<input type="button" value="exit" id="exit_filter_table_button">-->
                <!--<img src="css/images/close.png" id="exit_filter_table_button">-->
@@ -277,7 +285,7 @@
          </div>
 		 
 		 
-		 <div id="final_module" style="display: none;"><h1>Complete. Email was sent to you and the client.</h1></div>
+		 <div id="final_module" style="display: none; padding-top: 100px;"><h1>Complete. Email was sent to you and the client.</h1></div>
 		 
       </div>
       </div>
