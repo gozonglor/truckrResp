@@ -19,7 +19,8 @@ body{ //**having overflow:scroll -- messes up with the alignment of the hamburge
 	h1, h2, h3, h4,h5
 	{
 		color: #000000;
-		font-family: roboto;
+		/*font-family: roboto;*/
+		font-family: arial;
 		font-size: 40pt;
 	}
 	
