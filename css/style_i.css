@@ -16,11 +16,18 @@ body{ //**having overflow:scroll -- messes up with the alignment of the hamburge
 }
 
 
-	h1, h2, h3, h4,h5, h6
+	h1, h2, h3, h4,h5
 	{
 		color: #000000;
 		font-family: roboto;
 		font-size: 40pt;
+	}
+	
+	 h6
+	{
+		color: #000000;
+		font-size: 22pt;
+		font-weight: bold;
 	}
 	
 #filter_module{
