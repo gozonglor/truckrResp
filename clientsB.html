@@ -4,7 +4,9 @@
       <title>Logged Into Truckr</title>
       <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no"/>
       <!--Using jQuery and jQuery UI for display effects-->
-      <script src="js/jquery.min.js"></script>
+      <!--<script src="js/jquery.min.js"></script>-->
+	  		<script type="text/javascript" src="js/1.7.2.jquery.min.js"></script>
+
       <!--<script src="js/jquery-2.1.1.min.js" type="text/javascript"></script>-->
       <script src="js/jquery-ui.min.js" type="text/javascript"></script>
       <script src="js/jquery.maskedinput.min.js" type="text/javascript"></script>
@@ -17,9 +19,44 @@
       <link rel="stylesheet" type="text/css" media="all" href="css/style_i.css"/>
       <link rel="stylesheet" type="text/css" media="all" href="css/jquery.signaturepad.css"/>
       <!--Using Media Queries, if the viewport is smaller than 700px use another stylesheet-->
-      <link rel="stylesheet" type="text/css" media="all" href="css/hamburger.css"/>
+	  
+	  
+	  
+	  
+		<link type="text/css" rel="stylesheet" href="css/demo.css" />
+		<link type="text/css" rel="stylesheet" href="css/jquery.mmenu.all.css" />
+
+		<script type="text/javascript" src="js/jquery.mmenu.min.all.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('nav#menu').mmenu();
+			});
+		</script>
+	  
+	  
    </head>
-   <body onload="loadCurrentUser();" style="background-color: #DDDDDD;">
+   
+   
+   
+   
+   
+   
+   
+   	<div id="page">
+			<div class="header">
+				<a href="#menu"></a>
+				Demo
+			</div>
+			<div class="content" style="background-color: transparent;">
+				
+				
+				
+				
+				
+
+				
+				
+				<body onload="loadCurrentUser();" style="background-color: #DDDDDD;">
       <!--This wrapping container is used to get the width of the whole content-->
       <div id="container">
          <sub style="display: none;">
@@ -31,44 +68,7 @@
             <div id="hidden_username" style="font-size:10pt;"></div>
          </sub>
          <!--The Hamburger Button in the Header-->
-         <header>
-            <div id="hamburger">
-               <div></div>
-               <div></div>
-               <div></div>
-            </div>
-            <div id="title_bar" style="text-align: center;">Find Client</div>
-         </header>
-         <!--The mobile navigation Markup hidden via css-->
-         <nav>
-            <ul>
-               <a href="#">
-                  <li id="show_filter_button"><img src="css/images/filter_white2.png"> Find Client</li>
-               </a>
-               <a href="#">
-                  <li id="show_new_client_button"><img src="css/images/addnew_white.png"> New Client</li>
-               </a>
-
-               <li style="color: #3ca7ff" id="status_check">Logged in as: <span id="show_user_status" style="font-weight: bold; color: #FFFFFF;"></span><br><br>
-                  Selected donor: <span id="show_donor_status" style="font-weight: bold; color: #FFFFFF;"></span>
-               </li>
-			   
-			      <!--<a href="#"><li id="show_present_button">test: present transfer form</li></a>
-				  <a href="#"><li id="show_generate_button">test: generate</li></a>
-                  <a href="#"><li id="show_table_button">test: show filter table</li></a>
-                  <li onclick="clearFilterForm()">Test clear filter field</li>
-				  <li onclick="clearNewClientForm()">Test clear new client field</li>
-				  <li onclick="clearCreatingForm()">Test clear creating field</li>
-				  <li onclick="clearTooForm()">Test clear too field</li>
-				  				  <li onclick="clearAllForms()">CLEAR ALL</li>-->
-
-
-				  
-				  <a href="#" id="logout_button">
-                  <li>Logout</li>
-               </a>
-            </ul>
-         </nav> 
+        
          <!--The Layer that will be layed over the content
             so that the content is unclickable while menu is shown-->
          <div id="contentLayer"></div>
@@ -135,12 +135,12 @@
                      <b>City: </b><input type ="text" id="city_new" placeholder="City: ex. St. Paul" name='input_field' style="text-transform: capitalize;"/>
                      <select id="citiesDropDown" name="optional" style="visibility:hidden;" name='input_field'></select><br>
 					 <b>State: </b><input type="text" id="state_new" placeholder="Readonly: State" name='input_field' style="text-transform: uppercase;" maxlength="2" readonly/><br>
-                     <b>Zip code: </b><input type="text" class="simple-field-data-mask" id="zip_new" placeholder="Zip code: ex. 55101" name='input_field' maxlength="5" data-mask="00000" onchange="autoPopZip()"/><br>
+                     <b>Zip code: </b><input type="text" class="simple-field-data-mask" id="zip_new" placeholder="Zip code: ex. 55101" name='input_field' maxlength="5" data-mask="00000"/><br>
 					 <select id="zipcodesDropDown" name="optional" style="visibility:hidden;" name='input_field'></select><br>
                   </form>
                   <form id="optional_form">
                      <!--default clients get a 0 zipcode until I figure out how to use google's api to get the zip, and an id of 0-->
-                     <input type ="number" id="zip_new" style="display: none;" value="0" name='input_field' maxlength="5" onchange="autoPopZip()"/> 
+                     <input type ="number" id="zip_new" style="display: none;" value="0" name='input_field' maxlength="5"/> 
                      <!--default client id cannot be 0 as the id is how we'll track the donor throughout all the pages-->
                      <input type ="number" id="id_new" style="display: none;" value="0" name='input_field'/>
                      <input type ="text" id="notes_new" placeholder="Optional notes" name='input_field'/>
@@ -283,8 +283,116 @@
       </div>
       <div id="test_sig" style="display:none"></div>
       <div id="test_2" style="display:none">"Hello"</div>
-      <!--The hidden divs---> 
-      </div>
-      </div>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			<nav id="menu">
+				<ul>
+					  <a href="#">
+                  <li id="show_filter_button"><img src="css/images/filter_white2.png"> Find Client</li>
+               </a>
+               <a href="#">
+                  <li id="show_new_client_button"><img src="css/images/addnew_white.png"> New Client</li>
+               </a>
+
+               <li style="color: #3ca7ff" id="status_check">Logged in as: <span id="show_user_status" style="font-weight: bold; color: #FFFFFF;"></span><br><br>
+                  Selected donor: <span id="show_donor_status" style="font-weight: bold; color: #FFFFFF;"></span>
+               </li>
+			   
+			      <!--<a href="#"><li id="show_present_button">test: present transfer form</li></a>
+				  <a href="#"><li id="show_generate_button">test: generate</li></a>
+                  <a href="#"><li id="show_table_button">test: show filter table</li></a>
+                  <li onclick="clearFilterForm()">Test clear filter field</li>
+				  <li onclick="clearNewClientForm()">Test clear new client field</li>
+				  <li onclick="clearCreatingForm()">Test clear creating field</li>
+				  <li onclick="clearTooForm()">Test clear too field</li>
+				  				  <li onclick="clearAllForms()">CLEAR ALL</li>-->
+
+
+				  
+				  <a href="#" id="logout_button">
+                  <li>Logout</li>
+               </a>
+				</ul>
+			</nav>
+		</div>
+   
+   
+   
+   
    </body>
 </html>
+			
+   
+   
+   
+   
+   
