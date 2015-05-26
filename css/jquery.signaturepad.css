@@ -136,7 +136,6 @@
 .sigWrapper {
   clear: both;
   height: 55px;
-
   border: 1px solid #ccc;
 }
 
@@ -151,7 +150,6 @@
 .pad {
   /*position: relative;*/
   position: relative;
-
   /**
    * For cross browser compatibility, this should be an absolute URL
    * In IE the cursor is relative to the HTML document
@@ -164,7 +162,7 @@
    * IE will ignore this line because of the hotspot position
    * Unfortunately we need this twice, because some browsers ignore the hotspot inside the .cur
    */
-  cursor: url("pen.cur") 16 16, crosshair;
+  /*cursor: url("pen.cur") 10 10, crosshair; /*16 16, crosshair*/
 
   -ms-touch-action: none;
   -webkit-user-select: none;
@@ -172,6 +170,7 @@
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
+
 }
 
 .typed {

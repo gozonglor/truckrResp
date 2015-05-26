@@ -6,8 +6,12 @@
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<script src="js/jquery.min.js"></script>
+      <script src="js/jquery.maskedinput.min.js" type="text/javascript"></script>
+	        <script type="text/javascript" src="js/jquery.mask.js"></script>
 
 	<script type="text/javascript" src="js/master_validation.js"></script>
+		<script type="text/javascript" src="js/entertog.js"></script>
+
 	<script type="text/javascript" src="js/sha1.js"></script>
 	<script type="text/javascript" src="js/html2canvas.js"></script>
 			<link rel="stylesheet" href="css/style_i.css" />
@@ -18,11 +22,11 @@
 			<form id="login_form" class="panel" style="background-color:#3b5998;opacity:0.9;">
 				<center>
 				<h1 style="color:#FFFFFF; padding-top:25px;"><b>Trucker</b></h1>
-    <input type='text' name='input_field' style="width:70%" id="userID" placeholder="Username"/>	
-    <input type='password' name='input_field' style="width:70%" id="password" placeholder="Password"/>
+    <form><input type='text' name='input_field' style="width:70%" id="userID" placeholder="Username"/>	<br>
+    <input type='password' name='input_field' style="width:70%" id="password" placeholder="Password"/></form>
 	<br><br>
-	<a href="clients.html" class="jumplink"><input type="button" id="login_button" name="login" value="Log In"></a>
-
+	<a href=""><input type="button" id="login_button" name="login" value="Log In"/></a>
+<!--<a href="clients.html" class="jumplink"> </a>-->
 					<p><div id="error_message_login" class="error_message"><br></div></p>
 				</center>
 			</form>

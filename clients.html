@@ -11,6 +11,7 @@
       <!--Using the hamburger menu display code-->
       <script type="text/javascript" src="js/html2canvas.js"></script>
 	        <script type="text/javascript" src="js/jquery.mask.js"></script>
+	        <script type="text/javascript" src="js/entertog.js"></script>
 
       <script src="js/hamburger.js"></script>
       <script src="js/master_validation.js"></script>
@@ -37,22 +38,22 @@
                <div></div>
                <div></div>
             </div>
-            <div id="title_bar" style="text-align: center;">Find Client</div>
+            <div id="title_bar" style="text-align:left;">Find Client</div>
          </header>
          <!--The mobile navigation Markup hidden via css-->
          <nav>
             <ul>
                <a href="#">
-                  <li id="show_filter_button"><img src="css/images/filter_white2.png"> Find Client</li>
+                  <li id="show_filter_button" onclick="closeNav()"><img src="css/images/filter_white2.png"> Find Client</li>
                </a>
                <a href="#">
-                  <li id="show_new_client_button"><img src="css/images/addnew_white.png"> New Client</li>
+                  <li id="show_new_client_button" onclick="closeNav()"><img src="css/images/addnew_white.png"> New Client</li>
                </a>
 			   <a href="#">
-                  <li id="show_generate_button"><img src="css/images/build_icon.png" width="24px"> Create Transfer of Ownership</li>
+                  <li id="show_generate_button" onclick="closeNav()"><img src="css/images/build_icon.png" width="24px"> Create Transfer of Ownership</li>
                </a>
 			   <a href="#">
-                  <li id="show_present_button"><img src="css/images/form_icon.png" width="20px"> Display Transfer of Ownership</li>
+                  <li id="show_present_button" onclick="closeNav()"><img src="css/images/form_icon.png" width="20px"> Display Transfer of Ownership</li>
                </a>
 
                <li style="color: #3ca7ff" id="status_check">Logged in as: <span id="show_user_status" style="font-weight: bold; color: #FFFFFF;"></span><br><br>
@@ -98,16 +99,16 @@
                         <option value="contact_needed">Contact Needed</option>
                      </select>
                      <!--<input type ="text" id="contact_relationship_f" placeholder="contact_relationship"  style="display: none;"/>-->
-                     <B>First Name: </b><br><input type ="text" id="firstName_f" placeholder="First name" name='input_field' style="   text-transform: capitalize;"/><br>
-                     <b>Middle Initial: </b><br><input type ="text" id="midName_f" placeholder="(optional) Middle initial" name='input_field' style="text-transform: capitalize;" maxlength="1"/><br>
-                     <b>Last Name: </b><br><input type="text" id="lastName_f" placeholder="Last name" name='input_field' style="   text-transform: capitalize;"/><br>
-                     <b>Phone: </b><br><input class="simple-field-data-mask" type="text" id="phone_f" placeholder="Phone: ex. 999-999-9999" name='input_field' data-mask="000-000-0000"><br>
-                     <b>Business: </b><br><input type="text" id="org_f" placeholder="Organization name" name='input_field'/><br>
-                     <b>Email: </b><br><input type="text" id="email_f" placeholder="Email" name='input_field'/><br><br>
-                     <b>Address: </b><br><input type="text" id="address_f" placeholder="Address: ex. 1600 Grand Avenue" name='input_field' style="text-transform: capitalize;"/><br>
-                     <input type="text" id="address2_f" placeholder="Address2: ex. 1600 Grand Avenue" name='input_field' style="display:none;" style="text-transform: capitalize;"/>
-                     <b>City: </b><br><input type ="text" id="city_f" placeholder="City: ex. St. Paul" name='input_field' style="text-transform: capitalize;"/><br>
-                     <b>State: </b><br><input type="text" id="state_f" placeholder="State: ex. MN" name='input_field' style="   text-transform: uppercase;" maxlength="2"/><br>
+                     <B>First Name: </b><br><input type ="text" id="firstName_f" placeholder="First name" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('firstName_f', 'midName_f')"/><br>
+                     <b>Middle Initial: </b><br><input type ="text" id="midName_f" placeholder="(optional) Middle initial" name='input_field' style="text-transform: capitalize;" maxlength="1" onfocus="myAutoTab('midName_f', 'lastName_f')"/><br>
+                     <b>Last Name: </b><br><input type="text" id="lastName_f" placeholder="Last name" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('lastName_f', 'phone_f')"/><br>
+                     <b>Phone: </b><br><input class="simple-field-data-mask" type="text" id="phone_f" placeholder="Phone: ex. 999-999-9999" name='input_field' data-mask="000-000-0000" onfocus="myAutoTab('phone_f', 'org_f')"><br>
+                     <b>Business: </b><br><input type="text" id="org_f" placeholder="Organization name" name='input_field' onfocus="myAutoTab('org_f', 'email_f')"/><br>
+                     <b>Email: </b><br><input type="text" id="email_f" placeholder="Email" name='input_field' onfocus="myAutoTab('email_f', 'address_f')"/><br><br>
+                     <b>Address: </b><br><input type="text" id="address_f" placeholder="Address: ex. 1600 Grand Avenue" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('address_f', 'city_f')"/><br>
+                     <input type="text" id="address2_f" placeholder="Address2: ex. 1600 Grand Avenue" name='input_field' style="display:none;" style="text-transform: capitalize;" onfocus="myAutoTab('address2_f', 'city_f')"/>
+                     <b>City: </b><br><input type ="text" id="city_f" placeholder="City: ex. St. Paul" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('city_f', 'state_f')"/><br>
+                     <b>State: </b><br><input type="text" id="state_f" placeholder="State: ex. MN" name='input_field' style="   text-transform: uppercase;" maxlength="2" onfocus="myAutoTab('state_f', 'zip_f')"/><br>
                      <b>Zip code: </b><br><input type="text" class="simple-field-data-mask" id="zip_f" placeholder="Zip code: ex. 55101" name='input_field' maxlength="5" data-mask="000000"/><br>
                   </form>
                   <input type="button" value="Find Existing Client" id="filter_button">
@@ -128,20 +129,20 @@
                         <option value="dormant">Dormant</option>
                         <option value="contact_needed">Contact Needed</option>
                      </select>
-                     <b>First Name: </b><br><input type ="text" id="firstName_new" placeholder="First name" name='input_field' style="text-transform: capitalize;"/><br>
-                     <b>Middle Initial: </b><br><input type ="text" id="midName_new" name="optional" placeholder="(Optional) Middle initial" name='input_field' style="text-transform: capitalize;" maxlength="1"/><br>
-                     <b>Last Name: </b><br><input type="text" id="lastName_new" placeholder="Last name" name='input_field' style="text-transform: capitalize;"/><br>
-                     <b>Phone: </b><br><input class="simple-field-data-mask" type="text" id="phone_new" placeholder="Phone: ex. 999-999-9999" data-mask="000-000-0000" name='input_field'/> <br>
-                     <b>Business: </b><br><input type="text" id="org_new" name="input_field" placeholder="Organization name" name='input_field' style="text-transform: capitalize;"/><br>
-                     <b>Email: </b><br><input type="text" id="email_new" placeholder="Email" name='input_field'/><br>
-                     <b>Address: </b><br><input type="text" id="address_new" placeholder="Address: ex. 1600 Grand Avenue" name='input_field'/><br>
-                     <b>Address 2: </b><br><input type="text" id="address2_new" name="optional" placeholder="(optional) Address2: ex. 1600 Grand Avenue"/><br>
+                     <b>First Name: </b><br><input type ="text" id="firstName_new" placeholder="First name" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('firstName_new', 'midName_new')"/><br>
+                     <b>Middle Initial: </b><br><input type ="text" id="midName_new" name="optional" placeholder="(Optional) Middle initial" name='input_field' style="text-transform: capitalize;" maxlength="1" onfocus="myAutoTab('midName_new', 'lastName_new')"/><br>
+                     <b>Last Name: </b><br><input type="text" id="lastName_new" placeholder="Last name" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('lastName_new', 'phone_new')"/><br>
+                     <b>Phone: </b><br><input class="simple-field-data-mask" type="text" id="phone_new" placeholder="Phone: ex. 999-999-9999" data-mask="000-000-0000" name='input_field' onfocus="myAutoTab('phone_new', 'org_new')"/> <br>
+                     <b>Business: </b><br><input type="text" id="org_new" name="input_field" placeholder="Organization name" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('org_new', 'email_new')"/><br>
+                     <b>Email: </b><br><input type="text" id="email_new" placeholder="Email" name='input_field' onfocus="myAutoTab('email_new', 'address_new')"/><br>
+                     <b>Address: </b><br><input type="text" id="address_new" placeholder="Address: ex. 1600 Grand Avenue" name='input_field' onfocus="myAutoTab('address_new', 'address2_new')"/><br>
+                     <b>Address 2: </b><br><input type="text" id="address2_new" name="optional" placeholder="(optional) Address2: ex. 1600 Grand Avenue" onfocus="myAutoTab('address2_new', 'city_new')"/><br>
 					 
 					 
-                     <b>City: </b><br><input type ="text" id="city_new" placeholder="City: ex. St. Paul" name='input_field' style="text-transform: capitalize;"/>
+                     <b>City: </b><br><input type ="text" id="city_new" placeholder="City: ex. St. Paul" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('city_new', 'state_new')"/><br>
                      <select id="citiesDropDown" name="optional" style="visibility:hidden;"><option value=""></option></select><br>
-					 <b>State: </b><br><input type="text" id="state_new" placeholder="State: ex. MN" name='input_field' style="text-transform: uppercase;" maxlength="2"/><br>
-                     <b>Zip code: </b><br><input type="text" class="simple-field-data-mask" id="zip_new" placeholder="Zip code: ex. 55101" name='input_field' maxlength="5" data-mask="00000" onchange="autoPopZip()"/><br>
+					 <b>State: </b><br><input type="text" id="state_new" placeholder="State: ex. MN" name='input_field' style="text-transform: uppercase;" maxlength="2" onfocus="myAutoTab('state_new', 'zip_new')"/><br>
+                     <b>Zip code: </b><br><input type="text" class="simple-field-data-mask" id="zip_new" placeholder="Zip code: ex. 55101" name='input_field' maxlength="5" data-mask="00000" onchange="autoPopZip()" onfocus="myAutoTab('zip_new', 'notes_new')"/><br>
 					 <select id="zipcodesDropDown" name="optional" style="visibility:hidden;" name='input_field'>
 						<option value=""></option>
 					 </select><br>
@@ -173,14 +174,14 @@
                      <input type="radio" name="naidOption" value="noNaid">No
                      <input type="radio" name="naidOption" value ="yesNaid">Yes
                      <div id="answer"></div><br><br>
-                     <input type="button" id="transfer_button" value="Create Transfer of Ownership Form"></a>
+                     <input type="button" id="transfer_button" value="Create Transfer Form"></a>
                      <div id="error_message_generate" class="error_message"></div><br><br><br>
                   </form>
                </center>
             </div>
             <!------------------------------------------------------------------->
-            <div class="article" style="display: none; width: 100%;" id="signature_module">
-               <form action="" class="sigPad" id="sigPad" style="margin-top: 50px;">
+            <div class="article" style="display: none; width: 100%; height: 100%;" id="signature_module">
+               <form action="" class="sigPad" id="sigPad" style="margin-top: 50px;" onsubmit="return false">
                   <!--method="post"-->
                   <img src="css/images/close.png" id="exit_client_sig_button"><label for="name">Print your name:</label>
                   <input type="text" name="name" id="name" class="name" style="min-width: 75%;">
@@ -193,10 +194,10 @@
                   </ul>
                   <div class="sig sigWrapper" style="margin-bottom: 50px;">
                      <div class="typed"></div>
-                     <canvas class="pad" height="100" width="500" id="canvas_pad" style="background:#EEEEEE;"></canvas>
+                     <canvas class="pad" width="198px" height="55px" id="canvas_pad" style="background:#EEEEEE;"></canvas>
                      <input type="hidden" name="output" class="output" id="output">
                   </div>
-                  <input type="button" id="submit_me" value="Submit">
+                  <input type="button" id="submit_me" value="Submit"/>
                   <div id="sig_error_message" class="error_message"></div>
                   <div id="sig_message" class="notification"></div>
                </form>
@@ -218,7 +219,7 @@
                <div id="error_message_select" class="error_message" align="left"></div>
                <div id="message_select" class="notification_message"></div>
                <div id="client_table_div" style="overflow-y: scroll; overflow-x: scroll; width: 75%; height: 75%;">
-                  <table id="client_filter_table" class="filtered_client">
+                  <table id="client_filter_table" class="filtered_client" style="padding-right: 150px">
                   </table>
                </div>
                <!--</div>-->

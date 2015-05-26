@@ -24,6 +24,7 @@ var ekey = "";
 var currentUser = ""; //Username, example: "glor"
 var locationID = 0;
 var wordage = "";
+var loads = 0;
 
 
 //----------------------------------------------------------------------
@@ -38,6 +39,9 @@ function loadCurrentUser() {
     var urlTokens = url.split('='); //split into local url and query string
     var query = urlTokens[1]; //get query string
     //currentUser = vars; //for testing
+	loads += 1;
+	
+	if (loads == 1){
 
     if (typeof query !== "undefined") {
         query = query.split('&');
@@ -53,6 +57,7 @@ function loadCurrentUser() {
     } else {
         ekey = null;
     }
+	}
 }
 
 //Generate a client id for a new client. 
@@ -498,6 +503,24 @@ $(function() {
     });
 });
 
+
+// $('#searchbox input').bind('keypress', function(e) {
+
+	// var code = e.keyCode || e.which;
+	// if(code == 13) { //Enter keycode
+	//Do something
+	// }
+
+// });
+
+//Autotab
+function autotab(){
+    //if (current.getAttribute && current.value.length==current.getAttribute("maxlength")) {
+        document.getElementById("lastName_new").focus();
+	//}
+}
+
+
 //User is selecting a client, pressing 'select client' button 
 //--> We are updating our global client/donor data variables to match the selected client's data
 //USED IN THE FILTERED_CLIENTS_MODULE*or something close to it
@@ -613,6 +636,8 @@ function clearAllForms(){
 					donorID = 0;
 					chosenClientFName = ""; //the chosen donor's first name. Example: "Harry"
 					chosenClientLName = ""; //the chosen donor's last name. Example: "Potter"
+					document.getElementById("show_donor_status").innerHTML = "";
+					
 					
 
 }
@@ -1087,6 +1112,7 @@ $(document).ready(function() {
         $("#filter_module").hide();
         $("#new_client_module").show();
         document.getElementById("title_bar").innerHTML = "New Client";
+		
 
     });
 });
@@ -1551,3 +1577,67 @@ $(document).ready(function(){
 $(document).ready(function(){
   $('#zip_new').mask('00000');
 });
+
+
+//used for forms. not used for signature stuff.
+//check the type of the keydown...
+function myAutoTab(formId, newFocus){
+	$('#'+formId).on('keydown', function (e) {
+			//$('.log').html(e.type + ' : ' + e.which);
+			//if the user presses enter, it takes them to the next form field.
+			if ((e.keyCode == 9) || (e.keyCode == 13)){
+				// document.getElementById(newFocus).focus();
+				$('#'+newFocus).focus();
+			}
+	});
+}
+
+//triggered so long as everything is filled out on the new client form
+function myAutoTabNew(){
+	var valid =validateFormNew();
+
+	if (valid == true){
+		$('#'+formId).on('keydown', function (e) {
+				//$('.log').html(e.type + ' : ' + e.which);
+				//if the user presses enter, it takes them to the next form field.
+				if ((e.which == "13") || (e.which == "9")){
+					// document.getElementById(newFocus).focus();
+					$('#'+newFocus).focus();
+				}
+		});
+	}
+}
+
+//used for signature.
+//check the type of the keydown...
+function sigAuto(){
+	$('#'+formId).on('keydown', function (e) {
+			//$('.log').html(e.type + ' : ' + e.which);
+			//if the user presses enter, it takes them to the next form field.
+			if ((e.which == "13") || (e.which == "9")){
+				document.getElementById(newFocus).focus();
+			}
+	});
+}
+
+//tie the enter button to a bunch of conditonals that check
+//if validateFormFilter == true
+//	if filter_module is shown
+//		tie enter button to this event of clicking desired button (cannot trigger/call function because they are unnnamed jquery functions)
+//		
+function closeNav(){
+	        //enable all scrolling on mobile devices when menu is closed
+        jQuery('#container').unbind('touchmove');
+
+        //set margin for the whole container back to original state with a jquery UI animation
+        jQuery("#container").animate({"marginLeft": ["-1", 'easeOutExpo']}, {
+            duration: 65,
+            complete: function () {
+                jQuery('#content').css('width', 'auto');
+                jQuery('#contentLayer').css('display', 'none');
+                jQuery('nav').css('opacity', 0);
+                jQuery('#content').css('min-height', 'auto');
+
+            }
+        });
+	}
