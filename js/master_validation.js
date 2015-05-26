@@ -429,6 +429,8 @@ function init() {
 //Used in the index.html page
 $(function() {
     $("#login_button").click(function(e) {
+											document.getElementById("login_button").disabled = true;
+
         var validation = validateFormLogin();
         var NewPerson = {};
 
@@ -454,6 +456,8 @@ $(function() {
                 data: JSON.stringify(NewPerson),
 
                 success: function(response) {
+				
+
                     if (response !== "401") { //originally, if response == true, checks if user is authorized. returns 401 if not authorized.
                         currentUser = NewPerson.username;
                         document.getElementById("error_message_login").innerHTML = 'Logging in...';
@@ -472,6 +476,8 @@ $(function() {
                     } else {
                         document.getElementById("error_message_login").innerHTML = "Wrong password or username.";
                         alert("Wrong password or username.");
+																document.getElementById("login_button").disabled = false;
+
 
                     }
                 },
@@ -480,6 +486,8 @@ $(function() {
                     sucess = false;
                     document.getElementById("error_message_login").innerHTML = "No connection to API/Invalid encryption key.";
                     alert("No connection to API/Invalid encryption key.");
+															document.getElementById("login_button").disabled = false;
+
 
                 },
                 beforeSend: function(xhr) {
@@ -605,6 +613,10 @@ function clearAllForms(){
 	document.getElementById("accept_button").disabled = false;
 	document.getElementById("error_message_transfer").innerHTML = "";
                     document.getElementById("message_transfer").innerHTML = "";
+					donorID = 0;
+					chosenClientFName = ""; //the chosen donor's first name. Example: "Harry"
+					chosenClientLName = ""; //the chosen donor's last name. Example: "Potter"
+					
 
 }
 //Submitting the donor's signature
@@ -1278,7 +1290,7 @@ return;
 
             success: function(response) {
 			document.getElementById("accept_button").disabled = true;
-			alert("response: "+response);
+			//alert("response: "+response);
 
                 if (response != false) {
                     document.getElementById("error_message_transfer").innerHTML = "";
@@ -1290,8 +1302,21 @@ return;
 					//document.getElementById("transfer_module").style.visibility = "none";
 					
 					//$("#transfer_module").hide();
+					//$("#filter_module").show();
+
+
+
 					//$("#final_module").show();
 					clearAllForms();
+						document.getElementById("accept_button").disabled = false;
+	document.getElementById("error_message_transfer").innerHTML = "";
+                    document.getElementById("message_transfer").innerHTML = "";
+					donorID = 0;
+					chosenClientFName = ""; //the chosen donor's first name. Example: "Harry"
+					chosenClientLName = ""; //the chosen donor's last name. Example: "Potter"
+					//alert("Cleared");
+										document.getElementById("transfer_module").style.display = "none";
+					document.getElementById("filter_module").style.display = "block";
                 } else {
                     //document.getElementById("error_message_transfer").innerHTML = "Successful post. Bad API response. Error: " + response + ".  Could not insert final Transfer Form into db.";
                     //alert("AJAX request returned an error. Error: " + response + ".  Could not insert Transfer Form into db.");
@@ -1305,7 +1330,7 @@ return;
             }
         }).responseText;
         //response.preventDefault();
-				alert("Fell through the post request!");
+				//alert("Fell through the post request!");
 
     }
     });

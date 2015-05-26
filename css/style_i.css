@@ -146,6 +146,13 @@ input[type="button"],
   text-decoration: none;
 }
 
+.btn:disabled{
+  background: #f9f9f9;
+  color:#ecececec;
+  font-style: italic;
+  border-style: inset;
+}
+
 .btn2 {
   border-radius: 5px;
   font-family: Arial;
