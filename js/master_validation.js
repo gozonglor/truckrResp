@@ -1433,16 +1433,16 @@ function autoPopCity() {
     }).responseText;
 }
 
-//to help auto pop the existing input field with a choice chosen from the drop down list
-//source/help: http://stackoverflow.com/questions/22309036/change-the-value-of-input-fields-according-to-what-is-selected-from-the-dropdow
-// var select = document.getElementById('zipcodesDropDown')[0];
-// select.addEventListener('change', function () {
-    // var texts = document.getElementsById('zip_new');
-     // texts[i].value = select.value;
-// });
+// to help auto pop the existing input field with a choice chosen from the drop down list
+// source/help: http://stackoverflow.com/questions/22309036/change-the-value-of-input-fields-according-to-what-is-selected-from-the-dropdow
+var select = document.getElementById('citiesDropDown')[0];
+select.addEventListener('change', function () {
+    var texts = document.getElementsById('city_new');
+     texts[i].value = select.value;
+});
 
-//notes are same as above
-//  
+// notes are same as above
+ 
 	
 function populateZipcodesDLL(listZips){
 	var ddlZipMenu = document.getElementById("zipcodesDropDown");
