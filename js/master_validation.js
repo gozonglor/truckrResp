@@ -1181,6 +1181,7 @@ $(document).ready(function() {
             $('[name="module"]').hide();
         }
         $("#transfer_module").hide();
+        $("#signature_module").hide();
 
         $("#generate_module").show();
         document.getElementById("title_bar").innerHTML = "Generate Form";
