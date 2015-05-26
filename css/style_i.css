@@ -124,13 +124,14 @@ input[type="button"],
 .btn {
   font-family: Arial;
   color: #FFFFFF;
-  font-size: 24px;
+  font-size: 20px;
   background: #000000;
-  padding: 30px 30px 30px 30px;
+  padding: 10px 10px 10px 10px;
   text-decoration: none;
-  width: 100%;
+  width: 90%;
   border-color:#000000;
   border-width: 1px;
+  margin-top: 15px;
 }
 
 .btn:hover {
