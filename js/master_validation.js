@@ -658,6 +658,16 @@ function clearAllForms(){
 					
 
 }
+
+function clearAllForms2(){
+
+	if (confirm("Do you want to refresh?/App will begin like new/Fields are clear, etc.")){
+clearAllForms();
+					
+	}else{
+	
+	}
+}
 //Submitting the donor's signature
 //--> Record it as a base 64 image to store and display again on the final pdf transfer form.
 //Does validation and redisplays the signature on the next page 
