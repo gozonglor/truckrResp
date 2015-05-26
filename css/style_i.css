@@ -38,7 +38,7 @@ padding: 10px;
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
   /*background:#4569b2;*/
-  background: url(images/low.jpg);
+  background: url(images/tire_vector_bg.jpg);
 
 }
 
@@ -49,7 +49,7 @@ input[type=radio] {
 }
 
 input[name="input_field"] {
-   width: 100%;
+   width: 80%;
    height: 33px;
    border: solid 2px #FFFFFF;
    padding: 2px;
@@ -69,7 +69,7 @@ input[name="input_field"]:active  {
   }
 
   input[name="optional"] {
-   width: 100%;
+   width: 80%;
    height: 33px;
    border: solid 2px #FFFFFF;
    padding: 2px;
