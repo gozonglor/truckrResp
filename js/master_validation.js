@@ -1206,8 +1206,6 @@ function addAllColumnHeaders(myList) {
 $(function() {
     $("#accept_button").click(function(e) {
 
-	
-	
 if (donorID == 0){
 alert("Please select a client first.");
 return;
@@ -1291,9 +1289,7 @@ return;
 				alert("Fell through the post request!");
 
     }
-	
-	
-	
+    });
 });
 
 function other(pdfBase64) {
