@@ -370,7 +370,8 @@ $(function() {
 
                 success: function(response) {
                     $("#generate_module").hide();
-                    $("#transfer_module").show();
+                    $("#signature_module").show();
+					$("#transfer_module").hide();
                     document.getElementById("title_bar").innerHTML = "Transfer of Ownership";
 					
 
@@ -400,6 +401,21 @@ $(function() {
 
 					//Third Paragraph: Data wipe choice, naid or no naid
 					document.getElementById("customTOOForm").innerHTML = document.getElementById("customTOOForm").innerHTML+ "<br><br><div style='border: 2px solid; padding: 10px;'>"+response[3]+"</div>";
+					
+					
+					
+					//cries
+					
+					
+					                    document.getElementById("customTOOForm2").innerHTML = "<b>"+formOwnership+"</b>" + firstParagraph; 
+                    var data = formOwnership + response[1] + " what is this Data?!"; //Not sure what this this?
+                    formHtml = data; 
+					
+					//Second Paragraph: Donation description
+                    document.getElementById("customTOOForm2").innerHTML = document.getElementById("customTOOForm2").innerHTML+ "<br><br><div style='background:#EEEEEE'>"+response[2]+"</div>";
+
+					//Third Paragraph: Data wipe choice, naid or no naid
+					document.getElementById("customTOOForm2").innerHTML = document.getElementById("customTOOForm2").innerHTML+ "<br><br><div style='border: 2px solid; padding: 10px;'>"+response[3]+"</div>";
                     
 
                     var dateObj = new Date();
@@ -409,6 +425,7 @@ $(function() {
                     var newdate = "" + month + "/" + day + "/" + year;
                     globalDate = newdate;
                     document.getElementById("transfer_form_date1").innerHTML = "Date: " + globalDate + " " + " Lot Number: " + lotNumber;
+					 document.getElementById("transfer_form_date2").innerHTML = "Date: " + globalDate + " " + " Lot Number: " + lotNumber;
                 },
 
                 error: function() {
@@ -646,9 +663,9 @@ function clearAllForms(){
 //Does validation and redisplays the signature on the next page 
 $(function() {
     $("#submit_me").click(function(e) {
-        var valid = validateSignature();
+        //var valid = validateSignature();
 		sig_coord = document.getElementById("output").defaultValue;
-        if ((valid === true) && (sig_coord != "")){
+        if (sig_coord != ""){
 		
             document.getElementById("sig_message").innerHTML = "";
             document.getElementById("sig_error_message").innerHTML = "";
@@ -673,7 +690,10 @@ $(function() {
                 }); //--yposs
                 api.regenerate(sig_coord); //--
                 //alert("base 64 image: "+base64SigImg);
-                document.getElementById("typed_name").innerText = document.getElementById("name").value;
+                //document.getElementById("typed_name").innerText = document.getElementById("name").value;
+				document.getElementById("donorsName").value= document.getElementById("nameSign").value;
+				document.getElementById("donorsName").innerHTML= document.getElementById("nameSign").value;
+				document.getElementById("client_title2").value = document.getElementById("client_title").value;
             } 
 			// else {
                 // customer_signature = true;

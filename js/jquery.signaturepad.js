@@ -855,7 +855,7 @@ $.fn.signaturePad = function (options) {
  * @type {Object}
  */
 $.fn.signaturePad.defaults = {
-  defaultAction : 'typeIt' // What action should be highlighted first: typeIt or drawIt
+  defaultAction : 'drawIt' // What action should be highlighted first: typeIt or drawIt
   , displayOnly : false // Initialize canvas for signature display only; ignore buttons and inputs
   , drawOnly : false // Whether the to allow a typed signature or not
   , canvas : 'canvas' // Selector for selecting the canvas element
@@ -865,8 +865,8 @@ $.fn.signaturePad.defaults = {
   , penColour : '#000000' // Colour of the drawing ink
   , penWidth : 2 // Thickness of the pen
   , penCap : 'round' // Determines how the end points of each line are drawn (values: 'butt', 'round', 'square')
-  , lineColour : '#ffffff' // Colour of the signature line
-  , lineWidth : 0 // Thickness of the signature line
+  , lineColour : '#dddddd' // Colour of the signature line
+  , lineWidth : 2 // Thickness of the signature line
   , lineMargin : 5 // Margin on right and left of signature line
   , lineTop : 35 // Distance to draw the line from the top
   , name : '.name' // The input field for typing a name
