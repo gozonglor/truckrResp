@@ -112,7 +112,7 @@ nav
     background: -ms-linear-gradient(top, #3e3c3d 0%, #2d2c2d 100%);
     background: linear-gradient(to bottom, #3e3c3d 0%, #2d2c2d 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3e3c3d', endColorstr='#2d2c2d', GradientType=0);
-	overflow: scroll;
+	/*overflow: scroll;*/
 }
 
 /*
@@ -142,7 +142,7 @@ nav ul
 nav li
  {
     position: relative;
-    font-size: 0.9em;
+    font-size: 0.7em;
     font-weight: bold;
     border-bottom: 1px solid #222222;
     border-top: 1px solid #444444;
