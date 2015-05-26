@@ -57,7 +57,7 @@ the hamburger button with a little gradient effekt
     border: 1px solid #374C77;
     border-radius: 3px 3px 3px 3px;
     cursor: pointer;
-    display: float;
+    display: block;
     height: 24px;
     padding: 3px 4px 3px;
     position: relative;
