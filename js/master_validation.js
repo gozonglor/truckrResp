@@ -1143,6 +1143,20 @@ $(document).ready(function() {
     });
 });
 
+
+$(document).ready(function() {
+    $("#showtable_button").click(function() {
+        $("#client_table_module").show();
+        $("#generate_module").hide();
+
+        document.getElementById("title_bar").innerHTML = "Filter Table";
+alert("why?");
+    });
+})
+
+
+
+
 function handleData(data) { //A smaller function to consolidate the longer ones of building the html table
     buildHtmlTable(data);
 }
