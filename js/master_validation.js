@@ -1582,6 +1582,10 @@ function autoPopZip() {
         success: function(response) {
 		
 			if (response.city == ""){
+			
+			if (response.cityList.length == 0){
+			alert("btihgON");
+			}
 				if (response.cityList.length > 0){ //if it's returning a list of cities that match the zip code
 					//hide the single cities input
 					document.getElementById("city_new").style.visibility = "hidden";
@@ -1619,6 +1623,7 @@ function autoPopZip() {
 
         error: function() {
             //alert("Error with GET request. Make sure your zip code begins with a number other than 0.");
+			alert("There are no cities tied to that zipcode in our system.");
 							document.getElementById("state_new").readOnly = false;
 								document.getElementById("citiesDropDown").style.visibility = "hidden";
 				document.getElementById("city_new").style.visibility = "visible";
