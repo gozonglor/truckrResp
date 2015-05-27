@@ -1474,7 +1474,8 @@ return;
 
         TransferForm.donorEmail = donorEmail;
         TransferForm.wordage = wordage;
-        TransferForm.firstName = chosenClientFName;
+        //TransferForm.firstName = chosenClientFName;
+		TransferForm.firstName = document.getElementById("nameSign");
 
 
         var success = false;
