@@ -498,7 +498,7 @@ $(function() {
 					//cries
 					
 					
-					                    document.getElementById("customTOOForm2").innerHTML = "<b>"+formOwnership+"</b>" + firstParagraph; 
+					document.getElementById("customTOOForm2").innerHTML = "<b>"+formOwnership+"</b>" + firstParagraph; 
                     var data = formOwnership + response[1] + " what is this Data?!"; //Not sure what this this?
                     formHtml = data; 
 					
@@ -730,8 +730,6 @@ function clearTooForm(){
 	document.getElementById("sigImage").innerHTML = "";
 		document.getElementById("nameSign").value = "";
 				document.getElementById("nameSign").innerHTML = "";
-document.getElementById("actual_too_form").innerHTML = "";
-document.getElementById("actual_too_form").value = "";
 
 			document.getElementById("client_title").value = "";
 						document.getElementById("client_title").innerHTML = "";
