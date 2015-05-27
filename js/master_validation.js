@@ -1443,16 +1443,24 @@ function addAllColumnHeaders(myList) {
 //==================            HTML TO CANVAS              =================//
 $(function() {
     $("#accept_button").click(function(e) {
+					document.getElementById("accept_button").disabled = 'true';
+
 
 if (donorID == 0){
 alert("Please select a client first.");
+					document.getElementById("accept_button").disabled = 'false';
+
 return;
 }
 
     var result = checkTOOForm();
     if (result == false) { //orig false
         //Missing a field--a field is not filled out
+							document.getElementById("accept_button").disabled = 'false';
+
     } else {
+	
+
         var TransferForm = {};
 
         TransferForm.naidChoice = $('input[name=naidOption]:checked').val(); //will either be a string stating 'yesNaid' or 'noNaid'
@@ -1475,7 +1483,7 @@ return;
         TransferForm.donorEmail = donorEmail;
         TransferForm.wordage = wordage;
         //TransferForm.firstName = chosenClientFName;
-		TransferForm.firstName = document.getElementById("nameSign");
+		TransferForm.firstName = document.getElementById("nameSign").innerText;
 
 
         var success = false;
@@ -1498,7 +1506,6 @@ return;
             //Authorization: Basic ekey,
 
             success: function(response) {
-			document.getElementById("accept_button").disabled = true;
 			//alert("response: "+response);
 
                 if (response != false) {
@@ -1526,20 +1533,28 @@ return;
 					//alert("Cleared");
 										document.getElementById("transfer_module").style.display = "none";
 					document.getElementById("filter_module").style.display = "block";
+										document.getElementById("accept_button").disabled = 'false';
+
                 } else {
                     //document.getElementById("error_message_transfer").innerHTML = "Successful post. Bad API response. Error: " + response + ".  Could not insert final Transfer Form into db.";
                     //alert("AJAX request returned an error. Error: " + response + ".  Could not insert Transfer Form into db.");
 					alert("response from api: Email sent.");
+										document.getElementById("accept_button").disabled = 'false';
+
 				}
             },
 
             error: function() {
                 sucess = false;
                 document.getElementById("error_message_transfer").innerHTML = "Error with post request. No connection to API/Invalid encryption key.";
+									document.getElementById("accept_button").disabled = 'false';
+
             }
         }).responseText;
         //response.preventDefault();
 				//alert("Fell through the post request!");
+								document.getElementById("accept_button").disabled = false;
+
 
     }
     });
