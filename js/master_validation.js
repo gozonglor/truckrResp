@@ -25,6 +25,7 @@ var currentUser = ""; //Username, example: "glor"
 var locationID = 0;
 var wordage = "";
 var loads = 0;
+var cityToggle = false;
 
 
 //----------------------------------------------------------------------
@@ -122,21 +123,35 @@ function compileRelationshipFilter() {
 function validateFormNew() {
     var elements = document.getElementById("new_client_form").elements; //Grab the form fields in the new_client_form
     var check = true;
+	
+					if (cityToggle == true){
+						document.getElementById("city_new").name = "optional";
+					}
+					else {
+						//alert("Please fill out city name");
+					}
+
+	
     for (var i = 0; i < elements.length; i++) { //For each form field...
+	
+					
         if (!(elements[i].name === "optional")) {
             //alert("current field: "+elements[i].value);
 
-            if (((elements[i].value === "") || (elements[i].value === null)) || (elements[i].value === 0)) {
+            if (((elements[i].value === "") || (elements[i].value === null)) || (elements[i].value === 0) || (elements[i].value === "undefined")) {
+
                 alert("Please fill out all fields");
+				var test = document.getElementById("city_new");
                 document.getElementById("error_message_create_new").innerHTML = "Please fill out all fields"; //Replace the error message in the document with this error message
                 //reset the message after every click, run on every post back
                 check = false;
                 return check;
+				
             } 
 			else {
 				if (elements[i].id == "phone_new"){
-					var phoneN = document.getElementById("phone_new").value;
-					if (phoneN.length < 15){
+					var phoneN = elements[i].value;
+					if (phoneN.length < 12){
 					alert("Phone number is not long enough.");
 						//111-111-1111
 						alert("Please fill out all fields");
@@ -276,7 +291,10 @@ $(function() {
         //Compiling the NewPerson object by looking at the form fields...
         NewPerson.contact_relationship = compileRelationshipNew();
         NewPerson.contact_status = $("#ddlContactStatus_new").val(); //looks at value entered in form field with given id 
-        NewPerson.id = $("#id_new").val();
+        //NewPerson.id = $("#id_new").val();
+		NewPerson.contactID = 0;
+		NewPerson.midName = $("#midName_new").val();
+
         NewPerson.firstName = $("#firstName_new").val();
         NewPerson.lastName = $("#lastName_new").val();
         NewPerson.phone = $("#phone_new").val();
@@ -284,14 +302,25 @@ $(function() {
         NewPerson.email = $("#email_new").val();
         NewPerson.address = $("#address_new").val();
         NewPerson.address2 = $("#address2_new").val();
-        NewPerson.city = $("#city_new").val();
-        NewPerson.zip = $("#zip_new").val();
+		NewPerson.zip = $("#zip_new").val();
+        
+		if (cityToggle == false){
+			NewPerson.city = $("#city_new").val();
+		}
+		
+		else{
+			NewPerson.city = $("#citiesDropDown").val();
+		}
+        
+		NewPerson.zip = $("#zip_new").val();
         NewPerson.state = $("#state_new").val();
         NewPerson.notes = $("#notes_new").val();
         NewPerson.username = currentUser;
         NewPerson.key = ekey;
-        NewPerson.id = generateID(NewPerson); //Generate an id for the person using the generateID function.
+        NewPerson.id=""; //Generate an id for the person using the generateID function.
         NewPerson.locationid = parseInt(locationID);
+				NewPerson.notes = $("#notes_new").val();
+
 
         var response = $.ajax({ //use jquery to make a post to the api with the new client 
             type: "POST",
@@ -309,7 +338,7 @@ $(function() {
             success: function(data) { //the connection was successfully made
 
                 //alert("Data: "+data);
-                if (data !== false) { //[TBD] if the list returned by the api is not empty (meaning we have successfully passed the newly created client over to the api side to be dealth with via database
+                if (data !== 0) { //[TBD] if the list returned by the api is not empty (meaning we have successfully passed the newly created client over to the api side to be dealth with via database
                     //alert("New client successfully added.");
                     document.getElementById("error_message_create_new").innerHTML = ""; //Error message is cleared out
                     document.getElementById("message_create_new").innerHTML = "Donor '" + NewPerson.firstName + " " + NewPerson.lastName + "' has been created."; //Good message posted to let user know their client has been created
@@ -323,8 +352,9 @@ $(function() {
                     var showDonorStatus = document.getElementById('show_donor_status');
                     showDonorStatus.innerHTML = chosenClientFName + " " + chosenClientLName;
                     $("#new_client_module").hide();
-                    generateLotNum1();
+                    //generateLotNum1();
                     donorEmail = NewPerson.email;
+					donorID = data;
                     $("#generate_module").show();
                     document.getElementById("title_bar").innerHTML = "Generate Form";
 
@@ -336,7 +366,7 @@ $(function() {
 
             error: function() {
                 // alert("no success--error");
-                automaticLogout();
+                //automaticLogout();
                 alert("No connection to API/Invalid encryption key.");
             }
         }).responseText;
@@ -351,7 +381,7 @@ $(function() {
     $("#transfer_button").click(function(e) {
         ////*/*/CALLING AUTHORIZE/*/*///
 
-		if (donorID == 0){
+		if (chosenClientFName == ""){
 			alert("Please select a client first.");
 			return;
 		}
@@ -645,10 +675,16 @@ function clearTooForm(){
 	$('#clearButton').trigger('click');
 	$('#name').val('');
 	$('#actual_too_form').trigger("reset");
-	document.getElementById("typed_name").innerHTML = "";
-	document.getElementById("typed_name").innerText = ""; 
+	//document.getElementById("typed_name").innerHTML = "";
+	//document.getElementById("typed_name").innerText = ""; 
 	//document.getElementById("canvas_pad") = "";
 	document.getElementById("sigImage").innerHTML = "";
+		document.getElementById("nameSign").value = "";
+				document.getElementById("nameSign").innerHTML = "";
+
+			document.getElementById("client_title").value = "";
+						document.getElementById("client_title").innerHTML = "";
+
 
 }
 
@@ -706,54 +742,60 @@ loads = 0;
 //--> Record it as a base 64 image to store and display again on the final pdf transfer form.
 //Does validation and redisplays the signature on the next page 
 $(function() {
-    $("#submit_me").click(function(e) {
-        //var valid = validateSignature();
-		sig_coord = document.getElementById("output").defaultValue;
-        if (sig_coord != ""){
-		
-            document.getElementById("sig_message").innerHTML = "";
-            document.getElementById("sig_error_message").innerHTML = "";
-            //sig_coord = document.getElementById("output").defaultValue;
+            $("#submit_me").click(function(e) {
+                        if (chosenClientFName == "") {
+                            alert("Please select a client first.");
+							clearTooForm();
+                            return;
+                        } else {
+                            //validateSignature();
+                            sig_coord = document.getElementById("output").defaultValue;
+                            if (((document.getElementById("nameSign").value) == "") || ((document.getElementById("client_title").value) == "") || (sig_coord == "")) {
+                                alert("Please fill out all fields.");
+                                document.getElementById("client_sign_wrapper").style.backgroundColor = "#ffff66";
 
-            if (sig_coord !== "") {
-                $('.signed').show();
-                customer_signature = true;
-                var imgBaseSig = document.getElementById("canvas_pad").toDataURL();
-                //alert("Original "+imgBaseSig);
-                //imgBaseSig = imgBaseSig.split(",");
-                document.getElementById("test_sig").innerHTML = imgBaseSig;
-                //base64SigImg = imgBaseSig[1]; //store globally...
+                            } else if (((document.getElementById("nameSign").value) != "") && ((document.getElementById("client_title").value) != "") && (sig_coord != "")) {
+                                $('.signed').show();
+                                customer_signature = true;
+                                var imgBaseSig = document.getElementById("canvas_pad").toDataURL();
+                                //alert("Original "+imgBaseSig);
+                                //imgBaseSig = imgBaseSig.split(",");
+                                document.getElementById("test_sig").innerHTML = imgBaseSig;
+                                //base64SigImg = imgBaseSig[1]; //store globally...
 
-                base64SigImg = imgBaseSig;
+                                base64SigImg = imgBaseSig;
 
-                document.getElementById("sigImage").innerHTML = "<img src='" + base64SigImg + "'>";
+                                document.getElementById("sigImage").innerHTML = "<img src='" + base64SigImg + "'>";
 
-                //document.getElementById("test_sig").innerHTML = document.getElementById("test_sig").innerHTML+"<br><br>"+base64SigImg;
-                var api = $('.signed').signaturePad({
-                    displayOnly: true
-                }); //--yposs
-                api.regenerate(sig_coord); //--
-                //alert("base 64 image: "+base64SigImg);
-                //document.getElementById("typed_name").innerText = document.getElementById("name").value;
-				document.getElementById("donorsName").value= document.getElementById("nameSign").value;
-				document.getElementById("donorsName").innerHTML= document.getElementById("nameSign").value;
-				document.getElementById("client_title2").value = document.getElementById("client_title").value;
-            } 
-			// else {
-                // customer_signature = true;
-                // document.getElementById("typed_name").innerText = document.getElementById("name").value;
-                // base64SigImg = document.getElementById("typed_name").innerText;
-				// $('.signed').hide();
-            // }
+                                //document.getElementById("test_sig").innerHTML = document.getElementById("test_sig").innerHTML+"<br><br>"+base64SigImg;
+                                var api = $('.signed').signaturePad({
+                                    displayOnly: true
+                                }); //--yposs
+                                api.regenerate(sig_coord); //--
+                                //alert("base 64 image: "+base64SigImg);
+                                //document.getElementById("typed_name").innerText = document.getElementById("name").value;
+                                document.getElementById("donorsName").value = document.getElementById("nameSign").value;
+                                document.getElementById("donorsName").innerHTML = document.getElementById("nameSign").value;
+                                document.getElementById("client_title2").value = document.getElementById("client_title").value;
+                                // else {
+                                // customer_signature = true;
+                                // document.getElementById("typed_name").innerText = document.getElementById("name").value;
+                                // base64SigImg = document.getElementById("typed_name").innerText;
+                                // $('.signed').hide();
+                                // }
+                                document.getElementById("client_sign_wrapper").style.backgroundColor = "#d0e1a2";
 
-            $('#signature_module').hide();
-            $('#transfer_module').show();
-        } else { document.getElementById("sig_error_message").innerText = "Please sign.";
-				alert("Please sign.");
-}
-    });
-});
+                                $('#signature_module').hide();
+                                $('#transfer_module').show();
+                            } else {
+                                document.getElementById("sig_error_message").innerText = "Please sign.";
+                                alert("Please sign.");
+                                document.getElementByid("client_sign_wrapper").style.backgroundColor = "#ffff66";
 
+                            }
+                        }
+                    });
+            });
 //Generates the lot number and populates the lot number fields in the generate module.
 function generateLotNum1() {
     $("#generate_module").show();
@@ -1324,7 +1366,7 @@ function addAllColumnHeaders(myList) {
 $(function() {
     $("#accept_button").click(function(e) {
 
-if (donorID == 0){
+if (chosenClientFName == 0){
 alert("Please select a client first.");
 return;
 }
@@ -1455,6 +1497,35 @@ function other(pdfBase64) {
 // document.getElementById('holder').innerHTML= holder.trim();
 // }
 
+function removeDupes(list){
+
+    var seen = {};
+    var out = [];
+    var len = list.length;
+    var j = 0;
+    for(var i = 0; i < len; i++) {
+         var item = list[i];
+         if(seen[item] !== 1) {
+               seen[item] = 1;
+               out[j++] = item;
+         }
+    }
+    return out;
+
+}
+
+  // $("#citiesDropDown").change( function() {
+     // content = $("#citiesDropDown option:selected").text();
+     // $('#city_new').html(content);
+   // });
+
+fillNewCity = function(val){
+alert("you chose "+val);
+	var input = document.getElementById("city_new");
+    document.getElementById("city_new").value = val;
+}
+
+
 function autoPopZip() {
 
 	var val = "";
@@ -1463,6 +1534,11 @@ function autoPopZip() {
 
 
 		val =zip;
+		if (val.length != 5){
+			alert("Please enter a 5 digit zip code.");
+		}
+		
+		else{
 
     var response = $.ajax({
         type: "GET",
@@ -1480,8 +1556,10 @@ function autoPopZip() {
 					document.getElementById("city_new").style.visibility = "hidden";
 					document.getElementById("city_new").style.display = "none";
 					var listCities = response.cityList;
+					listCities= removeDupes(listCities);
 					populateCitiesDLL(listCities); //populate the drop down list
-					document.getElementById("citiesDropDown").style.visibility = "visible"; //finally show the drop down list
+					document.getElementById("citiesDropDown").style.visibility = "visible"; //finally show the drop down list	
+					cityToggle = true;
 					document.getElementById("state_new").value = response.stateLocation;
 					document.getElementById("state_new").textContent = response.stateLocation;
 					document.getElementById("state_new").readOnly = true;
@@ -1503,6 +1581,7 @@ function autoPopZip() {
 				document.getElementById("state_new").value = response.stateLocation;
 				document.getElementById("state_new").textContent = response.stateLocation;
 				document.getElementById("state_new").readOnly = true;
+									cityToggle = false;
 				}
 			
         },
@@ -1520,18 +1599,23 @@ function autoPopZip() {
 
         }
     }).responseText;
+	}
 }
 
 
 function populateCitiesDLL(listCities){
 	var ddlCityMenu = document.getElementById("citiesDropDown");
-	
+	var newDdl = document.createElement("select");
+	//document.getElementById("citiesDropDown") = newDdl; 
+	newDdl.id = "citiesDropDown";
+	ddlCityMenu.parentNode.replaceChild(newDdl, ddlCityMenu);
+	ddlCityMenu = document.getElementById("citiesDropDown");
 	//clear it out first.
 	//var select = document.getElementById("citiesDropDown");
-	var length = ddlCityMenu.options.length;
-	for (i = 0; i < length; i++) {
-	  ddlCityMenu.options[i] = null;
-	}
+	//var length = listCities.length;
+	//for (i = 0; i < length; i++) {
+	 // ddlCityMenu.options[0] = null;
+	//}
 	
 	for (var i=0; i<listCities.length+1; i++){
 		if (i == 0){
@@ -1625,13 +1709,19 @@ function autoPopCity() {
      // texts[i].value = select.value;
 // });
 
- $(document).ready(function(){
-   $("select#citiesDropDown").change(function(){
-      var b = $("select#citiesDropDown :selected").text();
-      var texts = document.getElementById('city_new');
-      texts.value = b;
-  });
-});
+ // $(document).ready(function(){
+   // $("select#citiesDropDown").change(function(){
+      // var b = $("select#citiesDropDown :selected").text();
+      // var texts = document.getElementById('city_new');
+      // texts.value = b;
+  // });
+// });
+
+// var select = document.getElementById('citiesDropDown').firstChild.option;
+// select.addEventListener('change', function () {
+    // var texts = document.getElementById('city_new');
+     // texts.value = select.value;
+// });
 	
 function populateZipcodesDLL(listZips){
 	var ddlZipMenu = document.getElementById("zipcodesDropDown");

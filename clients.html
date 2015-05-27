@@ -90,12 +90,6 @@
             <!--The hidden divs-->
             <div id="filter_module" class="article" name="module" style="background-image: url(css/images/magglass.png);background-repeat: no-repeat;background-attachment: fixed;margin-top: 50px; background-position: left top;">
                <center>
-                  <form id="relationship_filter_form">
-                     <input type="checkbox" name="Computer Donor" style="display: none; visibility:hidden;" checked>
-                  </form>
-                  <br><br>
-                  <input type ="text" id="id_f" placeholder="id"  style="display: none; visibility:hidden;" />
-                  <input type ="text" id="notes_f" placeholder="notes" style="display: none; visibility:hidden;"/>
                   <form id="filtering_form" style="background: none;">
                      <select id="ddlContactStatus" style="display:none; visibility:hidden;">
                         <option value="">Select Contact Status...</option>
@@ -119,6 +113,12 @@
                   </form>
                   <input type="button" value="Find Existing Client" id="filter_button">
                   <div id="error_message_filter" class="error_message"></div>
+				          <form id="relationship_filter_form">
+                     <input type="checkbox" name="Computer Donor" style="display: none; visibility:hidden;" checked>
+                  </form>
+                  <br><br>
+                  <input type ="text" id="id_f" placeholder="id"  style="display: none; visibility:hidden;" />
+                  <input type ="text" id="notes_f" placeholder="notes" style="display: none; visibility:hidden;"/>
                </center>
             </div>
             <!--------------Entry 2: create new client------------------->			
@@ -142,12 +142,12 @@
                      <b>Business: </b><br><input type="text" id="org_new" name="input_field" placeholder="Organization name" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('org_new', 'email_new')"/><br>
                      <b>Email: </b><br><input type="text" id="email_new" placeholder="Email" name='input_field' onfocus="myAutoTab('email_new', 'address_new')"/><br>
                      <b>Address: </b><br><input type="text" id="address_new" placeholder="Address: ex. 1600 Grand Avenue" name='input_field' onfocus="myAutoTab('address_new', 'address2_new')"/><br>
-                     <b>Address 2: </b><br><input type="text" id="address2_new" name="optional" placeholder="(optional) Address2: ex. 1600 Grand Avenue" onfocus="myAutoTab('address2_new', 'city_new')"/><br>
+                     <b>Address 2: </b><br><input type="text" id="address2_new" name="optional" placeholder="(optional) Address2: ex. 1600 Grand Avenue" onfocus="myAutoTab('address2_new', 'state_new')"/><br>
 					 
-					 					 <b>State: </b><br><input type="text" id="state_new" placeholder="State: ex. MN" name='input_field' style="text-transform: uppercase;" maxlength="2" onfocus="myAutoTab('state_new', 'zip_new')"/><br>
+					 					 <b>State: </b><br><input type="text" id="state_new" placeholder="State: ex. MN" name='input_field' style="text-transform: uppercase;" maxlength="2" onfocus="myAutoTab('state_new', 'city_new')"/><br>
 					 
-                     <b>City: </b><br><input type ="text" id="city_new" placeholder="City: ex. St. Paul" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('city_new', 'state_new')"/><br>
-                     <select id="citiesDropDown" name="optional" style="visibility:hidden;"></select><br>
+                     <b>City: </b><br><!--<input type ="text" id="city_new" placeholder="City: ex. St. Paul" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('city_new', 'state_new')"/>--><input type ="text" id="city_new" placeholder="City: ex. St. Paul" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('city_new', 'zip_new')"/><br>
+                     <select id="citiesDropDown" name="optional" style="visibility:hidden;width: 80%;height: 33px;border: solid 2px #FFFFFF;padding: 2px;font-size: 23px;box-shadow: 1px 1px 4px 0px #9C9C9C;background-color: #FFFFFF;outline: none;color: #474747;"></select><br>
 
                      <b>Zip code: </b><br><input type="text" class="simple-field-data-mask" id="zip_new" placeholder="Zip code: ex. 55101" name='input_field' maxlength="5" data-mask="00000" onchange="autoPopZip()" onfocus="myAutoTab('zip_new', 'notes_new')"/><br>
 					 <select id="zipcodesDropDown" name="optional" style="visibility:hidden;" name='input_field'>
@@ -198,29 +198,32 @@
                   </center>
                   <div id="customTOOForm" style="color: #000000"></div></form></div>
 
-				  <div id="label" class="menu1" style="background-color: #FFFFFF; border: #ffffff; font-size: 12pt; color: #000000; font-weight : bold;"><br><br>
-                                 				  			             Donor Title: <input type="text" id="client_title" placeholder="Title" style="width: 150px; border: 0px;" onkeypress="this.style.width = ((this.value.length + 3) * 8) + 'px';"></input>
+            
 																		 
+<div id="client_sign_wrapper" style="border-width: 2px; border-color:#ffff66; background:#ffff66; padding: 10px; display: inline-block; width: 400px;">
 
-
-								 <br>Donor Signature: <br></div>
-			
+								 <br>Donor Signature: 
+			 <sub><i>Sign below on the gray line.</i></sub>
                <form action="" class="sigPad" id="sigPad" onsubmit="return false">
                   <!--method="post"-->
                   <!--<img src="css/images/close.png" id="exit_client_sig_button">--><!--<label for="name">Print your name:</label>-->
                  <!-- <input type="text" name="name" id="name" class="name" style="min-width: 75%;">-->
-                  <ul class="sigNav">
+                  <!--<ul class="sigNav">-->
                      <!--<li class="typeIt"><a href="#type-it" class="current">Type It</a></li>-->
                      <!--<li class="drawIt"><a href="#draw-it" >Draw It</a></li>-->
-                     <li class="clearButton" id="clearButton"><a href="#clear" style="text-decoration: none;">Clear</a></li>
-                  </ul>
-                  <div class="sig sigWrapper" style="margin-bottom: 50px;">
+                     			<div class="clearButton" id="clearButton"><a href="#clear" style="text-decoration: none;"> Clear</a></div>	 
+                  <!--</ul>-->
+                  <div class="sig sigWrapper" style="margin-bottom: 50px; border-width: 0px;">
                      <div class="typed"></div>
-                     <canvas class="pad" width="398px" height="55px" id="canvas_pad" style="background:#EEEEEE;"></canvas>
+                     <canvas class="pad" width="345px" height="80px" id="canvas_pad" style="background:#ffffff;"></canvas>
                      <input type="hidden" name="output" class="output" id="output">
                   </div>
-				  																		<input type="text" name="name" id="nameSign" class="name" placeholder="Donor's typed name">
-                  <input type="button" id="submit_me" value="Submit"/>
+				  Name: <input type="text" name="name" id="nameSign" class="name" placeholder="Client's typed name"><br><br>
+                  Title: <br><input type="text" id="client_title" placeholder="Client title" style="width: 150px; border-width: 1px;" onkeypress="this.style.width = ((this.value.length + 3) * 8) + 'px';"></input>
+				  
+				  <br><br>
+				  <input type="button" id="submit_me" value="Submit"/>
+				  
                   <div id="sig_error_message" class="error_message"></div>
                   <div id="sig_message" class="notification"></div>
 				  
@@ -233,18 +236,19 @@
                </script>
                <script src="js/json2.min.js"></script>
 
-            </div>
+            </div></div>
             <!---------------------------------------------------------------------->					
             <!--------------entry 5: filtered clients ------------------->
-            <div id="client_table_module" class="article" name="module" style="display: none; margin-top: 115px; margin-left: 15px; margin-right: 15px;">
+            <div id="client_table_module" class="article" name="module" style="display: none; margin-top: 100px; margin-left: 0px; margin-right: 15px;">
                <!--<div id="client_table_wrapper">-->
                <!--<input type="button" value="exit" id="exit_filter_table_button">-->
                <!--<img src="css/images/close.png" id="exit_filter_table_button">-->
-               <button class="btn2" id="back_filter">Back to Filter</button> <button class="btn2" id="selected_client_button">Select Client</button>
+               <div style="margin-left: 20px;"><button class="btn2" id="back_filter">Back to Filter</button><br>
+			   <button class="btn2" id="selected_client_button">Select Client</button></div>
                <div id="error_message_select" class="error_message" align="left"></div>
                <div id="message_select" class="notification_message"></div>
                <div id="client_table_div" style="overflow-y: scroll; border-style: solid; border-width: 1px; border-color: #000000; overflow-x: scroll; width: 60%; height: 90%;">
-                  <table id="client_filter_table" class="filtered_client" style="padding-right: 100px">
+                  <table id="client_filter_table" class="filtered_client" style="padding-right: 0px">
 				  <div style="width: 1500px;"><br><br></div>
                   </table>
                </div>
@@ -307,7 +311,7 @@
                <!--<a href="javascript:demoFromHTML()" class="button"><input type = "button" value="I Accept" id="accept_button"></a>-->	
 
 			   </form>
-			   			               							  <div id="donorsName">ASDKJLKJJK</div>
+			   	<div style="padding-left: 10px;" id="donorsName"></div>
 
             </div>
             <div id="button_holder"><input type = "button" value="I Accept" id="accept_button"></div>
