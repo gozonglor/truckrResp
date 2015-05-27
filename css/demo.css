@@ -50,7 +50,7 @@ nav:not(.mm-menu)
 .content,
 .footer
 {
-	text-align: center;
+	/*text-align: center;*/
 }
 .header,
 .footer
