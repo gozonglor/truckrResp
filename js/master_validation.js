@@ -190,6 +190,8 @@ $(function() {
         NewPerson.org = $("#org_f").val();
         NewPerson.email = $("#email_f").val();
         NewPerson.address = $("#address_f").val();
+		        NewPerson.address = $("#address2_f").val();
+
         NewPerson.city = $("#city_f").val();
         NewPerson.zip = $("#zip_f").val();
         NewPerson.state = $("#state_f").val();
