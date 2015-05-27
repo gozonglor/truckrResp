@@ -41,7 +41,7 @@ position absolute isset to cover the whole viewport
 #content
 {
     background-image: url('');
-    padding: 52px 10px 10px 10px;
+    padding: 52px 0px 0px 0px;
     position: relative;
     width: auto;
     height: 100%;
