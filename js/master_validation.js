@@ -181,7 +181,7 @@ $(function() {
 		if (confirm("Do you want to choose a new client and overwrite information from your current transaction?")){
 			clearTooForm();
 clearCreatingForm();
-clearNewclientForm();
+clearNewClientForm();
 			leave= true; 
 		}else{
 			leave = false;
@@ -834,7 +834,7 @@ $(function() {
                                 // base64SigImg = document.getElementById("typed_name").innerText;
                                 // $('.signed').hide();
                                 // }
-                                document.getElementById("client_sign_wrapper").style.backgroundColor = "#d0e1a2";
+                                document.getElementById("client_sign_wrapper").style.backgroundColor = "#FFFFFF";
 
                                 $('#signature_module').hide();
                                 $('#transfer_module').show();
