@@ -910,13 +910,18 @@ function resetError() {
 //Shows the signature module upon click.
 $(document).ready(function() {
     $("#select_signature").click(function() {
+	
+	if (chosenClientFName ==""){
+		alert("Please select a client");
+	}
+	else{
         if ($('[name="module"]').is(':visible')) {
             $('[name="module"]').hide();
         }
         $("#transfer_module").hide();
         $("#signature_module").show();
         document.getElementById("title_bar").innerHTML = "Transfer of Ownership";
-
+	}
     });
 });
 
@@ -1384,7 +1389,7 @@ function addAllColumnHeaders(myList) {
 $(function() {
     $("#accept_button").click(function(e) {
 
-if (chosenClientFName == 0){
+if (chosenClientFName == ""){
 alert("Please select a client first.");
 return;
 }
