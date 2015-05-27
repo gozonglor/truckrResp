@@ -39,13 +39,13 @@
    
    
    
-   
+   <!--<body onload="loadCurrentUser();" style="background-color: #DDDDDD;">-->
    	<div id="page">
 			<div class="header">
 				<a href="#menu"></a>
 				<div id="title_bar">Find Client</div>
 			</div>
-			<div class="content" style="background-color: #DDDDDD;" onload="loadCurrentUser();">
+			<body class="content" style="background-color: #DDDDDD;" onload="loadCurrentUser();">
 				
 				
 <!-------------------------------------->
@@ -259,9 +259,7 @@
                   </center>
                   <div id="customTOOForm2" style="color: #000000"><i>Form has not been generated yet.</i></div>
                   <div id="wrapper_signature" class="content" style="background-color: none;">
-                     <table style="width:100%; border: #ffffff; padding-left: 0px;">
-                        <tr style="border: #ffffff;">
-                           <td style="font-size: 12pt; font-weight : bold; padding-left: 6px; border: #ffffff; width: 30%;">
+                    
                               <div id="label" class="menu1" style="background-color: #FFFFFF; border: #ffffff; font-size: 12pt; color: #000000; font-weight : bold;">
                                  <br><br>
                                  Donor Title: <input type="text" id="client_title2" placeholder="Title" style="width: 150px; border: 0px;" onkeypress="this.style.width = ((this.value.length + 3) * 8) + 'px';"></input><br>
@@ -282,10 +280,7 @@
                               </div>
                   </div>
                   <div id="sigImage"></div>
-                  </td>
-                  <td style="font-size: 12pt; font-weight : bold; border: #ffffff;"> </td>		
-                  </tr>
-                  </table>
+           
                   <script src="js/jquery.signaturepad.js"></script>
                   <script src="js/sample-signature-output.js"></script>
                   <script src="js/json2.min.js"></script>
@@ -328,19 +323,18 @@
 				
 				
 				
-		</div>
+		</body>
 			<nav id="menu">
 				<ul>
 							<li id="show_filter_button"><a href="#">Find Client</a></li>
 							<li id="show_new_client_button"><a href="#">New Client</a></li>
 							<li id="show_generate_button"><a href="#">Create Form</a></li>
 							<li id="show_present_button"><a href="#">View Form</a></li>
-							<li onclick="clearAllForms2()"><a href="#">Refresh</a></li>
-							<li id="status_check"><a href="#"><b>Logged in as:</b> <div id="show_user_status" style="font-weight: bold; color: #FFFFFF;"></div><br><b>Selected client:</b> <div id="show_donor_status" style="font-weight: bold; color: #FFFFFF;"></div></a></li>
+							<!--<li onclick="clearAllForms2()"><a href="#">Refresh</a></li>-->
+							<li id="status_check"><a href="#"><b>Logged in as:</b> <div id="show_user_status" style="font-weight: bold; color: #000000;"></div><br><b>Selected client:</b> <div id="show_donor_status" style="font-weight: bold; color: #000000;"></div></a></li>
 							<br><br><br>
 							<li id="logout_button"><a href="#">Log out</a></li>
 				</ul>
 			</nav>
 		</div>
-	</body>
 </html>

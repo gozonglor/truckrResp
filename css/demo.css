@@ -5,11 +5,11 @@ html, body
 }
 body
 {
-	background-color: #fff;
+	background-color: #EEEEEE;
 	font-family: Arial, Helvetica, Verdana;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 22px;
-	color: #666;
+	color: #000000;
 	position: relative;
 	-webkit-text-size-adjust: none;
 }
@@ -94,7 +94,7 @@ nav:not(.mm-menu)
 }
 .content
 {
-	padding: 10px 30px 30px 30px;
+	padding: 0px 0px 0px 0px;
 	background-color: #EEEEEE;
 	overflow: auto;
 }
