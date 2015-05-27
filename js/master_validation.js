@@ -190,12 +190,12 @@ $(function() {
         NewPerson.org = $("#org_f").val();
         NewPerson.email = $("#email_f").val();
         NewPerson.address = $("#address_f").val();
-		        NewPerson.address = $("#address2_f").val();
+		NewPerson.address2 = $("#address2_f").val();
 
         NewPerson.city = $("#city_f").val();
         NewPerson.zip = $("#zip_f").val();
         NewPerson.state = $("#state_f").val();
-        NewPerson.notes = $("#notes_f").val();
+        //NewPerson.notes = $("#notes_f").val();
         NewPerson.locationid = parseInt(locationID);
 
         var formFill = validateFormFilter();
@@ -347,7 +347,7 @@ $(function() {
                     chosenClientFName = NewPerson.firstName; // Assigned the global variable to be the new person first name and last name
                     chosenClientLName = NewPerson.lastName;
                     donorOrgS = NewPerson.org;
-                    chosenClientID = NewPerson.id;
+                    //chosenClientID = NewPerson.id;
                     var hiddenDonor = document.getElementById('hidden_client_id'); //grab the hidden donor field, which is a div
                     hiddenDonor.innerHTML = getDonor();
 
@@ -383,8 +383,8 @@ $(function() {
     $("#transfer_button").click(function(e) {
         ////*/*/CALLING AUTHORIZE/*/*///
 
-		if (chosenClientFName == ""){
-			alert("Please select a client first.");
+	
+	if (donorID == 0){			alert("Please select a client first.");
 			return;
 		}
 		
@@ -745,8 +745,8 @@ loads = 0;
 //Does validation and redisplays the signature on the next page 
 $(function() {
             $("#submit_me").click(function(e) {
-                        if (chosenClientFName == "") {
-                            alert("Please select a client first.");
+	
+	if (donorID == 0){                            alert("Please select a client first.");
 							clearTooForm();
                             return;
                         } else {
@@ -911,8 +911,10 @@ function resetError() {
 $(document).ready(function() {
     $("#select_signature").click(function() {
 	
-	if (chosenClientFName ==""){
-		alert("Please select a client");
+	
+	if (donorID == 0){
+	alert("Please select a client");
+		return;
 	}
 	else{
         if ($('[name="module"]').is(':visible')) {
@@ -927,15 +929,21 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $("#select_signature2").click(function() {
+	
+	if (donorID == 0){
+		alert("Please select a client");
+		return;
+	}
+	else{
         if ($('[name="module"]').is(':visible')) {
             $('[name="module"]').hide();
         }
         $("#transfer_module").hide();
         $("#signature_module").show();
         document.getElementById("title_bar").innerHTML = "Transfer of Ownership";
-
+	}
     });
-})
+});
 //Exit button directions
 $(document).ready(function() {
     $('#exit_filter_table_button').click(function() {
@@ -1389,7 +1397,7 @@ function addAllColumnHeaders(myList) {
 $(function() {
     $("#accept_button").click(function(e) {
 
-if (chosenClientFName == ""){
+if (donorID == 0){
 alert("Please select a client first.");
 return;
 }
