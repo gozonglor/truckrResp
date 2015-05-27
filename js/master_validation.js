@@ -750,7 +750,9 @@ function clearAllForms(){
 					chosenClientFName = ""; //the chosen donor's first name. Example: "Harry"
 					chosenClientLName = ""; //the chosen donor's last name. Example: "Potter"
 					document.getElementById("show_donor_status").innerHTML = "";
-					
+				document.getElementById("accept_button").disabled = 'false';
+				
+
 					
 
 }
