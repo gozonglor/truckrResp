@@ -173,6 +173,26 @@ function validateFormNew() {
 //Contains Post request to filter controller, passing in a client object and returning list of client objects
 $(function() {
     $("#filter_button").click(function(e) {
+	
+	var leave;
+	
+	if (donorID != 0){
+	
+		if (confirm("Do you want to choose a new client and overwrite information from your current transaction?")){
+			clearTooForm();
+clearCreatingForm();
+clearNewclientForm();
+			leave= true; 
+		}else{
+			leave = false;
+		}
+	}
+	
+		if (donorID == 0){
+		leave = true;
+	}
+	if (leave == true){
+	
 
         $("#client_table_module").hide();
         $("#client_filter_table").html("");
@@ -246,6 +266,7 @@ $(function() {
             alert("Please specify a field to filter by.");
 
         }
+		}
 
     });
 });
@@ -275,8 +296,32 @@ function automaticLogout() {
 //Controller that waits for when user creates a new client. 
 //Contains Post request to newclient controller, passing in a client object, returning success (true) or failure (false).
 //USED IN THE NEW_CLIENT_MODULE
+
+
+
 $(function() {
     $("#create_new_client_button").click(function(e) {
+	
+		
+	var leave;
+	
+	if (donorID != 0){
+	
+		if (confirm("Do you want to choose a new client and lose information from "+chosenClientFName+" "+chosenClientLName+ " and "+ donorOrgS+"?")){
+			clearTooForm();
+clearCreatingForm();
+clearNewClientForm();
+			leave= true; 
+		}else{
+			leave = false;
+		}
+	}
+	
+	if (donorID == 0){
+		leave = true;
+	}
+	
+	if (leave == true){
 
         ////*/*/CALLING AUTHORIZE/*/*///
 
@@ -344,6 +389,7 @@ $(function() {
                     //alert("New client successfully added.");
                     document.getElementById("error_message_create_new").innerHTML = ""; //Error message is cleared out
                     document.getElementById("message_create_new").innerHTML = "Donor '" + NewPerson.firstName + " " + NewPerson.lastName + "' has been created."; //Good message posted to let user know their client has been created
+					alert("Donor '" + NewPerson.firstName + " " + NewPerson.lastName + "' has been created.");
                     chosenClientFName = NewPerson.firstName; // Assigned the global variable to be the new person first name and last name
                     chosenClientLName = NewPerson.lastName;
                     donorOrgS = NewPerson.org;
@@ -373,6 +419,7 @@ $(function() {
             }
         }).responseText;
         e.preventDefault();
+		}
     });
 });
 
@@ -683,6 +730,8 @@ function clearTooForm(){
 	document.getElementById("sigImage").innerHTML = "";
 		document.getElementById("nameSign").value = "";
 				document.getElementById("nameSign").innerHTML = "";
+document.getElementById("actual_too_form").innerHTML = "";
+document.getElementById("actual_too_form").value = "";
 
 			document.getElementById("client_title").value = "";
 						document.getElementById("client_title").innerHTML = "";
