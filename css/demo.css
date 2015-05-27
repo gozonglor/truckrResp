@@ -98,3 +98,7 @@ nav:not(.mm-menu)
 	background-color: #EEEEEE;
 	overflow: auto;
 }
+
+li{
+	font-size:16px;
+}

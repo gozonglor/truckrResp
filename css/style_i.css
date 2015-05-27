@@ -52,12 +52,16 @@ body{ //**having overflow:scroll -- messes up with the alignment of the hamburge
 }
 	
 #filter_module{
-top:50%;left:0;width:100%;height:500%;
+/*top:50%;*/
+left:0;width:100%;height:500%;
 padding: 0px;
 }
 	
 #new_client_module{
-top:50%;left:0;width:100%;height:500%;
+/*top:50%;*/
+left:0;
+width:100%;
+height:500%;
 padding: 0px; 
 /*text-align: center;*/
 }
