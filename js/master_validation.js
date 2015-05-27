@@ -913,12 +913,22 @@ $(document).ready(function() {
         }
         $("#transfer_module").hide();
         $("#signature_module").show();
-        document.getElementById("title_bar").innerHTML = "Client Signature";
+        document.getElementById("title_bar").innerHTML = "Transfer of Ownership";
 
     });
 });
 
+$(document).ready(function() {
+    $("#select_signature2").click(function() {
+        if ($('[name="module"]').is(':visible')) {
+            $('[name="module"]').hide();
+        }
+        $("#transfer_module").hide();
+        $("#signature_module").show();
+        document.getElementById("title_bar").innerHTML = "Transfer of Ownership";
 
+    });
+})
 //Exit button directions
 $(document).ready(function() {
     $('#exit_filter_table_button').click(function() {
@@ -1218,7 +1228,8 @@ $(document).ready(function() {
         $("#filter_module").hide();
         $("#new_client_module").show();
         document.getElementById("title_bar").innerHTML = "New Client";
-		
+				$("#signature_module").hide();
+
 
     });
 });
@@ -1231,6 +1242,8 @@ $(document).ready(function() {
         document.getElementById("error_message_filter").innerHTML = "";
         // $("#navigation_module").hide();
         $("#filter_module").show();
+				$("#signature_module").hide();
+
 
     });
 });
@@ -1247,6 +1260,7 @@ $(document).ready(function() {
         $("#transfer_module").hide();
         $("#new_client_module").hide();
         $("#filter_module").show();
+		$("#signature_module").hide();
         document.getElementById("title_bar").innerHTML = "Find Client";
     });
 });
@@ -1271,6 +1285,8 @@ $(document).ready(function() {
             $('[name="module"]').hide();
         }
         $("#transfer_module").show();
+		        $("#signature_module").hide();
+
         document.getElementById("title_bar").innerHTML = "Transfer of Ownership";
 
     });
