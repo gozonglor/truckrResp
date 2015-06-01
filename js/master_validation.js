@@ -464,7 +464,9 @@ $(function() {
                     $("#signature_module").show();
 					$("#transfer_module").hide();
                     document.getElementById("title_bar").innerHTML = "Transfer of Ownership";
-					
+					document.getElementById("nameSign").value = chosenClientFName + " " + chosenClientLName;
+					document.getElementById("nameSign").innerHTML = chosenClientFName + " " + chosenClientLName;
+					//document.getElementById("nameSign").innerText = chosenClientFName + " " + chosenClientLName.toUpperCase();
 
                     var formOwnership = donorOrgS;
                     response = response.split("%");
@@ -651,8 +653,8 @@ $(function() {
                 checked = true;
                 //document.getElementById("error_message_select").innerHTML = "You have selected " + clientFName + " " + clientLName, " with an id number of "+clientID;
 				
-				
-				if (confirm("You have selected " + clientFName + " " + clientLName+ " with an id number of "+clientID+". Is that ok?")){
+				//"You have selected " + clientFName + " " + clientLName+ " with an id number of "+clientID+". Is that ok?"
+				if (confirm("You have selected " + clientFName + " " + clientLName+ " with "+ donorOrgS+". Is that ok?")){
 					$("#client_table_module").hide(); //Hide current module
 					$("#filter_module").hide(); //Hide current module
 					$("#generate_module").show(); //Show the wanted module
@@ -1486,11 +1488,19 @@ return;
         TransferForm.wordage = wordage;
         //TransferForm.firstName = chosenClientFName;
 		TransferForm.firstName = document.getElementById("nameSign").value;
+		TransferForm.title = document.getElementById("client_title2").value;
 
 
         var success = false;
 		alert("Created the Transfer form... Making a post request now");
-
+		
+		var loadingGif = document.createElement("IMG");
+		loadingGif.id = "loadingImg";
+		var loadingDiv = document.getElementById("loading");
+		
+		loadingGif.setAttribute("src", "images/loading.gif");
+		loadingDiv.appendChild(loadingGif);
+		
         var response = $.ajax({
             type: "POST",
             url: "http://truckrtest.pcscrm.com/api/submit",
@@ -1525,6 +1535,10 @@ return;
 
 
 					//$("#final_module").show();
+					
+					var loadingImg = document.getElementById("loadingImg");
+					loadingImg.parentNode.removeChild(loadingImg);
+					
 					clearAllForms();
 						document.getElementById("accept_button").disabled = false;
 	document.getElementById("error_message_transfer").innerHTML = "";
@@ -1540,6 +1554,10 @@ return;
                 } else {
                     //document.getElementById("error_message_transfer").innerHTML = "Successful post. Bad API response. Error: " + response + ".  Could not insert final Transfer Form into db.";
                     //alert("AJAX request returned an error. Error: " + response + ".  Could not insert Transfer Form into db.");
+					
+										var loadingImg = document.getElementById("loadingImg");
+					loadingImg.parentNode.removeChild(loadingImg);
+					
 					alert("response from api: Email sent.");
 										document.getElementById("accept_button").disabled = 'false';
 
