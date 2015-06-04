@@ -649,12 +649,24 @@ $(function() {
             var clientLName = entry.childNodes[3];
             clientFName = clientFName.innerText;
             clientLName = clientLName.innerText;
+			donorOrgS = entry.childNodes[5].innerText;
             if (radioButton.checked) { //checks if the 'i' particular radio button is checked --i.e. the 3rd if you are on the fourth iteration of the loop
                 checked = true;
                 //document.getElementById("error_message_select").innerHTML = "You have selected " + clientFName + " " + clientLName, " with an id number of "+clientID;
 				
 				//"You have selected " + clientFName + " " + clientLName+ " with an id number of "+clientID+". Is that ok?"
-				if (confirm("You have selected " + clientFName + " " + clientLName+ " with "+ donorOrgS+". Is that ok?")){
+				var confirmMsg = "You have selected " + clientFName + " " + clientLName+ " with "+ donorOrgS+". Is that ok?";
+				var confirmMsg2 = "You have selected " + clientFName+ " " + clientLName +". Is that ok?";
+				var chosenMsg = "";
+				
+				if (donorOrgS != ""){
+					chosenMsg = confirmMsg;
+				}
+				else{
+					chosenMsg = confirmMsg2;
+				}
+				
+				if (confirm(chosenMsg)){
 					$("#client_table_module").hide(); //Hide current module
 					$("#filter_module").hide(); //Hide current module
 					$("#generate_module").show(); //Show the wanted module
@@ -1447,6 +1459,8 @@ function addAllColumnHeaders(myList) {
 //==================            HTML TO CANVAS              =================//
 $(function() {
     $("#accept_button").click(function(e) {
+	//if theres no internet,store in the local db right away
+	//
 					document.getElementById("accept_button").disabled = 'true';
 
 
@@ -1494,12 +1508,16 @@ return;
         var success = false;
 		alert("Created the Transfer form... Making a post request now");
 		
-		var loadingGif = document.createElement("IMG");
-		loadingGif.id = "loadingImg";
-		var loadingDiv = document.getElementById("loading");
 		
-		loadingGif.setAttribute("src", "images/loading.gif");
-		loadingDiv.appendChild(loadingGif);
+		var ldiv = document.getElementById('LoadingDiv');
+ldiv.style.display='block';
+		
+		// var loadingGif = document.createElement("IMG");
+		// loadingGif.id = "loadingImg";
+		// var loadingDiv = document.getElementById("loading");
+		
+		//loadingGif.setAttribute("src", "images/loading.gif");
+		//loadingDiv.appendChild(loadingGif);
 		
         var response = $.ajax({
             type: "POST",
@@ -1536,8 +1554,8 @@ return;
 
 					//$("#final_module").show();
 					
-					var loadingImg = document.getElementById("loadingImg");
-					loadingImg.parentNode.removeChild(loadingImg);
+					//var loadingImg = document.getElementById("loadingImg");
+					//loadingImg.parentNode.removeChild(loadingImg);
 					
 					clearAllForms();
 						document.getElementById("accept_button").disabled = false;
@@ -1574,6 +1592,7 @@ return;
         //response.preventDefault();
 				//alert("Fell through the post request!");
 								document.getElementById("accept_button").disabled = false;
+ldiv.style.display = 'none';
 
 
     }

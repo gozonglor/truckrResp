@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+
+<head>
+<script type="text/javascript" src="js/testdb.js"></script>
+
+<title>Conforming HTML 4.01 Strict Template</title>
+
+</head>
+
+<body>
+
+<form id="test">
+	Name: <input type="text" id="name"><br><br>
+	Favorite icecream flavor: 
+	<select id="icecream">
+		<option value="Vanilla">Vanilla</option>
+		<option value="Chocolate">Chocolate</option>
+		<option value="Cookie Dough">Cookie Dough</option>
+		<option value="Mint">Mint</option>
+		<option value="Chocolate Chip">Chocolate Chip</option>
+		<option value="Bacon">Bacon</option>
+		<option value="Strawberry">Strawberry</option>
+	</select><br><br>
+	Favorite movie: <input type="text" id="movie"><br><br>
+	<input type="submit" id="webSqlSubmitBtn" value="Store in Web Sql Db" onclick="insertSql()">
+	<!--<input type="submit" id="webStorageSubmitBtn" value="Store in Web Storage" onclick="insertWeb()">-->
+
+	<br><br>
+	<h2>Everything in local storage</h2>
+	<input type="button" id="refreshWeb" value="Refresh">
+	<div id="dataWeb"></div>
+	
+</form>
+</body>
+</html> 
