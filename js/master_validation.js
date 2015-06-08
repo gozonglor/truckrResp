@@ -335,9 +335,10 @@ function pleaseSync(count) {
 					}
 					else{
 						data[i] = JSON.parse(results.rows[i].profileJson);
-						//alert("everything is ok");
+						alert("C) Testing within for loop.");
 					}
                 }
+				alert("C) Completed testing for loop, about to put data into the table.");
                 //data = results;
                 //alert(results);
                 //alert("A Completed pushing data into the array.");
@@ -345,9 +346,10 @@ function pleaseSync(count) {
                 //alert("B compelted handling data");
 				alert("C) Completed handling data/putting it into a table.");
             });
+			alert("C) closing db transaction");
         });
 
-
+alert("D) Completed.");
         //iterate through the data array to generate the json stringified version of it...  
     }
 }
