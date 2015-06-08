@@ -291,13 +291,17 @@ function pleaseSync(count) {
                 for (b = 0; b < count; b++) {
                     //var first = JSON.parse(results.row[i].profileJson);
                     dataToUpdate[b] = JSON.parse(resultsP.rows[b].profileJson);
+					alert("A) testing to see if the results are there: "+dataToUpdate[b].naidChoice+" with org "+dataToUpdate[b].org);
                 }
 								
 				//Update the username for each transaction
 				var j;
 				for (j = 0; j < count; j++) {
-					dataToUpdate[j].username = currentUser; //TO DO: DONE.
+					dataToUpdate[j].username = currentUser; //TO DO: DONE
 				}
+				
+				alert("B) finished updating each user name.");
+
             });
         });
 
@@ -339,6 +343,7 @@ function pleaseSync(count) {
                 //alert("A Completed pushing data into the array.");
                 handleData2(data);
                 //alert("B compelted handling data");
+				alert("C) Completed handling data/putting it into a table.");
             });
         });
 
@@ -1769,6 +1774,13 @@ $(document).ready(function() {
             $('[name="module"]').hide();
         }
 		var countPromise = getCustomerCount();
+		
+		// if (countPromise = 0){
+			//location.reload();
+		// }
+		// else{
+			// alert("There are no pending transactions");
+		// }
 
 		//offlineLoads++;
         document.getElementById("error_message_filter").innerHTML = "";
