@@ -313,6 +313,21 @@
          <h1>Complete. Email was sent to you and the client.</h1>
       </div>
 
+	  
+	  <div id="transactions_module" style="display: none; padding: 50px;background: #FFFFFF;">
+         <center><h1>Pending Transactions</h1></center>
+		 <b><label id="transactions_message" style="color:red"></label></b><br>
+		 <b><label id="selected_transaction_message"></label></b>
+
+		                   <input type="button" id="selected_transaction_button" value="Select Transaction"/><input type="button" id="refresh_transactions" value="Refresh"/>
+
+		 <table id="transactions_table" class="filtered_client" style="padding-right: 0px;">
+                  <!--<div style="width: 1500px;"><br><br></div>-->
+				  
+         </table>
+		 <ul id="transactions_list"></ul>
+		 <div id="transactions"></div>
+      </div>
 
    <div id="test_sig" style="display:none"></div>
    <div id="test_2" style="display:none">"Hello"</div>
@@ -339,8 +354,10 @@
 							<li id="show_new_client_button"><a href="#">New Client</a></li>
 							<li id="show_generate_button"><a href="#">Create Form</a></li>
 							<li id="show_present_button"><a href="#">View Form</a></li>
+							<li id="show_transactions_button"><a href="#">Pending Transactions</a></i>
 							<!--<li onclick="clearAllForms2()"><a href="#">Refresh</a></li>-->
 							<li id="status_check"><a href="#"><b>Logged in as:</b> <div id="show_user_status" style="font-weight: bold; color: #000000;"></div><br><b>Selected client:</b> <div id="show_donor_status" style="font-weight: bold; color: #000000;"></div></a></li>
+							<li id="show_current_transaction" style="padding-left: 20px;"></li>
 							<br><br><br>
 							<li id="logout_button"><a href="#">Log out</a></li>
 				</ul>

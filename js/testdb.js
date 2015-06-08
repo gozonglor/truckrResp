@@ -11,11 +11,11 @@ $(function() {                                       // <== Doc Ready
 });
 
 
-var db =  openDatabase('testlocal2', '1.0', 'My First Web Database', 2 * 1024 *1024);
+var db =  openDatabase('testlocal3', '1.0', 'My First Web Database', 2 * 1024 *1024);
 	//run a transaction
 	db.transaction(function(tx) { 
 			//execute a query to create a new table called "user" with two fields (id and name)
-			tx.executeSql("CREATE TABLE IF NOT EXISTS tooForms (profileJson STRING UNIQUE)");
+			tx.executeSql("CREATE TABLE IF NOT EXISTS tooForms (id INTEGER PRIMARY KEY ASC, profileJson STRING UNIQUE)");
 			//tx.executeSql("INSERT INTO people (id, name) VALUES (5, 'team 5');");
 		},error_log);
 		
@@ -116,7 +116,19 @@ function findConnection(){
 	}
 }
 
+function validateOffline(){
+	if ((document.getElementById("offline_donor_name1").value == "") || (document.getElementById("offline_donation_description").value == "") || (typeof $('input[name=offline_naidOption]:checked').val() == 'undefined')){
+		alert("Please fill out all fields.");
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+
 function acceptOffline(){
+	if (validateOffline() == true){
+	
 //scrape all the data from the screen.
 	
 	//GOZONG LOR % is transferring ownership of electronic equipment to PCs for People. PCs for People will redistribute the refurbished computers to low income families and people with disabilities. This document fully transfers legal ownership from GOZONG LOR  to PCs for People, and along with that ownership all liability associated with disposal and use. PCs for People has a zero landfill policy and any non-functional parts will be locally recycled. No goods or services were exchanged in consideration of this contribution and PCs for People understands that no warranty is provided and all equipment is accepted as is.%By signing your name below you agree that you are a duly appointed and authorized representative of your company
@@ -126,7 +138,7 @@ function acceptOffline(){
 	if (((document.getElementById("offline_signers_name").value) == "") || ((document.getElementById("offline_signers_title").value) == "") || (sig_coord == "")) {
 		alert("Please fill out all fields.");
 		//document.getElementById("client_sign_wrapper").style.backgroundColor = "#ffff66";
-
+		return;
 	} else if (((document.getElementById("offline_signers_name").value) != "") && ((document.getElementById("offline_signers_title").value) != "") && (sig_coord != "")) {
 		//$('.signed').show();
 		//customer_signature = true;
@@ -157,8 +169,10 @@ function acceptOffline(){
 	var naidChoice = $('input[name=offline_naidOption]:checked').val();//yes or no naid
 	var donationDescription = $("#donation_description").val();
 	
-	var fName = document.getElementById("offline_donor_name1");
-	var firstParagraph = document.getElementById("firstPiece");
+	var fName = $("#offline_donor_name1").val()
+	var firstParagraph = document.getElementById("firstPiece").innerText;
+	var secondParagraph = document.getElementById("secondPiece").innerText;
+	firstParagraph = firstParagraph+" "+fName+" "+secondParagraph;
 	
 	
 	var dateObj = new Date();
@@ -169,11 +183,14 @@ function acceptOffline(){
 	var dateFilled = newdate;
 	var formatted = "Thank you for calling PCs for People to safely and legally dispose of your used hardware. Attached is a screen shot of the transfer of ownership form.";
 	var wordage = fName+"%"+firstParagraph+"%"+"By signing your name below you agree that you are a duly appointed and authorized representative of your company";
-	var donationDescription = $("#donation_description").val();
-	var title = document.getElementById("offline_signers_title");
-	var firstName = document.getElementById("offline_signers_name");
-	var org = document.getElementById("offline_donor_name1");
+	var donationDescription = $("#offline_donation_description").val();
+	var title = $("#offline_signers_title").val()
+	var firstName = $("#offline_signers_name").val()
+	var org = $("#offline_donor_name1").val()
 
+	
+	alert("Donation descriptiOn: "+donationDescription);
+	
 	tooForm.naidChoice = naidChoice;
 	tooForm.donationDescription = donationDescription;
 	tooForm.lotNum = 0;
@@ -186,12 +203,13 @@ function acceptOffline(){
 	tooForm.wordage = wordage;
 	tooForm.firstName = firstName;
 	tooForm.title = title;
+	tooForm.donorEmail = "";
 	
 	//localStorage.setItem("transfer form", tooForm);
 	
 		db.transaction(function(tx) { 
 			//execute a query to create a new table called "user" with two fields (id and name)
-			//tx.executeSql("CREATE TABLE IF NOT EXISTS people (name STRING UNIQUE, profileJson TEXT(100))");
+			tx.executeSql("CREATE TABLE IF NOT EXISTS people (name STRING UNIQUE, profileJson TEXT(100))");
 			//tx.executeSql("INSERT INTO people (name, profileJson) VALUES ("+name+", "+ "ham" + ");");
 			tx.executeSql('INSERT INTO tooForms(profileJson) VALUES (?)',[JSON.stringify(tooForm)]);
 			//tx.executeSql("INSERT INTO people (name, profileJson) VALUES ('Anna', 'team 5');");
@@ -199,4 +217,5 @@ function acceptOffline(){
 
                         
 alert("Stored in local storage. Remember to sync it when you have internet connection!");
+}
 }
