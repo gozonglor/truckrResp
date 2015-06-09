@@ -119,6 +119,11 @@ function loadCurrentUser() {
 
 // outputTransactions();
 
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
 function checkLocalStorage() {
     //if the db is not empty
     var len = 0;
@@ -1007,6 +1012,7 @@ $(function() {
             clientFName = clientFName.innerText;
             clientLName = clientLName.innerText;
             donorOrgS = entry.childNodes[5].innerText;
+			donorOrgS = toTitleCase(donorOrgS).trim();
             if (radioButton.checked) { //checks if the 'i' particular radio button is checked --i.e. the 3rd if you are on the fourth iteration of the loop
                 checked = true;
                 //document.getElementById("error_message_select").innerHTML = "You have selected " + clientFName + " " + clientLName, " with an id number of "+clientID;
@@ -1044,6 +1050,7 @@ $(function() {
                     chosenClientLName = clientLName; //set global variable of last name
                     donorEmail = entry.childNodes[6].innerText;
                     donorOrgS = entry.childNodes[5].innerText;
+					donorOrgS = toTitleCase(donorOrgS).trim();
 					}
                 } else {
                     break;
@@ -1116,7 +1123,7 @@ $(function() {
             document.getElementById("show_current_transaction").innerHTML = donorOrgS;
 
              
-                    donorOrgS = offlineOrg;
+                    donorOrgS = toTitleCase(offlineOrg).trim();
             document.getElementById("show_current_transaction").innerHTML = "<b>Selected transaction: </b>"+donorOrgS;
 
               offlineTransactionObj = ""; //TO DO!!!!!!!!!!!!!!FUCK!
@@ -1281,9 +1288,9 @@ $(function() {
                 api.regenerate(sig_coord); //--
                 //alert("base 64 image: "+base64SigImg);
                 //document.getElementById("typed_name").innerText = document.getElementById("name").value;
-                document.getElementById("donorsName").value = document.getElementById("nameSign").value;
-                document.getElementById("donorsName").innerHTML = document.getElementById("nameSign").value;
-                document.getElementById("client_title2").value = document.getElementById("client_title").value;
+                document.getElementById("donorsName").value = toTitleCase(document.getElementById("nameSign").value);
+                document.getElementById("donorsName").innerHTML = toTitleCase(document.getElementById("nameSign").value);
+                document.getElementById("client_title2").value = toTitleCase(document.getElementById("client_title").value);
                 // else {
                 // customer_signature = true;
                 // document.getElementById("typed_name").innerText = document.getElementById("name").value;
@@ -1997,8 +2004,8 @@ $(function() {
             TransferForm.donorEmail = donorEmail;
             TransferForm.wordage = wordage;
             //TransferForm.firstName = chosenClientFName;
-            TransferForm.firstName = document.getElementById("nameSign").value;
-            TransferForm.title = document.getElementById("client_title2").value;
+            TransferForm.firstName = toTitleCase(document.getElementById("nameSign").value);
+            TransferForm.title = toTitleCase(document.getElementById("client_title2").value);
 
 
             var success = false;
