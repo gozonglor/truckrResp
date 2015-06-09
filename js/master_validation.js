@@ -821,8 +821,8 @@ $(function() {
                     var newdate = "" + month + "/" + day + "/" + year;
                     globalDate = dateObj.toISOString();
 					//newdate;
-                    document.getElementById("transfer_form_date1").innerHTML = "Date: " + newdate + " " + " Lot Number: " + lotNumber;
-                    document.getElementById("transfer_form_date2").innerHTML = "Date: " + newdate + " " + " Lot Number: " + lotNumber;
+                    document.getElementById("transfer_form_date1").innerHTML = "Date: " + newdate + " " + " Lot Number: To be generated.";
+                    document.getElementById("transfer_form_date2").innerHTML = "Date: " + newdate + " " + " Lot Number: To be generated.";
                 },
 
                 error: function() {
