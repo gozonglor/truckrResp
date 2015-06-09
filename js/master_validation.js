@@ -1,3 +1,5 @@
+//TO DO: YYYY-MM-DD+'T'+HH:MM:SS (change the date to thisand pass it into the tooFormObj as a string, iso 8601 date time standard.
+//
 //TO-DO: Global variable to change and switch production from on to off. 
 //Look at this fine fine piece of code: http://jsfiddle.net/vovkss/CSKDK/
 //TO DO: Find ways to simplify the compileRelationship_____() methods
@@ -812,9 +814,10 @@ $(function() {
                     var day = dateObj.getUTCDate();
                     var year = dateObj.getUTCFullYear();
                     var newdate = "" + month + "/" + day + "/" + year;
-                    globalDate = newdate;
-                    document.getElementById("transfer_form_date1").innerHTML = "Date: " + globalDate + " " + " Lot Number: " + lotNumber;
-                    document.getElementById("transfer_form_date2").innerHTML = "Date: " + globalDate + " " + " Lot Number: " + lotNumber;
+                    globalDate = dateObj.toISOString();
+					//newdate;
+                    document.getElementById("transfer_form_date1").innerHTML = "Date: " + newdate + " " + " Lot Number: " + lotNumber;
+                    document.getElementById("transfer_form_date2").innerHTML = "Date: " + newdate + " " + " Lot Number: " + lotNumber;
                 },
 
                 error: function() {
