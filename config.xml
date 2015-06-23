@@ -43,7 +43,7 @@
     <preference name="android-installLocation"    value="auto" />           <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
     <!--
         Define a specific version of PhoneGap to build into your app.-->
-        <preference name="phonegap-version"       value="3.0.0" />
+        <preference name="phonegap-version"       value="3.7.0" />
     <!--"Define a specific version of PhoneGap to build into your app" was once commented out-->
 
     <!-- Plugins -->
