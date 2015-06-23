@@ -103,22 +103,23 @@ var pass = false;
 
 }
 
-function findConnection(){
-	var response = testConnect();
+// function findConnection(){
+	// var response = testConnect();
 	
-	if (response == true) {
-		window.location = "index.html";
-		//TODO: Where I will have to build the capabilities on the app to recognize there is a TOO form in local storage and give user the option to tie it to a client.
+	// if (response == true) {
+		// window.location = "index.html";
+		// TODO: Where I will have to build the capabilities on the app to recognize there is a TOO form in local storage and give user the option to tie it to a client.
 		
-	}
-	else{
-		alert("No internet connection!");
-	}
-}
+	// }
+	// else{
+		// alert("No internet connection!");
+	// }
+// }
 
 function validateOffline(){
 	if ((document.getElementById("offline_donor_name1").value == "") || (document.getElementById("offline_donation_description").value == "") || (typeof $('input[name=offline_naidOption]:checked').val() == 'undefined')){
-		alert("Please fill out all fields.");
+		//alert("Please fill out all fieldss.");
+		swal("Please fill out all fields.","", "warning");
 		return false;
 	}
 	else{
@@ -136,7 +137,8 @@ function acceptOffline(){
 	var sig_coord = document.getElementById("output").defaultValue;
 	var imgBaseSig = "";
 	if (((document.getElementById("offline_signers_name").value) == "") || ((document.getElementById("offline_signers_title").value) == "") || (sig_coord == "")) {
-		alert("Please fill out all fields.");
+		//alert("Please fill out all fields.");
+		swal("Please fill out all fields.","", "warning");
 		//document.getElementById("client_sign_wrapper").style.backgroundColor = "#ffff66";
 		return;
 	} else if (((document.getElementById("offline_signers_name").value) != "") && ((document.getElementById("offline_signers_title").value) != "") && (sig_coord != "")) {
@@ -145,7 +147,7 @@ function acceptOffline(){
 		imgBaseSig = document.getElementById("canvas_pad").toDataURL();  //grab the data from canvas pad
 		var newSig = imgBaseSig.split(",");
 		imgBaseSig = newSig[1];
-		alert("imgBaseSig. grab the data from canvas pad: "+imgBaseSig);
+		//alert("imgBaseSig. grab the data from canvas pad: "+imgBaseSig);
 
 		//base64SigImg = imgBaseSig;
 		
@@ -154,8 +156,10 @@ function acceptOffline(){
 		//$('#signature_module').hide();
 		//$('#transfer_module').show();
 	} else {
-		document.getElementById("sig_error_message").innerText = "Please sign.";
-		alert("Please sign.");
+		//document.getElementById("sig_error_message").innerText = "Please sign.";
+		//alert("Please sign.");
+		swal("Please sign your name.","", "warning");
+
 	}
 	
 	
@@ -189,7 +193,7 @@ function acceptOffline(){
 	var org = $("#offline_donor_name1").val()
 
 	
-	alert("Donation descriptiOn: "+donationDescription);
+	//alert("Donation descriptiOn: "+donationDescription);
 	
 	tooForm.naidChoice = naidChoice;
 	tooForm.donationDescription = donationDescription;
@@ -216,6 +220,7 @@ function acceptOffline(){
 		},error_log);
 
                         
-alert("Stored in local storage. Remember to sync it when you have internet connection!");
+//alert("Stored in local storage. Remember to sync it when you have internet connection!");
+swal("Offline transfer form successfully created.", "Stored in local storage. Remember to sync it when you have internet connection!", "success");
 }
 }

@@ -198,7 +198,7 @@ function buildHtmlTable2(myList) {
                 if (colIndex == 0) {
                     var cellValue = $('<input type="radio" name="radioBtn" id="radioBtn" value="' + myList[i][columns[colIndex + 1]] + '">');
                 } else {
-                    if ((colIndex == 3) || (colIndex == 4)) {
+                    if ((colIndex == 3) || (colIndex == 4) || (colIndex == 11)) {
                         var cellValue = "<b>MISSING</b>";
                     } else {
                         if (cellValue = myList[i][columns[colIndex]] != "") { //if it is empty
@@ -281,7 +281,7 @@ function pleaseSync(count) {
     // });
     //alert("checkLocalStorage(): "+finalCount);
     if (finalCount != 0) {
-        alert("You have " + count + " transaction(s) that are unsynced. You need to filter for or create a client to tie them to."); //have this pop up on initial opening of the app
+        // alert("You have " + count + " transaction(s) that are unsynced. You need to filter for or create a client to tie them to."); //have this pop up on initial opening of the app
         document.getElementById("transactions_message").innerHTML = "You have " + count + " transaction(s) that are unsynced. You need to filter for or create a client to tie them to.";
         //$("#filter_module").hide();//hide the filter module
 
@@ -298,16 +298,17 @@ function pleaseSync(count) {
                 for (b = 0; b < count; b++) {
                     //var first = JSON.parse(results.row[i].profileJson);
                     dataToUpdate[b] = JSON.parse(resultsP.rows[b].profileJson);
-					alert("A) testing to see if the results are there: "+dataToUpdate[b].naidChoice+" with org "+dataToUpdate[b].org);
+					// alert("A) testing to see if the results are there: "+dataToUpdate[b].naidChoice+" with org "+dataToUpdate[b].org);
                 }
 								
 				//Update the username for each transaction
 				var j;
 				for (j = 0; j < count; j++) {
 					dataToUpdate[j].username = currentUser; //TO DO: DONE
+					// alert("****************** ********************* ****************** updated the data in the local storage ****************** ********************* ******************");
 				}
 				
-				alert("B) finished updating each user name.");
+				// alert("B) finished updating each user name.");
 
             });
         });
@@ -325,7 +326,7 @@ function pleaseSync(count) {
                 tx.executeSql('INSERT INTO tooForms(profileJson) VALUES (?)', [JSON.stringify(profileJsonA)]);
 
             }
-			alert("done with reinsertion..");
+			// alert("done with reinsertion..");
         });
 
 
@@ -342,29 +343,48 @@ function pleaseSync(count) {
 					}
 					else{
 						data[i] = JSON.parse(results.rows[i].profileJson);
-						alert("C) Testing within for loop.");
+						//alert("C) Testing within for loop.");
 					}
                 }
-				alert("C) Completed testing for loop, about to put data into the table.");
+				//alert("C) Completed testing for loop, about to put data into the table.");
                 //data = results;
                 //alert(results);
                 //alert("A Completed pushing data into the array.");
                 handleData2(data);
                 //alert("B compelted handling data");
-				alert("C) Completed handling data/putting it into a table.");
+				//alert("C) Completed handling data/putting it into a table.");
             });
-			alert("C) closing db transaction");
+			//alert("C) closing db transaction");
         });
 
-alert("D) Completed.");
+//alert("D) Completed.");
         //iterate through the data array to generate the json stringified version of it...  
     }
 }
 
 function moveOffline() {
     //check if there is internet
+	// var check = false;
+	// swal({title: "what up", 
+	// text: "lol", 
+	// imageUrl: "images/logo2.png", 
+	// showCancelButton: true,
+	// closeOnConfirm: true},
+	
+	// function(){
+	
+		    window.location = "offlineform.html";
 
-    window.location = "offlineform.html";
+	// });
+	
+	// function(inputValue){
+		// if (inputValue === false){ check = false; }
+		// if (inputValue === ""){ check = true; } 
+	// }
+
+	// if (check === true){
+	    // window.location = "offlineform.html";
+	// }
 }
 
 //Generate a client id for a new client. 
@@ -445,7 +465,8 @@ function validateFormNew() {
 
             if (((elements[i].value === "") || (elements[i].value === null)) || (elements[i].value === 0) || (elements[i].value === "undefined")) {
 
-                alert("Please fill out all fields");
+                //alert("Please fill out all fields");
+				swal("Please fill out all fields.", "", "warning");
                 var test = document.getElementById("city_new");
                 document.getElementById("error_message_create_new").innerHTML = "Please fill out all fields"; //Replace the error message in the document with this error message
                 //reset the message after every click, run on every post back
@@ -456,9 +477,10 @@ function validateFormNew() {
                 if (elements[i].id == "phone_new") {
                     var phoneN = elements[i].value;
                     if (phoneN.length < 12) {
-                        alert("Phone number is not long enough.");
+                        //alert("Phone number is not long enough.");
+						swal("Phone number is not long enough.","","warning");
                         //111-111-1111
-                        alert("Please fill out all fields");
+                        //alert("Please fill out all fields");
                         check = false;
                         return check;
                     }
@@ -560,14 +582,18 @@ $(function() {
                         ekey = "";
                         automaticLogout();
                         //document.getElementById("error_message_filter").innerHTML = "No connection to API/Invalid encryption key.";
-                        alert("No connection to API/Invalid encryption key.");
+                        //alert("No connection to API/Invalid encryption key.");
+						swal("No internet connection.", "Try again later when there's internet access.", "error");
+
                     }
                 }).responseText;
                 e.preventDefault();
             } else {
                 $("#client_table_module").hide();
                 document.getElementById("error_message_filter").innerHTML = "Please specify a field to filter by.";
-                alert("Please specify a field to filter by.");
+                //alert("Please specify a field to filter by.");
+				swal("Please specify a field to filter by.", "", "warning");
+
 
             }
         }
@@ -670,7 +696,6 @@ $(function() {
             NewPerson.locationid = parseInt(locationID);
             NewPerson.notes = $("#notes_new").val();
 
-
             var response = $.ajax({ //use jquery to make a post to the api with the new client 
                 type: "POST",
                 url: "http://truckrtest.pcscrm.com/api/newclient",
@@ -689,9 +714,15 @@ $(function() {
                     //alert("Data: "+data);
                     if (data !== 0) { //[TBD] if the list returned by the api is not empty (meaning we have successfully passed the newly created client over to the api side to be dealth with via database
                         //alert("New client successfully added.");
+						
+						
+						
+						
+						
                         document.getElementById("error_message_create_new").innerHTML = ""; //Error message is cleared out
                         document.getElementById("message_create_new").innerHTML = "Donor '" + NewPerson.firstName + " " + NewPerson.lastName + "' has been created."; //Good message posted to let user know their client has been created
-                        alert("Donor '" + NewPerson.firstName + " " + NewPerson.lastName + "' has been created.");
+                        //alert("Donor '" + NewPerson.firstName + " " + NewPerson.lastName + "' has been created.");
+						//swal("Donor '" + NewPerson.firstName + " " + NewPerson.lastName + "' has been created.");
                         chosenClientFName = NewPerson.firstName; // Assigned the global variable to be the new person first name and last name
                         chosenClientLName = NewPerson.lastName;
                         donorOrgS = NewPerson.org;
@@ -705,8 +736,19 @@ $(function() {
                         //generateLotNum1();
                         donorEmail = NewPerson.email;
                         donorID = data;
+						alert("donor id = "+ data);
+						
+									if ((offlineTransaction == true) && (offlineTransactionObj != "")){
+				//TO DO
+				                    //donorEmail = entry.childNodes[6].innerText;
+									
+						justSubmit(offlineTransactionObj, donorEmail, clientID);
+					}
+
+else{						
                         $("#generate_module").show();
-                        document.getElementById("title_bar").innerHTML = "Generate Form";
+                        document.getElementById("title_bar").innerHTML = "Create Form";
+						}
 
                     } else {
                         // alert("empty list");			
@@ -717,7 +759,7 @@ $(function() {
                 error: function() {
                     // alert("no success--error");
                     //automaticLogout();
-                    alert("No connection to API/Invalid encryption key.");
+					swal("No internet connection.", "Try again later when there's internet access.", "error");					
                 }
             }).responseText;
             e.preventDefault();
@@ -734,7 +776,8 @@ $(function() {
 
 
         if (donorID == 0) {
-            alert("Please select a client first.");
+            //alert("Please select a client first.");
+			swal("Please select a client first.");
             return;
         }
 
@@ -829,8 +872,7 @@ $(function() {
                     sucess = false;
                     automaticLogout();
                     //document.getElementById("error_message_transfer").innerHTML = "No connection to API/Invalid encryption key.";
-                    alert("No connection to API/Invalid encryption key.");
-                }
+					swal("No internet connection.", "Try again later when there's internet access.", "error");                }
             }).responseText;
             e.preventDefault();
         }
@@ -862,9 +904,12 @@ $(function() {
 
         if (validation === false) {
             // document.getElementById("error_message_login").innerHTML = "Please fill out all fields.";
-            alert("Please fill out all fields");
+            //alert("Please fill out all fields");
+			swal("Please fill out all fields.", "", "warning");
+
 
         } else {
+			document.getElementById("error_message_login").innerHTML = "LOADING...";
             var response = $.ajax({
                 type: "POST",
                 url: "http://truckrtest.pcscrm.com/api/confirm",
@@ -874,10 +919,10 @@ $(function() {
                 data: JSON.stringify(NewPerson),
 
                 success: function(response) {
-
-
                     if (response !== "401") { //originally, if response == true, checks if user is authorized. returns 401 if not authorized.
-                        currentUser = NewPerson.username;
+                        document.getElementById("error_message_login").innerHTML = "";
+
+						currentUser = NewPerson.username;
                         // document.getElementById("error_message_login").innerHTML = 'Logging in...';
                         //setTimeout(allowLogin, 3000);
                         //allowLogin();
@@ -892,8 +937,12 @@ $(function() {
 
 
                     } else {
+					     document.getElementById("error_message_login").innerHTML = "";
+
                         // document.getElementById("error_message_login").innerHTML = "Wrong password or username.";
-                        alert("Wrong password or username.");
+                        //alert("Wrong password or username.");
+						swal("Wrong password or username.", "", "error");
+
 
                     }
                 },
@@ -901,8 +950,8 @@ $(function() {
                 error: function() {
                     sucess = false;
                     // document.getElementById("error_message_login").innerHTML = "No connection to API/Invalid encryption key.";
-                    alert("No connection to API/Invalid encryption key.");
-
+                    //alert("No connection to API/Invalid encryption key.");
+					swal("No internet connection.", "Try again later when there's internet access.", "error");
 
                 },
                 beforeSend: function(xhr) {
@@ -959,8 +1008,8 @@ function justSubmit(jsonObj, donorEmail, donorId){
             //alert("response: "+response);
 
             if (response != false) {
-                alert("Transfer of Ownership successfully added to database. Email sent to " + donorEmail + ". Transaction completed.");
-
+                //alert("Transfer of Ownership successfully added to database. Email sent to " + donorEmail + ". Transaction completed.");
+swal("Transfer of Ownership successfully added to database. Email sent to " + donorEmail + ". Transaction completed.", "", "success");
                 clearAllForms();
 
                 donorID = 0;
@@ -1001,7 +1050,7 @@ $(function() {
         ////*/*/CALLING AUTHORIZE/*/*///
         ////*/*/CALLING AUTHORIZE/*/*///
         var table = document.getElementById('client_filter_table'); //grab the table of filtered clients 
-        for (var i = 1; i < table.rows.length; i++) { //loop through them and grab their information
+        for (var i = 0; i < table.rows.length; i++) { //loop through them and grab their information
             var entry = table.rows[i];
             var firstCol = entry.childNodes[0];
             var radioButton = firstCol.firstChild;
@@ -1067,7 +1116,8 @@ $(function() {
         //the chosenClientID must be null (has not been set to anything), and if it is null...
         if (checked === false) {
             document.getElementById("error_message_select").innerHTML = "Please select a donor.";
-            alert("Please select a donor");
+            //alert("Please select a donor");
+			swal("Please select a donor.","","warning");
         } else { //otherwise... if we have selected a client
 		
 		
@@ -1100,7 +1150,6 @@ $(function() {
 $(function() {
     $('#selected_transaction_button').click(function() {
 		offlineTransaction = true;
-	//alert("curse you aqua scum");
         var checked = false;
         ////*/*/CALLING AUTHORIZE/*/*///
         ////*/*/CALLING AUTHORIZE/*/*///
@@ -1116,7 +1165,24 @@ $(function() {
                 checked = true;
                 var confirmMsg = "You have selected the form with " + offlineOrg + ".";
 				document.getElementById("selected_transaction_message").innerHTML = confirmMsg+"<br>Now you can either filter for or create a new client to complete the transaction.";
-				alert("Now you can either filter for or create a new client to complete the transaction.");
+				//alert("Now you can either filter for or create a new client to complete the transaction.");
+				swal({ title: "Complete the Transaction",
+				text: "You have selected the form with " + offlineOrg + ". Now you can either filter for or create a new client to complete the transaction.",
+				type: "info",
+				showCancelButton: true,
+				//confirmButtonColor: "#DD6B55",
+				//cancelButtonColor: "#DD6B55",
+				confirmButtonText: "Find Client",
+				cancelButtonText: "New Client", 
+				closeOnConfirm: true,
+				closeOnCancel: true }, 
+				function(isConfirm){   
+					if (isConfirm) { 
+						$("#show_filter_button").trigger("click");
+					} 
+					else {
+						$("#show_new_client_button").trigger("click");
+					} });
 				//				document.getElementById("selected_transaction_message").innerHTML = confirmMsg+"<br>Now you can either filter for or create a new client to complete the transaction. <br><input type='button' id='show_filter_button' value='Filter for Client'><input type='button' id='show_new_client_button' value='Create New Client'> ";
 
                     donorOrgS = offlineOrg;
@@ -1126,7 +1192,7 @@ $(function() {
                     donorOrgS = toTitleCase(offlineOrg).trim();
             document.getElementById("show_current_transaction").innerHTML = "<b>Selected transaction: </b>"+donorOrgS;
 
-              offlineTransactionObj = ""; //TO DO!!!!!!!!!!!!!!FUCK!
+              offlineTransactionObj = ""; //TO DO!!!!!!!!!!!!!!
 			  
 			          db.transaction(function(tx) {
             tx.executeSql('SELECT * FROM tooForms WHERE id=?', [i], function(tx, results) {
@@ -1134,7 +1200,7 @@ $(function() {
                 //http://stackoverflow.com/questions/17189803/how-to-display-a-row-content-in-json-format-in-node
                 //alert("maybe? ---> "+data.rows[0].profileJson);
 				offlineIteration = i;
-                alert("offline transaction obj: "+results.rows[0].profileJson);
+                //alert("offline transaction obj: "+results.rows[0].profileJson);
 				offlineTransactionObj = JSON.parse(results.rows[0].profileJson);
 				
             });
@@ -1148,7 +1214,8 @@ $(function() {
         //the chosenClientID must be null (has not been set to anything), and if it is null...
         if (checked == false) {
             //document.getElementById("error_message_select").innerHTML = "Please select a transaction.";
-            alert("Please select a transaction.");
+            //alert("Please select a transaction.");
+			swal("Please select a transaction.", "", "warning");
         } 
 		}
 		
@@ -1466,7 +1533,7 @@ $(document).ready(function() {
     $('#exit_client_sig_button').click(function() {
         $('#signature_module').hide(); //hide the current module ORGIINALLY COMMMENTED OUT 
         $('#transfer_module').show();
-        document.getElementById("title_bar").innerHTML = "Transfer of Ownership";
+        document.getElementById("title_bar").innerHTML = "View Form";
 
     });
 });
@@ -1852,7 +1919,7 @@ $(document).ready(function() {
         $("#transactions_module").hide();
 
         $("#generate_module").show();
-        document.getElementById("title_bar").innerHTML = "Generate Form";
+        document.getElementById("title_bar").innerHTML = "Create Form";
 
     });
 });
@@ -1867,7 +1934,7 @@ $(document).ready(function() {
 
         $("#signature_module").hide();
 
-        document.getElementById("title_bar").innerHTML = "Transfer of Ownership";
+        document.getElementById("title_bar").innerHTML = "View Form";
 
     });
 });
@@ -2009,8 +2076,8 @@ $(function() {
 
 
             var success = false;
-            alert("Created the Transfer form... Making a post request now");
-
+            //alert("Created the Transfer form... Making a post request now");
+			alert("Pending...");
 
             var ldiv = document.getElementById('LoadingDiv');
             ldiv.style.display = 'block';
