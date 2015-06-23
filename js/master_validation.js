@@ -61,7 +61,7 @@ function loadCurrentUser() {
         currentUser = username;
         ekey = query[1];
         document.getElementById("hidden_username").innerHTML = username;
-        document.getElementById('show_user_status').innerHTML = username + " " + locationID;
+        document.getElementById('show_user_status').innerHTML = username; //use to be concatenating +locationID
         //alert("currentUser: "+currentUser+" ekey: "+ekey); //for testing
     } else {
         ekey = null;
@@ -121,7 +121,7 @@ function loadCurrentUser() {
 
 function toTitleCase(str)
 {
-    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1);});//useto be+ txt.substr(1).toLowerCase()
 }
 
 function checkLocalStorage() {
@@ -732,28 +732,26 @@ $(function() {
 
                         var showDonorStatus = document.getElementById('show_donor_status');
                         showDonorStatus.innerHTML = chosenClientFName + " " + chosenClientLName;
-                        $("#new_client_module").hide();
                         //generateLotNum1();
                         donorEmail = NewPerson.email;
                         donorID = data;
 						alert("donor id = "+ data);
 						
-									if ((offlineTransaction == true) && (offlineTransactionObj != "")){
-				//TO DO
-				                    //donorEmail = entry.childNodes[6].innerText;
-									
-						justSubmit(offlineTransactionObj, donorEmail, clientID);
-					}
-
-else{						
-                        $("#generate_module").show();
-                        document.getElementById("title_bar").innerHTML = "Create Form";
+						if ((offlineTransaction == true) && (offlineTransactionObj != "")){	
+							alert("true! you have an offline transactions..");
+							justSubmit(offlineTransactionObj, donorEmail, donorID);
 						}
+						else{						
+						    $("#new_client_module").hide();
+							$("#generate_module").show();
+							document.getElementById("title_bar").innerHTML = "Create Form";
+						//}
 
-                    } else {
+                    //} else {
                         // alert("empty list");			
                         document.getElementById("error_message_create_new").innerHTML = "Please fill out all fields";
-                    }
+						}
+					}
                 },
 
                 error: function() {
@@ -2077,7 +2075,7 @@ $(function() {
 
             var success = false;
             //alert("Created the Transfer form... Making a post request now");
-			alert("Pending...");
+			//alert("Pending...");
 
             var ldiv = document.getElementById('LoadingDiv');
             ldiv.style.display = 'block';
