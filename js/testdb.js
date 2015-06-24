@@ -216,7 +216,7 @@ function acceptOffline(){
 	
 		db.transaction(function(tx) { 
 			//execute a query to create a new table called "user" with two fields (id and name)
-			tx.executeSql("CREATE TABLE IF NOT EXISTS people (name STRING UNIQUE, profileJson TEXT(100))");
+			tx.executeSql("CREATE TABLE IF NOT EXISTS tooForms(name STRING UNIQUE, profileJson TEXT(100))");
 			//tx.executeSql("INSERT INTO people (name, profileJson) VALUES ("+name+", "+ "ham" + ");");
 			tx.executeSql('INSERT INTO tooForms(profileJson) VALUES (?)',[JSON.stringify(tooForm)]);
 			//tx.executeSql("INSERT INTO people (name, profileJson) VALUES ('Anna', 'team 5');");
