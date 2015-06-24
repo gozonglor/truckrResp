@@ -2,7 +2,10 @@
 // document.getElementById("webStorageSubmitBtn").addEventListener("click", insertWeb);
 // document.getElementById("refreshWeb").addEventListener("click", refreshWeb);
 
-
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1);});//useto be+ txt.substr(1).toLowerCase()
+}
 
 $(function() {                                       // <== Doc Ready
     $("#offline_donor_name1").change(function() {                  // When the email is changed
@@ -188,9 +191,9 @@ function acceptOffline(){
 	var formatted = "Thank you for calling PCs for People to safely and legally dispose of your used hardware. Attached is a screen shot of the transfer of ownership form.";
 	var wordage = fName+"%"+firstParagraph+"%"+"By signing your name below you agree that you are a duly appointed and authorized representative of your company";
 	var donationDescription = $("#offline_donation_description").val();
-	var title = $("#offline_signers_title").val()
-	var firstName = $("#offline_signers_name").val()
-	var org = $("#offline_donor_name1").val()
+	var title = toTitleCase($("#offline_signers_title").val());
+	var firstName = toTitleCase($("#offline_signers_name").val());//TO DO: test "John" vs "John Smith"
+	var org = toTitleCase($("#offline_donor_name1").val());
 
 	
 	//alert("Donation descriptiOn: "+donationDescription);

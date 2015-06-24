@@ -282,7 +282,7 @@ function pleaseSync(count) {
     //alert("checkLocalStorage(): "+finalCount);
     if (finalCount != 0) {
         // alert("You have " + count + " transaction(s) that are unsynced. You need to filter for or create a client to tie them to."); //have this pop up on initial opening of the app
-        document.getElementById("transactions_message").innerHTML = "You have " + count + " transaction(s) that are unsynced. You need to filter for or create a client to tie them to.";
+        //document.getElementById("transactions_message").innerHTML = "You have " + count + " transaction(s) that are unsynced. You need to filter for or create a client to tie them to.";
         //$("#filter_module").hide();//hide the filter module
 
 
@@ -311,7 +311,11 @@ function pleaseSync(count) {
 				// alert("B) finished updating each user name.");
 
             });
-        });
+        },
+		function (tx, error){
+			alert("Something went wrong: "+error.message);
+			console.log("Error processing SQL: "+err);
+		});
 
 
         db.transaction(function(tx) {
@@ -346,6 +350,15 @@ function pleaseSync(count) {
 						//alert("C) Testing within for loop.");
 					}
                 }
+				
+				alert("COMMENCING way 2");
+				//SECOND way of doing this, not sur eif it'll work yet: http://stackoverflow.com/questions/29491561/websql-not-working-on-phonegap-build
+				var rowz = results.rows;
+				alert(rowz.length);
+				for (var index=0; index < rowz.length; index++){
+					var x = rowz.item(index);
+					alert(x.profileJson);
+				}
 				//alert("C) Completed testing for loop, about to put data into the table.");
                 //data = results;
                 //alert(results);
@@ -735,11 +748,15 @@ $(function() {
                         //generateLotNum1();
                         donorEmail = NewPerson.email;
                         donorID = data;
-						alert("donor id = "+ data);
+						//alert("donor id = "+ data);
 						
 						if ((offlineTransaction == true) && (offlineTransactionObj != "")){	
-							alert("true! you have an offline transactions..");
+							//alert("true! you have an offline transactions..");
 							justSubmit(offlineTransactionObj, donorEmail, donorID);
+							clearAllForms();
+							$("#new_client_module").hide(); //Hide current module
+							$("#filter_module").show(); //Hide current module
+
 						}
 						else{						
 						    $("#new_client_module").hide();
@@ -1082,6 +1099,10 @@ $(function() {
 				                    donorEmail = entry.childNodes[6].innerText;
 
 						justSubmit(offlineTransactionObj, donorEmail, clientID);
+						clearAllForms();
+						$("#client_table_module").hide(); //Hide current module
+						$("#filter_module").show(); //Hide current module
+
 					}
 					
 					else{
