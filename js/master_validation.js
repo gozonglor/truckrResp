@@ -596,7 +596,7 @@ $(function() {
                         automaticLogout();
                         //document.getElementById("error_message_filter").innerHTML = "No connection to API/Invalid encryption key.";
                         //alert("No connection to API/Invalid encryption key.");
-						swal("No internet connection.", "Try again later when there's internet access.", "error");
+						swal("No api connection.", "Try again later when there's internet access and the API is finished rebuilding.", "error");
 
                     }
                 }).responseText;
@@ -711,7 +711,7 @@ $(function() {
 
             var response = $.ajax({ //use jquery to make a post to the api with the new client 
                 type: "POST",
-                url: "http://truckrtest.pcscrm.com/api/newclient",
+                url: "http://truckr.pcscrm.com/api/newclient",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 async: false,
@@ -774,7 +774,8 @@ $(function() {
                 error: function() {
                     // alert("no success--error");
                     //automaticLogout();
-					swal("No internet connection.", "Try again later when there's internet access.", "error");					
+					
+					swal("No api connection.", "Try again later when there's internet access and the API is finished rebuilding.", "error");					
                 }
             }).responseText;
             e.preventDefault();
@@ -808,7 +809,7 @@ $(function() {
         } else {
             var response = $.ajax({
                 type: "POST",
-                url: "http://truckrtest.pcscrm.com/api/transferform",
+                url: "http://truckr.pcscrm.com/api/transferform",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 async: false,
@@ -887,7 +888,7 @@ $(function() {
                     sucess = false;
                     automaticLogout();
                     //document.getElementById("error_message_transfer").innerHTML = "No connection to API/Invalid encryption key.";
-					swal("No internet connection.", "Try again later when there's internet access.", "error");                }
+					swal("No api connection.", "Try again later when there's internet access and the API is finished rebuilding.", "error");              }
             }).responseText;
             e.preventDefault();
         }
@@ -927,7 +928,7 @@ $(function() {
 			document.getElementById("error_message_login").innerHTML = "LOADING...";
             var response = $.ajax({
                 type: "POST",
-                url: "http://truckrtest.pcscrm.com/api/confirm",
+                url: "http://truckr.pcscrm.com/api/confirm",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 async: false,
@@ -966,7 +967,7 @@ $(function() {
                     sucess = false;
                     // document.getElementById("error_message_login").innerHTML = "No connection to API/Invalid encryption key.";
                     //alert("No connection to API/Invalid encryption key.");
-					swal("No internet connection.", "Try again later when there's internet access.", "error");
+					swal("No api connection.", "Try again later when there's internet access and the API is finished rebuilding.", "error");
 
                 },
                 beforeSend: function(xhr) {
@@ -1006,7 +1007,7 @@ function justSubmit(jsonObj, donorEmail, donorId){
 	if (confirm("You are going to submit a transfer of ownership form to the database and email it to the selected client. Do you want to continue and finish?")){
 	 var response = $.ajax({
         type: "POST",
-        url: "http://truckrtest.pcscrm.com/api/submit",
+        url: "http://truckr.pcscrm.com/api/submit",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         async: false,
@@ -2048,7 +2049,7 @@ function addAllColumnHeaders(myList) {
 //==================            HTML TO CANVAS              =================//
 $(function() {
     $("#accept_button").click(function(e) {
-        //if theres no internet,store in the local db right away
+        //if theres No api ,store in the local db right away
         //
         document.getElementById("accept_button").disabled = 'true';
 
@@ -2111,7 +2112,7 @@ $(function() {
 
             var response = $.ajax({
                 type: "POST",
-                url: "http://truckrtest.pcscrm.com/api/submit",
+                url: "http://truckr.pcscrm.com/api/submit",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 async: false,
@@ -2263,7 +2264,7 @@ function autoPopZip() {
 
         var response = $.ajax({
             type: "GET",
-            url: "http://truckrtest.pcscrm.com/api/location/" + val,
+            url: "http://truckr.pcscrm.com/api/location/" + val,
             contentType: "application/json; charset=utf-8",
             //dataType: "json",
             async: false,
@@ -2371,7 +2372,7 @@ function autoPopCity() {
 
     var response = $.ajax({
         type: "GET",
-        url: "http://truckrtest.pcscrm.com/api/location/",
+        url: "http://truckr.pcscrm.com/api/location/",
         contentType: "application/json; charset=utf-8",
         //dataType: "json",
         async: false,

@@ -130,13 +130,13 @@
                   <b>Email: </b><br><input type="text" id="email_new" placeholder="Email" name='input_field' onfocus="myAutoTab('email_new', 'address_new')"/><br>
                   <b>Address: </b><br><input type="text" id="address_new" placeholder="Address: ex. 1600 Grand Avenue" name='input_field' onfocus="myAutoTab('address_new', 'address2_new')"/><br>
                   <b>Address 2: </b><br><input type="text" id="address2_new" name="optional" placeholder="(optional) Address2: ex. 1600 Grand Avenue" onfocus="myAutoTab('address2_new', 'state_new')"/><br>
-                  <b>State: </b><br><input type="text" id="state_new" placeholder="State: ex. MN" name='input_field' style="text-transform: uppercase;" maxlength="2" onfocus="myAutoTab('state_new', 'city_new')"/><br>
-                  <b>City: </b><br><!--<input type ="text" id="city_new" placeholder="City: ex. St. Paul" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('city_new', 'state_new')"/>--><input type ="text" id="city_new" placeholder="City: ex. St. Paul" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('city_new', 'zip_new')"/><br>
-                  <select id="citiesDropDown" name="optional"  style="visibility:hidden;"></select><br>
-                  <b>Zip code: </b><br><input type="text" class="simple-field-data-mask" id="zip_new" placeholder="Zip code: ex. 55101" name='input_field' maxlength="5" data-mask="00000" onchange="autoPopZip()" onfocus="myAutoTab('zip_new', 'notes_new')"/><br>
+				                    <b>Zip code: </b><br><input type="text" class="simple-field-data-mask" id="zip_new" placeholder="Zip code: ex. 55101" name='input_field' maxlength="5" data-mask="00000" onchange="autoPopZip()" onfocus="myAutoTab('zip_new', 'notes_new')"/><br>
                   <select id="zipcodesDropDown" name="optional" style="visibility:hidden;" name='input_field'>
                      <option value=""></option>
                   </select>
+                  <b>State: </b><br><input type="text" id="state_new" placeholder="State: ex. MN" name='input_field' style="text-transform: uppercase;" maxlength="2" onfocus="myAutoTab('state_new', 'city_new')"/><br>
+                  <b>City: </b><br><!--<input type ="text" id="city_new" placeholder="City: ex. St. Paul" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('city_new', 'state_new')"/>--><input type ="text" id="city_new" placeholder="City: ex. St. Paul" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('city_new', 'zip_new')"/><br>
+                  <select id="citiesDropDown" name="optional"  style="visibility:hidden;"></select><br>
                   <br>
                </form>
                <form id="optional_form">
@@ -149,8 +149,8 @@
                </form>
                <!--<a href="#filter" class="jumplink">-->
                <input type="button" value="Create New Client" id="create_new_client_button">
-               <div id="error_message_create_new" class="error_message"></div>
-               <div id="message_create_new" class="notification_message"></div>
+               <div id="error_message_create_new" class="error_message" dstyle="display:none;"></div>
+               <div id="message_create_new" class="notification_message" style="display:none;"></div>
             </center>
          </div>
          <!--------------entry 3: generate the too, midway------------------->
