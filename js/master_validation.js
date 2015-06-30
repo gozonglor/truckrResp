@@ -275,13 +275,12 @@ function pleaseSync(count) {
     var data = [];
     var dataToUpdate = [];
 
-	
     var finalCount = count;
     // getTransactionsCount(function(count){
     // finalCount = count;
     // });
     //alert("checkLocalStorage(): "+finalCount);
-    if (finalCount != 0) { //if there are offline vorm
+    if (finalCount != 0) {
         // alert("You have " + count + " transaction(s) that are unsynced. You need to filter for or create a client to tie them to."); //have this pop up on initial opening of the app
         //document.getElementById("transactions_message").innerHTML = "You have " + count + " transaction(s) that are unsynced. You need to filter for or create a client to tie them to.";
         //$("#filter_module").hide();//hide the filter module
@@ -563,9 +562,9 @@ $(function() {
 
             if (formFill === true) {
                 document.getElementById("error_message_filter").innerHTML = "";
-                //$("#filter_module").hide();
-                //$("#client_table_module").show();
-                //document.getElementById("title_bar").innerHTML = "Filtered Client Table";
+                $("#filter_module").hide();
+                $("#client_table_module").show();
+                document.getElementById("title_bar").innerHTML = "Filtered Client Table";
 
                 var response = $.ajax({
                     type: "POST",
@@ -582,16 +581,12 @@ $(function() {
                     success: function(data) {
                         if (data.length == 0) {
                             //alert("No results found");
-							swal("No results found.","","error");
                             document.getElementById("error_message_select").innerHTML = "No results found.";
                             document.getElementById("message_select").innerHTML = data.length + " result(s) found.";
                         } else {
                             document.getElementById("error_message_select").innerHTML = "";
                             document.getElementById("message_select").innerHTML = data.length + " result(s) found.";
                             success = true;
-							$("#filter_module").hide();
-							$("#client_table_module").show();
-							document.getElementById("title_bar").innerHTML = "Filtered Client Table";
                             handleData(data);
                         }
                     },
@@ -688,15 +683,15 @@ $(function() {
             NewPerson.contact_status = $("#ddlContactStatus_new").val(); //looks at value entered in form field with given id 
             //NewPerson.id = $("#id_new").val();
             NewPerson.contactID = 0;
-            NewPerson.midName = toTitleCase($("#midName_new").val());
+            NewPerson.midName = $("#midName_new").val();
 
-            NewPerson.firstName = toTitleCase($("#firstName_new").val());
-            NewPerson.lastName = toTitleCase($("#lastName_new").val());
+            NewPerson.firstName = $("#firstName_new").val();
+            NewPerson.lastName = $("#lastName_new").val();
             NewPerson.phone = $("#phone_new").val();
-            NewPerson.org = toTitleCase($("#org_new").val());
+            NewPerson.org = $("#org_new").val();
             NewPerson.email = $("#email_new").val();
-            NewPerson.address = toTitleCase($("#address_new").val());
-            NewPerson.address2 = toTitleCase($("#address2_new").val());
+            NewPerson.address = $("#address_new").val();
+            NewPerson.address2 = $("#address2_new").val();
             NewPerson.zip = $("#zip_new").val();
 
             if (cityToggle == false) {
@@ -859,7 +854,7 @@ $(function() {
                     document.getElementById("customTOOForm").innerHTML = document.getElementById("customTOOForm").innerHTML + "<br><br><div style='background:#EEEEEE'>" + response[2] + "</div>";
 
                     //Third Paragraph: Data wipe choice, naid or no naid
-                    document.getElementById("customTOOForm").innerHTML = document.getElementById("customTOOForm").innerHTML + "<br><div style='border: 2px solid; padding: 10px;'>" + response[3] + "</div>";
+                    document.getElementById("customTOOForm").innerHTML = document.getElementById("customTOOForm").innerHTML + "<br><br><div style='border: 2px solid; padding: 10px;'>" + response[3] + "</div>";
 
 
 
@@ -874,7 +869,7 @@ $(function() {
                     document.getElementById("customTOOForm2").innerHTML = document.getElementById("customTOOForm2").innerHTML + "<br><br><div style='background:#EEEEEE'>" + response[2] + "</div>";
 
                     //Third Paragraph: Data wipe choice, naid or no naid
-                    document.getElementById("customTOOForm2").innerHTML = document.getElementById("customTOOForm2").innerHTML + "<br><div style='border: 2px solid; padding: 10px;'>" + response[3] + "</div>";
+                    document.getElementById("customTOOForm2").innerHTML = document.getElementById("customTOOForm2").innerHTML + "<br><br><div style='border: 2px solid; padding: 10px;'>" + response[3] + "</div>";
 
 
                     var dateObj = new Date();
@@ -1303,7 +1298,11 @@ function clearAllForms() {
     chosenClientFName = ""; //the chosen donor's first name. Example: "Harry"
     chosenClientLName = ""; //the chosen donor's last name. Example: "Potter"
     document.getElementById("show_donor_status").innerHTML = "";
-    document.getElementById("accept_button").removeAttribute("disabled");
+    document.getElementById("accept_button").disabled = 'false';
+
+
+
+
 }
 
 function clearAllForms2() {

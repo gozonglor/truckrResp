@@ -90,7 +90,7 @@
                   <b>Middle Initial: </b><br><input type ="text" id="midName_f" placeholder="(optional) Middle initial" name='input_field' style="text-transform: capitalize;" maxlength="1" onfocus="myAutoTab('midName_f', 'lastName_f')"/><br>
                   <b>Last Name: </b><br><input type="text" id="lastName_f" placeholder="Last name" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('lastName_f', 'phone_f')"/><br>
                   <b>Phone: </b><br><input class="simple-field-data-mask" type="text" id="phone_f" placeholder="Phone: ex. 999-999-9999" name='input_field' data-mask="000-000-0000" onfocus="myAutoTab('phone_f', 'org_f')"><br>
-                  <b>Business: </b><br><input type="text" id="org_f" placeholder="Organization name" name='input_field' onfocus="myAutoTab('org_f', 'email_f')" style="text-transform: capitalize;"/><br>
+                  <b>Business: </b><br><input type="text" id="org_f" placeholder="Organization name" name='input_field' onfocus="myAutoTab('org_f', 'email_f')"/><br>
                   <b>Email: </b><br><input type="text" id="email_f" placeholder="Email" name='input_field' onfocus="myAutoTab('email_f', 'address_f')"/><br><br>
                   <b>Address: </b><br><input type="text" id="address_f" placeholder="Address: ex. 1600 Grand Avenue" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('address_f', 'city_f')"/><br>
                   <input type="text" id="address2_f" placeholder="Address2: ex. 1600 Grand Avenue" name='input_field' style="display:none;" style="text-transform: capitalize;" onfocus="myAutoTab('address2_f', 'city_f')"/>
@@ -128,15 +128,15 @@
                   <b>Phone: </b><br><input class="simple-field-data-mask" type="text" id="phone_new" placeholder="Phone: ex. 999-999-9999" data-mask="000-000-0000" name='input_field' onfocus="myAutoTab('phone_new', 'org_new')"/> <br>
                   <b>Business: </b><br><input type="text" id="org_new" name="input_field" placeholder="Organization name" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('org_new', 'email_new')"/><br>
                   <b>Email: </b><br><input type="text" id="email_new" placeholder="Email" name='input_field' onfocus="myAutoTab('email_new', 'address_new')"/><br>
-                  <b>Address: </b><br><input type="text" id="address_new" placeholder="Address: ex. 1600 Grand Avenue" name='input_field' onfocus="myAutoTab('address_new', 'address2_new')" style="text-transform: capitalize;"/><br>
-                  <b>Address 2: </b><br><input type="text" id="address2_new" name="optional" placeholder="(optional) Address2: ex. 1600 Grand Avenue" onfocus="myAutoTab('address2_new', 'state_new')" style="text-transform: capitalize;"/><br>
-				  <b>Zip code: </b><br><input type="text" class="simple-field-data-mask" id="zip_new" placeholder="Zip code: ex. 55101" name='input_field' maxlength="5" data-mask="00000" onchange="autoPopZip()" onfocus="myAutoTab('zip_new', 'notes_new')"/><br>
-                  <select id="zipcodesDropDown" name="optional" style="visibility:hidden;" name='input_field'></select><br>
+                  <b>Address: </b><br><input type="text" id="address_new" placeholder="Address: ex. 1600 Grand Avenue" name='input_field' onfocus="myAutoTab('address_new', 'address2_new')"/><br>
+                  <b>Address 2: </b><br><input type="text" id="address2_new" name="optional" placeholder="(optional) Address2: ex. 1600 Grand Avenue" onfocus="myAutoTab('address2_new', 'state_new')"/><br>
                   <b>State: </b><br><input type="text" id="state_new" placeholder="State: ex. MN" name='input_field' style="text-transform: uppercase;" maxlength="2" onfocus="myAutoTab('state_new', 'city_new')"/><br>
                   <b>City: </b><br><!--<input type ="text" id="city_new" placeholder="City: ex. St. Paul" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('city_new', 'state_new')"/>--><input type ="text" id="city_new" placeholder="City: ex. St. Paul" name='input_field' style="text-transform: capitalize;" onfocus="myAutoTab('city_new', 'zip_new')"/><br>
                   <select id="citiesDropDown" name="optional"  style="visibility:hidden;"></select><br>
-
+                  <b>Zip code: </b><br><input type="text" class="simple-field-data-mask" id="zip_new" placeholder="Zip code: ex. 55101" name='input_field' maxlength="5" data-mask="00000" onchange="autoPopZip()" onfocus="myAutoTab('zip_new', 'notes_new')"/><br>
+                  <select id="zipcodesDropDown" name="optional" style="visibility:hidden;" name='input_field'>
                      <option value=""></option>
+                  </select>
                   <br>
                </form>
                <form id="optional_form">
@@ -212,7 +212,7 @@
                      <canvas class="pad" width="345px" height="80px" id="canvas_pad" style="background:#ffffff;"></canvas>
                      <input type="hidden" name="output" class="output" id="output">
                   </div>
-                  Name: <input type="text" name="name" id="nameSign" class="name" placeholder="Client's typed name" style="text-transform:capitalize;"><br><br>
+                  Name: <input type="text" name="name" id="nameSign" class="name" placeholder="Client's typed name" ><br><br>
                   Title: <br><input type="text" id="client_title" placeholder="Client title" style="width: 150px; border-width: 1px;text-transform: capitalize;" onkeypress="this.style.width = ((this.value.length + 3) * 8) + 'px';"></input>
                   <br><br>
                   <input type="button" id="submit_me" value="Submit"/>
@@ -261,7 +261,7 @@
          <!---------------------------------------------------------------------->					
          <!----where i learned how to 'disable' a page and show a translucent progress bar/gif img: http://www.edwardawebb.com/web-development/cakephp/disable-page-show-translucent-progress-bar--->
 		 
-		 <div id="transfer_module" name="transfer_module" class="article" style="display:none;background-color:#FFFFFF; width: 100%;" name="module" >
+		 <div id="transfer_module" name="transfer_module" class="article" style="display:none;background-color:#FFFFFF;" name="module" >
 			<div id="LoadingDiv" style="display:none;"><center><img src="css/images/loading.gif"></center></div>
 		 
 		 
