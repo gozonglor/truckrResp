@@ -1352,7 +1352,7 @@ $(function() {
             sig_coord = document.getElementById("output").defaultValue;
             if (((document.getElementById("nameSign").value) == "") || ((document.getElementById("client_title").value) == "") || (sig_coord == "")) {
                 alert("Please fill out all fields.");
-                document.getElementById("client_sign_wrapper").style.backgroundColor = "#ffff66";
+                document.getElementById("client_sign_wrapper").style.backgroundColor = "#ffffff";
 
             } else if (((document.getElementById("nameSign").value) != "") && ((document.getElementById("client_title").value) != "") && (sig_coord != "")) {
                 $('.signed').show();
@@ -1390,7 +1390,7 @@ $(function() {
             } else {
                 document.getElementById("sig_error_message").innerText = "Please sign.";
                 alert("Please sign.");
-                document.getElementByid("client_sign_wrapper").style.backgroundColor = "#ffff66";
+                document.getElementByid("client_sign_wrapper").style.backgroundColor = "#ffffff";
 
             }
         }
@@ -2092,6 +2092,7 @@ $(function() {
             //TransferForm.firstName = chosenClientFName;
             TransferForm.firstName = toTitleCase(document.getElementById("nameSign").value);
             TransferForm.title = toTitleCase(document.getElementById("client_title2").value);
+			TransferForm.locationID = locationID;
 
 
             var success = false;
