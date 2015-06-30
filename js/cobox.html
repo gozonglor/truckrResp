@@ -18,7 +18,7 @@
 			document.querySelector('#status').innerHTML =  msg;
 		});
 
-		//executing new query--
+		//executing new query--grabbing everything from the demo
 		db.transaction(function (tx) {
 			tx.executeSql('SELECT * FROM DEMO', [], function (tx, results) {
 				var len = results.rows.length, i;

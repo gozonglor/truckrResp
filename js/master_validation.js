@@ -765,7 +765,8 @@ $(function() {
 						}
 						else{						
 						    $("#new_client_module").hide();
-							$("#generate_module").show();
+							//$("#generate_module").show();
+							$("#test_transfer").show();
 							document.getElementById("title_bar").innerHTML = "Create Form";
 						//}
 
@@ -1113,8 +1114,10 @@ $(function() {
 					else{
                     $("#client_table_module").hide(); //Hide current module
                     $("#filter_module").hide(); //Hide current module
-                    $("#generate_module").show(); //Show the wanted module
-
+                    //$("#generate_module").show(); //Show the wanted module
+					
+					
+					
                     donorID = clientID;
 
                     //GLOBALIZING				
@@ -1124,6 +1127,23 @@ $(function() {
                     donorEmail = entry.childNodes[6].innerText;
                     donorOrgS = entry.childNodes[5].innerText;
 					donorOrgS = toTitleCase(donorOrgS).trim();
+					
+					
+					
+                    if (donorOrgS != "PCs for People"){
+						document.getElementById("offline_donor_name1").innerHTML = donorOrgS;
+						document.getElementById("offline_donor_name2").innerHTML = donorOrgS;
+						document.getElementById("offline_signers_name").value = chosenClientFName+" "+chosenClientLName;
+						
+					}
+					else{
+						document.getElementById("offline_donor_name1").innerHTML = chosenClientFName+" "+chosenClientLName;
+						document.getElementById("offline_donor_name2").innerHTML = chosenClientFName+" "+chosenClientLName;
+						document.getElementById("offline_signers_name").value = chosenClientFName+" "+chosenClientLName;
+						
+					}
+					$("#test_transfer").show(); //Show the wanted module
+
 					}
                 } else {
                     break;
@@ -2188,6 +2208,225 @@ $(function() {
         }
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+function validateOffline(){
+	if ((document.getElementById("offline_signers_name").value == "") || (document.getElementById("offline_donation_description").value == "") || (typeof $('input[name=offline_naidOption]:checked').val() == 'undefined')){
+		//alert("Please fill out all fieldss.");
+		swal("Please fill out all fields.","", "warning");
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+function acceptOffline2(){
+alert("abcdef");
+if (validateOffline() == true){
+	
+//scrape all the data from the screen.
+	
+	//GOZONG LOR % is transferring ownership of electronic equipment to PCs for People. PCs for People will redistribute the refurbished computers to low income families and people with disabilities. This document fully transfers legal ownership from GOZONG LOR  to PCs for People, and along with that ownership all liability associated with disposal and use. PCs for People has a zero landfill policy and any non-functional parts will be locally recycled. No goods or services were exchanged in consideration of this contribution and PCs for People understands that no warranty is provided and all equipment is accepted as is.%By signing your name below you agree that you are a duly appointed and authorized representative of your company
+
+	//var sig_coord = document.getElementById("output").defaultValue;
+	var sig_coord = document.getElementById("canvas_pad").toDataURL();  //grab the data from canvas pad
+
+	alert("sig: "+sig_coord);
+	var imgBaseSig = "";
+	if (((document.getElementById("offline_signers_name").value) == "") || ((document.getElementById("offline_signers_title").value) == "") || (sig_coord == "")) {
+		//alert("Please fill out all fields.");
+		swal("Please fill out all fields.","", "warning");
+		//document.getElementById("client_sign_wrapper").style.backgroundColor = "#ffff66";
+		return;
+	} else if (((document.getElementById("offline_signers_name").value) != "") && ((document.getElementById("offline_signers_title").value) != "") && (sig_coord != "")) {
+		alert("grabiing dignature");
+		//$('.signed').show();
+		//customer_signature = true;
+		imgBaseSig = document.getElementById("canvas_pad1").toDataURL();  //grab the data from canvas pad
+		//imgBaseSig = sig_coord;  //grab the data from canvas pad
+
+		var newSig = imgBaseSig.split(",");
+		imgBaseSig = newSig[1];
+		alert("imgBaseSig: "+imgBaseSig);
+		//alert("imgBaseSig. grab the data from canvas pad: "+imgBaseSig);
+
+		//base64SigImg = imgBaseSig;
+		
+		//document.getElementById("client_sign_wrapper").style.backgroundColor = "#FFFFFF";
+
+		//$('#signature_module').hide();
+		//$('#transfer_module').show();
+	} else {
+		//document.getElementById("sig_error_message").innerText = "Please sign.";
+		//alert("Please sign.");
+		swal("Please sign your name.","", "warning");
+
+	}
+	
+	
+	
+	
+	//------------------
+	
+	
+	var tooForm = {};
+
+	var naidChoice = $('input[name=offline_naidOption]:checked').val();//yes or no naid
+	var donationDescription = $("#donation_description").val();
+	
+	
+	var fName = $("#offline_donor_name1").text();
+	alert("fName :"+fName);
+	var firstParagraph = document.getElementById("firstPiece").innerText;
+	var secondParagraph = document.getElementById("secondPiece").innerText;
+	firstParagraph = firstParagraph+" "+fName+" "+secondParagraph;
+	
+	
+	var dateObj = new Date();
+	var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+	var newdate = "" + month + "/" + day + "/" + year;
+	var dateFilled = newdate;
+	var formatted = "Thank you for calling PCs for People to safely and legally dispose of your used hardware. Attached is a screen shot of the transfer of ownership form.";
+	var wordage = fName+"%"+firstParagraph+"%"+"By signing your name below you agree that you are a duly appointed and authorized representative of your company.";
+	var donationDescription = $("#offline_donation_description").val();
+	var title = toTitleCase($("#offline_signers_title").val());
+	var firstName = toTitleCase($("#offline_signers_name").val());//TO DO: test "John" vs "John Smith"
+	var org = toTitleCase($("#offline_donor_name1").val());
+
+	
+	//alert("Donation descriptiOn: "+donationDescription);
+	
+	tooForm.naidChoice = naidChoice;
+	tooForm.donationDescription = donationDescription;
+	tooForm.lotNum = 0;
+	tooForm.donorID = donorID;
+	tooForm.username = currentUser;
+	//tooForm.donorSig = imgBaseSig;
+	tooForm.donorSig = imgBaseSig;
+
+	tooForm.org = org;
+	tooForm.dateFilled = dateFilled;
+	tooForm.formatted = formatted;
+	tooForm.wordage = wordage;
+	tooForm.firstName = firstName;
+	tooForm.title = title;
+	tooForm.donorEmail = donorEmail;
+	
+	//localStorage.setItem("transfer form", tooForm);
+	
+
+                        
+            var response = $.ajax({
+                type: "POST",
+                url: "http://truckrtest.pcscrm.com/api/submit",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                headers: {
+                    "Authorization": "Basic " + ekey,
+                    "Content-Type": "text/json",
+                    "Connection": "keep-alive" //Note: This might have been the key to solving the issue.
+                },
+
+
+                data: JSON.stringify(tooForm),
+                //Authorization: Basic ekey,
+
+                success: function(response) {
+                    //alert("response: "+response);
+
+                    if (response != false) {
+                        document.getElementById("error_message_transfer").innerHTML = "";
+                        document.getElementById("message_transfer").innerHTML = "Transfer Form successfully added to database. Email sent to " + "<b>" + donorEmail + "</b>";
+                        alert("Transfer of Ownership successfully added to database. Email sent to " + donorEmail);
+                        alert("Transaction completed.");
+                        //document.getElementById("transfer_module").style.display = "none";
+                        //document.getElementById("transfer_module").style.visibility = "none";
+                        //document.getElementById("transfer_module").style.visibility = "none";
+
+                        //$("#transfer_module").hide();
+                        //$("#filter_module").show();
+
+
+
+                        //$("#final_module").show();
+
+                        //var loadingImg = document.getElementById("loadingImg");
+                        //loadingImg.parentNode.removeChild(loadingImg);
+
+                        clearAllForms();
+                        document.getElementById("accept_button").disabled = false;
+                        document.getElementById("error_message_transfer").innerHTML = "";
+                        document.getElementById("message_transfer").innerHTML = "";
+                        donorID = 0;
+                        chosenClientFName = ""; //the chosen donor's first name. Example: "Harry"
+                        chosenClientLName = ""; //the chosen donor's last name. Example: "Potter"
+                        //alert("Cleared");
+                        document.getElementById("transfer_module").style.display = "none";
+                        document.getElementById("filter_module").style.display = "block";
+                        document.getElementById("accept_button").disabled = 'false';
+
+                    } else {
+                        //document.getElementById("error_message_transfer").innerHTML = "Successful post. Bad API response. Error: " + response + ".  Could not insert final Transfer Form into db.";
+                        //alert("AJAX request returned an error. Error: " + response + ".  Could not insert Transfer Form into db.");
+
+                        var loadingImg = document.getElementById("loadingImg");
+                        loadingImg.parentNode.removeChild(loadingImg);
+
+                        alert("response from api: Email sent.");
+                        document.getElementById("accept_button").disabled = 'false';
+
+                    }
+                },
+
+                error: function() {
+                    sucess = false;
+                    document.getElementById("error_message_transfer").innerHTML = "Error with post request. No connection to API/Invalid encryption key.";
+                    document.getElementById("accept_button").disabled = 'false';
+
+                }
+            }).responseText;
+            //response.preventDefault();
+            //alert("Fell through the post request!");
+            document.getElementById("accept_button").disabled = false;
+            //ldiv.style.display = 'none';
+}
+}
+
+
+
+
+
+
+
+
+$(function() {
+    $("#offline_accept").click(function(e) {
+        //if theres no internet,store in the local db right away
+        //
+		acceptOffline2();
+		})
+		})
+
+
+
+
+
+
+
 
 function other(pdfBase64) {
 
