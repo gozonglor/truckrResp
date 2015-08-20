@@ -564,7 +564,7 @@ $(function() {
                 document.getElementById("error_message_filter").innerHTML = "";
                 $("#filter_module").hide();
                 $("#client_table_module").show();
-                document.getElementById("title_bar").innerHTML = "Filtered Client Table";
+                document.getElementById("title_bar").innerHTML = "Filtered Partner Table";
 
                 var response = $.ajax({
                     type: "POST",
@@ -1841,7 +1841,7 @@ $(document).ready(function() {
         $("#transactions_module").hide();
 
         $("#new_client_module").show();
-        document.getElementById("title_bar").innerHTML = "New Client";
+        document.getElementById("title_bar").innerHTML = "New Partner";
         $("#signature_module").hide();
 
 
@@ -1925,7 +1925,7 @@ $(document).ready(function() {
 
         $("#filter_module").show();
         $("#signature_module").hide();
-        document.getElementById("title_bar").innerHTML = "Find Client";
+        document.getElementById("title_bar").innerHTML = "Find Partner";
     });
 });
 
