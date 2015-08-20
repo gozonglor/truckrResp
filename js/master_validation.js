@@ -2539,3 +2539,122 @@ function closeNav() {
         }
     });
 }
+
+function popqueue(){
+alert("Running popqueue.");
+        var table = document.getElementById('partner_pick_up_table'); //grab the table of filtered clients 
+       for (var i = 0; i < table.rows.length; i++) { //loop through them and grab their information
+            var entry = table.rows[i];
+            var firstCol = entry.childNodes[0];
+            var radioButton = firstCol.firstChild;
+            //var clientID = entry.childNodes[1].innerText;
+            //donorID = clientID;
+			var donorOrgS = entry.childNodes[1].innerText;
+			var clientFName = entry.childNodes[2].innerText;
+			var clientLName = entry.childNodes[3].innerText;
+			donorOrgS = toTitleCase(donorOrgS).trim();
+			donorEmail = entry.childNodes[4].innerText;
+
+            if (radioButton.checked) { //checks if the 'i' particular radio button is checked --i.e. the 3rd if you are on the fourth iteration of the loop
+                checked = true;
+                var confirmMsg = "You have selected " + clientFName + " " + clientLName + " with " + donorOrgS + ". Is that ok?";
+                var confirmMsg2 = "You have selected " + clientFName + " " + clientLName + ". Is that ok?";
+                var chosenMsg = "";
+
+                if (donorOrgS != "") {
+                    chosenMsg = confirmMsg;
+                } else {
+                    chosenMsg = confirmMsg2;
+                }
+
+                if (confirm(chosenMsg)) {
+				
+				                    donorEmail = entry.childNodes[6].innerText;
+
+						justSubmit(offlineTransactionObj, donorEmail, clientID);
+						clearAllForms();
+					}
+					
+					else{
+        
+                    //chosenClientID = clientID.firstChild.data; //set the global variable chosenClientID to be the id of the selected child
+                    chosenClientFName = clientFName; //set global variable of first name
+                    chosenClientLName = clientLName; //set global variable of last name
+					}
+                } else {
+                    break;
+                }
+
+                //alert("Globalizing line 265: "+donorEmail+" .... "+donorOrgS);
+                //show the generate module
+
+                break; //break out of the for loop, since we have a selected donor already
+            }
+        }
+
+//Listens for the add partner list button to be clicked.
+//It must add the selected partner to the partner list.
+$(document).ready(function() {
+    $("#add_to_list").click(function() {
+		
+		//Do something similar to selecting a partner (we already have that logic)
+		
+		//below is the copy-pasted-edited version
+		var checked = false;
+        var table = document.getElementById('client_filter_table'); //grab the table of filtered clients 
+        for (var i = 0; i < table.rows.length; i++) { //loop through them and grab their information
+            var entry = table.rows[i];
+            var firstCol = entry.childNodes[0];
+            var radioButton = firstCol.firstChild;
+            var clientID = entry.childNodes[1].innerText;
+            //donorID = clientID;
+            var clientFName = entry.childNodes[2];
+            var clientLName = entry.childNodes[3];
+            clientFName = clientFName.innerText;
+            clientLName = clientLName.innerText;
+            donorOrgS = entry.childNodes[5].innerText;
+			donorOrgS = toTitleCase(donorOrgS).trim();
+						donorEmail = entry.childNodes[6].innerText;
+            if (radioButton.checked) { //checks if the 'i' particular radio button is checked --i.e. the 3rd if you are on the fourth iteration of the loop
+                checked = true;
+
+                var addPartnerMsg = clientFName + " " + clientLName + " with "+donorOrgS+" has been added to the partner pick up list.";
+				
+				//just add the partner to the partner list. nothing fancy please gozong.
+				//first create the list object and then populate with corresponding data.
+				//there will be hidden fields in the list object that contain stuff that i dont want to pull down again from the database such as email, phone number, organization, contact person, etc.
+				//Or should I use local storage for this????
+				
+				  var table = document.getElementById("partner_pick_up_table");
+				  var row = table.insertRow(0);
+				  var cell1 = row.insertCell(0);
+				  var cell2 = row.insertCell(1);
+				  var cell3 = row.insertCell(2);
+				  var cell4 = row.insertCell(3);
+				  var cell5 = row.insertCell(4);
+				  
+				  var radio = document.createElement("input");
+				  radio.type = "radio";
+				//radio.name=clientFName+"_"+clientLName;
+				radio.name="radioBtn1";
+				  
+				  //cell1.appendChild = radio;
+				    cell1.innerHTML = "<input type='radio' onclick='popqueue()' name='queuebtnCount' ></input>";
+					
+				  cell2.innerHTML = donorOrgS;
+				  cell3.innerHTML = clientFName;
+				  cell4.innerHTML = clientLName;
+				  cell5.innerHTML = donorEmail;
+		
+				
+				swal(addPartnerMsg);
+	
+					//}
+                } else {
+					//break; this is a stupid break. goizong, please remember that breaks will break you out of your entire for loop.
+                }
+
+            }
+		
+    });
+});
