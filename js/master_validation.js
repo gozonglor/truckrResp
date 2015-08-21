@@ -566,9 +566,10 @@ $(function() {
                 $("#client_table_module").show();
                 document.getElementById("title_bar").innerHTML = "Filtered Partner Table";
 
+				//i'm a little worried. the url for this was http://truckrtest.pcscrm.com/api/filter orgiinally, instead of http://truckr.pcscrm.com/api/filter
                 var response = $.ajax({
                     type: "POST",
-                    url: "http://truckrtest.pcscrm.com/api/filter",
+                    url: "http://localhost:49235/api/filter",
                     async: false,
                     headers: {
                         "Authorization": "Basic " + ekey,
@@ -711,7 +712,7 @@ $(function() {
 
             var response = $.ajax({ //use jquery to make a post to the api with the new client 
                 type: "POST",
-                url: "http://truckr.pcscrm.com/api/newclient",
+                url: "http://localhost:49235/api/newclient",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 async: false,
@@ -787,7 +788,7 @@ $(function() {
 
 
 function popqueue(){
-alert("Running popqueue.");
+// alert("Running popqueue.");
 						//$("#client_table_module").hide();
 						// $("#generate_module").hide();
 						// $("#client_table_module").hide();
@@ -823,16 +824,16 @@ alert("Running popqueue.");
 							donorOrgS = "";
 							clearAllForms();
 							donorID = entry.childNodes[6].innerText;
-							alert("donor ID: "+donorID);
+							// alert("donor ID: "+donorID);
 				                    donorEmail = entry.childNodes[5].innerText;
-									alert('now begining to reset the donorOrgS variable...');
-									donorOrgS = entry.childNodes[2].innerText;
-									alert("donorOrgS is now equal to : "+entry.childNodes[2].innerText);
+									// alert('now begining to reset the donorOrgS variable...');
+									// donorOrgS = entry.childNodes[2].innerText;
+									// alert("donorOrgS is now equal to : "+entry.childNodes[2].innerText);
 									donorOrgS = toTitleCase(donorOrgS).trim();
-									alert("Current donorOrgS: "+donorOrgS);
+									// alert("Current donorOrgS: "+donorOrgS);
 									chosenClientFName = clientFName; //set global variable of first nam
 									chosenClientLName = clientLName; //set global variable of last name									
-									alert("chosen client f and l name "+chosenClientFName+" "+chosenClientLName);
+									// alert("chosen client f and l name "+chosenClientFName+" "+chosenClientLName);
 									document.getElementById("hidden_donorOrgS").innerText = donorOrgS;
 						//justSubmit(offlineTransactionObj, donorEmail, clientID);
 						//clearAllForms();
@@ -967,7 +968,7 @@ $(function() {
         } else {
             var response = $.ajax({
                 type: "POST",
-                url: "http://truckr.pcscrm.com/api/transferform",
+                url: "http://localhost:49235/api/transferform",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 async: false,
@@ -1086,7 +1087,7 @@ $(function() {
 			document.getElementById("error_message_login").innerHTML = "LOADING...";
             var response = $.ajax({
                 type: "POST",
-                url: "http://truckr.pcscrm.com/api/confirm",
+                url: "http://localhost:49235/api/confirm",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 async: false,
@@ -1165,7 +1166,7 @@ function justSubmit(jsonObj, donorEmail, donorId){
 	if (confirm("You are going to submit a transfer of ownership form to the database and email it to the selected client. Do you want to continue and finish?")){
 	 var response = $.ajax({
         type: "POST",
-        url: "http://truckr.pcscrm.com/api/submit",
+        url: "http://localhost:49235/api/submit",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         async: false,
@@ -1504,6 +1505,8 @@ function clearAllForms2() {
     //Does validation and redisplays the signature on the next page 
 $(function() {
     $("#submit_me").click(function(e) {
+    document.getElementById("accept_button").disabled = false;
+    //document.getElementById("accept_button").disabled = 'false';
 
         if (donorID == 0) {
             alert("Please select a client first.");
@@ -2210,6 +2213,7 @@ function addAllColumnHeaders(myList) {
 //==================            HTML TO CANVAS              =================//
 $(function() {
     $("#accept_button").click(function(e) {
+	//alert("you've clicked on theacceptbutton");
         //if theres No api ,store in the local db right away
         //
         document.getElementById("accept_button").disabled = 'true';
@@ -2271,9 +2275,10 @@ $(function() {
             //loadingGif.setAttribute("src", "images/loading.gif");
             //loadingDiv.appendChild(loadingGif);
 
+			alert("moving into the ajax call");
             var response = $.ajax({
                 type: "POST",
-                url: "http://truckr.pcscrm.com/api/submit",
+                url: "http://localhost:49235/api/submit",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 async: false,
@@ -2425,7 +2430,7 @@ function autoPopZip() {
 
         var response = $.ajax({
             type: "GET",
-            url: "http://truckr.pcscrm.com/api/location/" + val,
+            url: "http://localhost:49235/api/location/" + val,
             contentType: "application/json; charset=utf-8",
             //dataType: "json",
             async: false,
@@ -2533,7 +2538,7 @@ function autoPopCity() {
 
     var response = $.ajax({
         type: "GET",
-        url: "http://truckr.pcscrm.com/api/location/",
+        url: "http://localhost:49235/api/location/",
         contentType: "application/json; charset=utf-8",
         //dataType: "json",
         async: false,
