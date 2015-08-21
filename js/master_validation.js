@@ -739,6 +739,8 @@ $(function() {
                         chosenClientFName = NewPerson.firstName; // Assigned the global variable to be the new person first name and last name
                         chosenClientLName = NewPerson.lastName;
                         donorOrgS = NewPerson.org;
+						document.getElementById("hidden_donorOrgS").innerText = donorOrgS;
+
                         //chosenClientID = NewPerson.id;
                         var hiddenDonor = document.getElementById('hidden_client_id'); //grab the hidden donor field, which is a div
                         hiddenDonor.innerHTML = getDonor();
@@ -783,14 +785,164 @@ $(function() {
     });
 });
 
+
+function popqueue(){
+alert("Running popqueue.");
+						//$("#client_table_module").hide();
+						// $("#generate_module").hide();
+						// $("#client_table_module").hide();
+						// $("#generate_module").show();
+						
+        var table = document.getElementById('partner_pick_up_table'); //grab the table of filtered clients 
+       for (var i = 0; i < table.rows.length; i++) { //loop through them and grab their information
+            var entry = table.rows[i];
+            var firstCol = entry.childNodes[0];
+            var radioButton = firstCol.firstChild;
+            //var clientID = entry.childNodes[1].innerText;
+            //donorID = clientID;
+			var donorOrgS = entry.childNodes[2].innerText;
+			var clientFName = entry.childNodes[3].innerText;
+			var clientLName = entry.childNodes[4].innerText;
+			donorOrgS = toTitleCase(donorOrgS).trim();
+			donorEmail = entry.childNodes[5].innerText;
+
+
+            if (radioButton.checked) { //checks if the 'i' particular radio button is checked --i.e. the 3rd if you are on the fourth iteration of the loop
+                checked = true;
+                var confirmMsg = "You have selected " + clientFName + " " + clientLName + " with " + donorOrgS + ". Is that ok?";
+                var confirmMsg2 = "You have selected " + clientFName + " " + clientLName + ". Is that ok?";
+                var chosenMsg = "";
+
+                if (donorOrgS != "") {
+                    chosenMsg = confirmMsg;
+                } else {
+                    chosenMsg = confirmMsg2;
+                }
+
+                if (confirm(chosenMsg)) {
+							donorOrgS = "";
+							clearAllForms();
+							donorID = entry.childNodes[6].innerText;
+							alert("donor ID: "+donorID);
+				                    donorEmail = entry.childNodes[5].innerText;
+									alert('now begining to reset the donorOrgS variable...');
+									donorOrgS = entry.childNodes[2].innerText;
+									alert("donorOrgS is now equal to : "+entry.childNodes[2].innerText);
+									donorOrgS = toTitleCase(donorOrgS).trim();
+									alert("Current donorOrgS: "+donorOrgS);
+									chosenClientFName = clientFName; //set global variable of first nam
+									chosenClientLName = clientLName; //set global variable of last name									
+									alert("chosen client f and l name "+chosenClientFName+" "+chosenClientLName);
+									document.getElementById("hidden_donorOrgS").innerText = donorOrgS;
+						//justSubmit(offlineTransactionObj, donorEmail, clientID);
+						//clearAllForms();
+
+						document.getElementById('show_generate_button').click();
+						//popqueue2();
+						//hide filter table
+						//$("#client_table_module").hide();
+						//$("#generate_module").show();
+						//show create form screen
+					}
+					
+					else{
+						//do nothing?
+					}
+					
+					break;
+					
+                } else { //if radio button is not checked on this iteration
+                    //break;
+                }
+
+                //alert("Globalizing line 265: "+donorEmail+" .... "+donorOrgS);
+                //show the generate module
+
+                //break; //break out of the for loop, since we have a selected donor already
+            }
+        }
+
+		
+function popqueue2(){
+alert("Running popqueue TWO.");
+						//$("#client_table_module").hide();
+						// $("#generate_module").hide();
+						// $("#client_table_module").hide();
+						// $("#generate_module").show();
+						
+        var table = document.getElementById('partner_pick_up_table'); //grab the table of filtered clients 
+       for (var i = 0; i < table.rows.length; i++) { //loop through them and grab their information
+            var entry = table.rows[i];
+            var firstCol = entry.childNodes[0];
+            var radioButton = firstCol.firstChild;
+            //var clientID = entry.childNodes[1].innerText;
+            //donorID = clientID;
+			var donorOrgS = entry.childNodes[1].innerText;
+			var clientFName = entry.childNodes[2].innerText;
+			var clientLName = entry.childNodes[3].innerText;
+			donorOrgS = toTitleCase(donorOrgS).trim();
+			donorEmail = entry.childNodes[4].innerText;
+
+
+            if (radioButton.checked) { //checks if the 'i' particular radio button is checked --i.e. the 3rd if you are on the fourth iteration of the loop
+                checked = true;
+                var confirmMsg = "You have selected " + clientFName + " " + clientLName + " with " + donorOrgS + ". Is that ok?";
+                var confirmMsg2 = "You have selected " + clientFName + " " + clientLName + ". Is that ok?";
+                var chosenMsg = "";
+
+                if (donorOrgS != "") {
+                    chosenMsg = confirmMsg;
+                } else {
+                    chosenMsg = confirmMsg2;
+                }
+
+                if (confirm(chosenMsg)) {
+							donorOrgS = "";
+							clearAllForms();
+							donorID = entry.childNodes[5].innerText;
+							alert("donor ID: "+donorID);
+				                    donorEmail = entry.childNodes[4].innerText;
+									alert('now begining to reset the donorOrgS variable...');
+									donorOrgS = entry.childNodes[1].innerText;
+									alert("donorOrgS is now equal to : "+entry.childNodes[1].innerText);
+									donorOrgS = toTitleCase(donorOrgS).trim();
+									alert("Current donorOrgS: "+donorOrgS);
+									chosenClientFName = clientFName; //set global variable of first nam
+									chosenClientLName = clientLName; //set global variable of last name									
+									alert("chosen client f and l name "+chosenClientFName+" "+chosenClientLName);
+						//justSubmit(offlineTransactionObj, donorEmail, clientID);
+						//clearAllForms();
+
+						//hide filter table
+						//$("#client_table_module").hide();
+						//$("#generate_module").show();
+						//show create form screen
+					}
+					
+					else{
+						//do nothing?
+					}
+					
+					break;
+					
+                } else { //if radio button is not checked on this iteration
+                    //break;
+                }
+
+                //alert("Globalizing line 265: "+donorEmail+" .... "+donorOrgS);
+                //show the generate module
+
+                //break; //break out of the for loop, since we have a selected donor already
+            }
+        }
+		
 //User is starting to create a new transfer form --> We're sending pre-information to build the final transfer form
 //Contains Post request to transfer form controller, passing in a 'building form' object, returning the language on the transfer form
 //USED IN THE GENERATE_MODULE, IMPORTANT: To do: ACTUAL TEXT OF THE TRANSFER FORM IS BEING STORED/HARD CODED IN THE TRANSFER FORM CONTROLLER
 $(function() {
     $("#transfer_button").click(function(e) {
         ////*/*/CALLING AUTHORIZE/*/*///
-
-
+		//popqueue2();
         if (donorID == 0) {
             //alert("Please select a client first.");
 			swal("Please select a client first.");
@@ -798,7 +950,13 @@ $(function() {
         }
 
         var BuildingForm = {};
+		
+		//NEEDS TO BE CONSISTENT ACROSS OTHER METHODS OF FINDING A CLIENT
+		donorOrgS = document.getElementById("hidden_donorOrgS").innerText;
 
+		alert("now the donorOrgS is : "+donorOrgS);
+		
+		
         BuildingForm.naidChoice = $('input[name=naidOption]:checked').val(); //will either be a string stating 'yesNaid' or 'noNaid'
         BuildingForm.donationDescription = $("#donation_description").val();
         BuildingForm.org = donorOrgS;
@@ -1120,6 +1278,9 @@ $(function() {
                     donorEmail = entry.childNodes[6].innerText;
                     donorOrgS = entry.childNodes[5].innerText;
 					donorOrgS = toTitleCase(donorOrgS).trim();
+					//to be consistent across
+					document.getElementById("hidden_donorOrgS").innerText = donorOrgS;
+
 					}
                 } else {
                     break;
@@ -2540,57 +2701,11 @@ function closeNav() {
     });
 }
 
-function popqueue(){
-alert("Running popqueue.");
-        var table = document.getElementById('partner_pick_up_table'); //grab the table of filtered clients 
-       for (var i = 0; i < table.rows.length; i++) { //loop through them and grab their information
-            var entry = table.rows[i];
-            var firstCol = entry.childNodes[0];
-            var radioButton = firstCol.firstChild;
-            //var clientID = entry.childNodes[1].innerText;
-            //donorID = clientID;
-			var donorOrgS = entry.childNodes[1].innerText;
-			var clientFName = entry.childNodes[2].innerText;
-			var clientLName = entry.childNodes[3].innerText;
-			donorOrgS = toTitleCase(donorOrgS).trim();
-			donorEmail = entry.childNodes[4].innerText;
+function deletepickup(r){
+	var i = r.parentNode.parentNode.rowIndex;
+    document.getElementById("partner_pick_up_table").deleteRow(i);
+}
 
-            if (radioButton.checked) { //checks if the 'i' particular radio button is checked --i.e. the 3rd if you are on the fourth iteration of the loop
-                checked = true;
-                var confirmMsg = "You have selected " + clientFName + " " + clientLName + " with " + donorOrgS + ". Is that ok?";
-                var confirmMsg2 = "You have selected " + clientFName + " " + clientLName + ". Is that ok?";
-                var chosenMsg = "";
-
-                if (donorOrgS != "") {
-                    chosenMsg = confirmMsg;
-                } else {
-                    chosenMsg = confirmMsg2;
-                }
-
-                if (confirm(chosenMsg)) {
-				
-				                    donorEmail = entry.childNodes[6].innerText;
-
-						justSubmit(offlineTransactionObj, donorEmail, clientID);
-						clearAllForms();
-					}
-					
-					else{
-        
-                    //chosenClientID = clientID.firstChild.data; //set the global variable chosenClientID to be the id of the selected child
-                    chosenClientFName = clientFName; //set global variable of first name
-                    chosenClientLName = clientLName; //set global variable of last name
-					}
-                } else {
-                    break;
-                }
-
-                //alert("Globalizing line 265: "+donorEmail+" .... "+donorOrgS);
-                //show the generate module
-
-                break; //break out of the for loop, since we have a selected donor already
-            }
-        }
 
 //Listens for the add partner list button to be clicked.
 //It must add the selected partner to the partner list.
@@ -2601,12 +2716,13 @@ $(document).ready(function() {
 		
 		//below is the copy-pasted-edited version
 		var checked = false;
+		var clientID = "";
         var table = document.getElementById('client_filter_table'); //grab the table of filtered clients 
         for (var i = 0; i < table.rows.length; i++) { //loop through them and grab their information
             var entry = table.rows[i];
             var firstCol = entry.childNodes[0];
             var radioButton = firstCol.firstChild;
-            var clientID = entry.childNodes[1].innerText;
+            clientID = entry.childNodes[1].innerText;
             //donorID = clientID;
             var clientFName = entry.childNodes[2];
             var clientLName = entry.childNodes[3];
@@ -2632,6 +2748,8 @@ $(document).ready(function() {
 				  var cell3 = row.insertCell(2);
 				  var cell4 = row.insertCell(3);
 				  var cell5 = row.insertCell(4);
+				  var cell6 = row.insertCell(5);
+				  var cell7 = row.insertCell(6);
 				  
 				  var radio = document.createElement("input");
 				  radio.type = "radio";
@@ -2641,10 +2759,12 @@ $(document).ready(function() {
 				  //cell1.appendChild = radio;
 				    cell1.innerHTML = "<input type='radio' onclick='popqueue()' name='queuebtnCount' ></input>";
 					
-				  cell2.innerHTML = donorOrgS;
-				  cell3.innerHTML = clientFName;
-				  cell4.innerHTML = clientLName;
-				  cell5.innerHTML = donorEmail;
+				cell2.innerHTML = "<a href='#' onclick='deletepickup(this)'><font size='40'>X</font></a>";
+				  cell3.innerHTML = donorOrgS;
+				  cell4.innerHTML = clientFName;
+				  cell5.innerHTML = clientLName;
+				  cell6.innerHTML = donorEmail;
+				  cell7.innerHTML = clientID;
 		
 				
 				swal(addPartnerMsg);
