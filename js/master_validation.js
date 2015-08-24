@@ -573,7 +573,7 @@ $(function() {
 				//i'm a little worried. the url for this was http://truckrtest.pcscrm.com/api/filter orgiinally, instead of http://truckr.pcscrm.com/api/filter
                 var response = $.ajax({
                     type: "POST",
-                    url: "http://localhost:49235/api/filter",
+                    url: "http://truckr.pcscrm.com/api/filter",
                     async: false,
                     headers: {
                         "Authorization": "Basic " + ekey,
@@ -716,7 +716,7 @@ $(function() {
 
             var response = $.ajax({ //use jquery to make a post to the api with the new client 
                 type: "POST",
-                url: "http://localhost:49235/api/newclient",
+                url: "http://truckr.pcscrm.com/api/newclient",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 async: false,
@@ -977,7 +977,7 @@ $(function() {
         } else {
             var response = $.ajax({
                 type: "POST",
-                url: "http://localhost:49235/api/transferform",
+                url: "http://truckr.pcscrm.com/api/transferform",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 async: false,
@@ -1096,7 +1096,7 @@ $(function() {
 			document.getElementById("error_message_login").innerHTML = "LOADING...";
             var response = $.ajax({
                 type: "POST",
-                url: "http://localhost:49235/api/confirm",
+                url: "http://truckr.pcscrm.com/api/confirm",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 async: false,
@@ -1175,7 +1175,7 @@ function justSubmit(jsonObj, donorEmail, donorId){
 	if (confirm("You are going to submit a transfer of ownership form to the database and email it to the selected client. Do you want to continue and finish?")){
 	 var response = $.ajax({
         type: "POST",
-        url: "http://localhost:49235/api/submit",
+        url: "http://truckr.pcscrm.com/api/submit",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         async: false,
@@ -2293,7 +2293,7 @@ $(function() {
 
             var response = $.ajax({
                 type: "POST",
-                url: "http://localhost:49235/api/submit",
+                url: "http://truckr.pcscrm.com/api/submit",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 async: false,
@@ -2447,7 +2447,7 @@ function autoPopZip() {
 
         var response = $.ajax({
             type: "GET",
-            url: "http://localhost:49235/api/location/" + val,
+            url: "http://truckr.pcscrm.com/api/location/" + val,
             contentType: "application/json; charset=utf-8",
             //dataType: "json",
             async: false,
@@ -2555,7 +2555,7 @@ function autoPopCity() {
 
     var response = $.ajax({
         type: "GET",
-        url: "http://localhost:49235/api/location/",
+        url: "http://truckr.pcscrm.com/api/location/",
         contentType: "application/json; charset=utf-8",
         //dataType: "json",
         async: false,
