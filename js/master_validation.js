@@ -821,7 +821,7 @@ function popqueue(){
                 }
 
                 if (confirm(chosenMsg)) {
-							donorOrgS = "";
+//donorOrgS = "";
 							clearAllForms();
 							donorID = entry.childNodes[6].innerText;
 							// alert("donor ID: "+donorID);
@@ -834,6 +834,7 @@ function popqueue(){
 									chosenClientFName = clientFName; //set global variable of first nam
 									chosenClientLName = clientLName; //set global variable of last name									
 									// alert("chosen client f and l name "+chosenClientFName+" "+chosenClientLName);
+									alert("popqueue says you chose this donor org: "+donorOrgS);
 									document.getElementById("hidden_donorOrgS").innerText = donorOrgS;
 						//justSubmit(offlineTransactionObj, donorEmail, clientID);
 						//clearAllForms();
@@ -956,6 +957,7 @@ $(function() {
 		donorOrgS = document.getElementById("hidden_donorOrgS").innerText;
 
 		alert("now the donorOrgS is : "+donorOrgS);
+		alert("hidden donor org s: "+document.getElementById("hidden_donorOrgS").innerText+" vs. "+donorOrgS);
 		
 		
         BuildingForm.naidChoice = $('input[name=naidOption]:checked').val(); //will either be a string stating 'yesNaid' or 'noNaid'
@@ -1281,6 +1283,7 @@ $(function() {
 					donorOrgS = toTitleCase(donorOrgS).trim();
 					//to be consistent across
 					document.getElementById("hidden_donorOrgS").innerText = donorOrgS;
+					
 
 					}
                 } else {
@@ -2297,7 +2300,9 @@ $(function() {
 
                     if (response != false) {
                         document.getElementById("error_message_transfer").innerHTML = "";
-                        document.getElementById("message_transfer").innerHTML = "Transfer Form successfully added to database. Email sent to " + "<b>" + donorEmail + "</b>";
+						// ---- commenting below out, where the msg printed on the screen
+                        // document.getElementById("message_transfer").innerHTML = "Transfer Form successfully added to database. Email sent to " + "<b>" + donorEmail + "</b>";
+					
                         alert("Transfer of Ownership successfully added to database. Email sent to " + donorEmail);
                         alert("Transaction completed.");
                         //document.getElementById("transfer_module").style.display = "none";
