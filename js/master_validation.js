@@ -34,6 +34,10 @@ var offlineTransaction = false;
 var offlineTransactionObj = "";
 var offlineIteration = 0;
 
+//---Queue
+var queue = "";
+var queuenum = 0;
+
 //----------------------------------------------------------------------
 
 
@@ -351,7 +355,7 @@ function pleaseSync(count) {
 					}
                 }
 				
-				alert("COMMENCING way 2");
+				alert("This section is not complete yet.");
 				//SECOND way of doing this, not sur eif it'll work yet: http://stackoverflow.com/questions/29491561/websql-not-working-on-phonegap-build
 				var rowz = results.rows;
 				alert(rowz.length);
@@ -787,6 +791,11 @@ $(function() {
 });
 
 
+function deletepickup2(r){
+    document.getElementById("partner_pick_up_table").deleteRow(r);
+}
+
+
 function popqueue(){
 // alert("Running popqueue.");
 						//$("#client_table_module").hide();
@@ -821,7 +830,10 @@ function popqueue(){
                 }
 
                 if (confirm(chosenMsg)) {
-//donorOrgS = "";
+//donorOrgS = ""; 
+//--trigger the queue flag
+queue = "on";
+queuenum = i;
 							clearAllForms();
 							donorID = entry.childNodes[6].innerText;
 							// alert("donor ID: "+donorID);
@@ -834,7 +846,6 @@ function popqueue(){
 									chosenClientFName = clientFName; //set global variable of first nam
 									chosenClientLName = clientLName; //set global variable of last name									
 									// alert("chosen client f and l name "+chosenClientFName+" "+chosenClientLName);
-									alert("popqueue says you chose this donor org: "+donorOrgS);
 									document.getElementById("hidden_donorOrgS").innerText = donorOrgS;
 						//justSubmit(offlineTransactionObj, donorEmail, clientID);
 						//clearAllForms();
@@ -955,10 +966,6 @@ $(function() {
 		
 		//NEEDS TO BE CONSISTENT ACROSS OTHER METHODS OF FINDING A CLIENT
 		donorOrgS = document.getElementById("hidden_donorOrgS").innerText;
-
-		alert("now the donorOrgS is : "+donorOrgS);
-		alert("hidden donor org s: "+document.getElementById("hidden_donorOrgS").innerText+" vs. "+donorOrgS);
-		
 		
         BuildingForm.naidChoice = $('input[name=naidOption]:checked').val(); //will either be a string stating 'yesNaid' or 'noNaid'
         BuildingForm.donationDescription = $("#donation_description").val();
@@ -2220,7 +2227,13 @@ $(function() {
         //if theres No api ,store in the local db right away
         //
         document.getElementById("accept_button").disabled = 'true';
-
+		
+		if(queue == "on"){
+			//alert("queue is on");
+			//on the javascript side, trigger a button click
+			//alert("queue is on and the queue number is: "+queuenum);
+			deletepickup2(queuenum);
+		}
 
         if (donorID == 0) {
             alert("Please select a client first.");
@@ -2278,7 +2291,6 @@ $(function() {
             //loadingGif.setAttribute("src", "images/loading.gif");
             //loadingDiv.appendChild(loadingGif);
 
-			alert("moving into the ajax call");
             var response = $.ajax({
                 type: "POST",
                 url: "http://localhost:49235/api/submit",
@@ -2299,6 +2311,7 @@ $(function() {
                     //alert("response: "+response);
 
                     if (response != false) {
+						//alert("response.something : "+response.something);
                         document.getElementById("error_message_transfer").innerHTML = "";
 						// ---- commenting below out, where the msg printed on the screen
                         // document.getElementById("message_transfer").innerHTML = "Transfer Form successfully added to database. Email sent to " + "<b>" + donorEmail + "</b>";
@@ -2355,8 +2368,7 @@ $(function() {
             //alert("Fell through the post request!");
             document.getElementById("accept_button").disabled = false;
             ldiv.style.display = 'none';
-
-
+			queue = "";
         }
     });
 });

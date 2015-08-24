@@ -339,7 +339,7 @@ html.mm-blocking #mm-blocker {
 .mm-menu {
   width: 80%;
   min-width: 140px;
-  max-width: 440px; }
+  max-width: 240px; } /*this use to be 240px. so i went ahead and changed everything that was 240 into 240.*/
 
 html.mm-opening .mm-slideout {
   -webkit-transform: translate(80%, 0);
@@ -357,11 +357,11 @@ html.mm-opening .mm-slideout {
     transform: translate(140px, 0); } }
 @media all and (min-width: 550px) {
   html.mm-opening .mm-slideout {
-    -webkit-transform: translate(440px, 0);
-    -moz-transform: translate(440px, 0);
-    -ms-transform: translate(440px, 0);
-    -o-transform: translate(440px, 0);
-    transform: translate(440px, 0); } }
+    -webkit-transform: translate(240px, 0);
+    -moz-transform: translate(240px, 0);
+    -ms-transform: translate(240px, 0);
+    -o-transform: translate(240px, 0);
+    transform: translate(240px, 0); } }
 /*
 	jQuery.mmenu autoHeight addon CSS
 */
@@ -1023,11 +1023,11 @@ html.mm-right.mm-opening .mm-slideout {
     transform: translate(-140px, 0); } }
 @media all and (min-width: 550px) {
   html.mm-right.mm-opening .mm-slideout {
-    -webkit-transform: translate(-440px, 0);
-    -moz-transform: translate(-440px, 0);
-    -ms-transform: translate(-440px, 0);
-    -o-transform: translate(-440px, 0);
-    transform: translate(-440px, 0); } }
+    -webkit-transform: translate(-240px, 0);
+    -moz-transform: translate(-240px, 0);
+    -ms-transform: translate(-240px, 0);
+    -o-transform: translate(-240px, 0);
+    transform: translate(-240px, 0); } }
 /*
 	jQuery.mmenu z-position extension CSS
 */
