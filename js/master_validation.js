@@ -46,7 +46,7 @@ var queuenum = 0;
 //This is how the current user follows us through the different modules and actions on the app
 function loadCurrentUser() {
     //example url: ...clients.html?user=glor&ABC123
-    db = openDatabase('testlocal3', '1.0', 'My First Web Database', 2 * 1024 * 1024);
+    //db = openDatabase('testlocal3', '1.0', 'My First Web Database', 2 * 1024 * 1024);
 
     var url = document.URL; //get current page url
     var urlTokens = url.split('='); //split into local url and query string
